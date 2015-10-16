@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0BD76F1AD8E8AAF39E25A283 /* Pods_Tinylog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B28E3FF08E874E8FBA997B9 /* Pods_Tinylog.framework */; };
-		564CE8A01BD0E39C008C055C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE89F1BD0E39C008C055C /* AppDelegate.swift */; };
 		564CE8A21BD0E39C008C055C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE8A11BD0E39C008C055C /* ViewController.swift */; };
 		564CE8A51BD0E39C008C055C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564CE8A31BD0E39C008C055C /* Main.storyboard */; };
 		564CE8A71BD0E39C008C055C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 564CE8A61BD0E39C008C055C /* Assets.xcassets */; };
 		564CE8AA1BD0E39C008C055C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564CE8A81BD0E39C008C055C /* LaunchScreen.storyboard */; };
 		564CE8B51BD0E39C008C055C /* TinylogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE8B41BD0E39C008C055C /* TinylogTests.swift */; };
+		56ED18E81BD12DB400672D86 /* Tinylog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56ED18E11BD12DB400672D86 /* Tinylog.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		56ED18EA1BD12DD400672D86 /* TLIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ED18E91BD12DD400672D86 /* TLIAppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		6BE5BC2A5E5851AE0CADC4DB /* Pods_TinylogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F271783A81E5BBE0791D9D /* Pods_TinylogTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,7 +34,6 @@
 		242F8901CEF3398A5561C510 /* Pods-TinylogTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinylogTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests.release.xcconfig"; sourceTree = "<group>"; };
 		5025D22A19B8119D39BB9C70 /* Pods-TinylogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinylogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests.debug.xcconfig"; sourceTree = "<group>"; };
 		564CE89C1BD0E39B008C055C /* Tinylog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinylog.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		564CE89F1BD0E39C008C055C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		564CE8A11BD0E39C008C055C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		564CE8A41BD0E39C008C055C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		564CE8A61BD0E39C008C055C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,6 +42,13 @@
 		564CE8B01BD0E39C008C055C /* TinylogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinylogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		564CE8B41BD0E39C008C055C /* TinylogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinylogTests.swift; sourceTree = "<group>"; };
 		564CE8B61BD0E39C008C055C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		56ED18E21BD12DB400672D86 /* Tinylog 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 2.xcdatamodel"; sourceTree = "<group>"; };
+		56ED18E31BD12DB400672D86 /* Tinylog 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 3.xcdatamodel"; sourceTree = "<group>"; };
+		56ED18E41BD12DB400672D86 /* Tinylog 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 4.xcdatamodel"; sourceTree = "<group>"; };
+		56ED18E51BD12DB400672D86 /* Tinylog 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 5.xcdatamodel"; sourceTree = "<group>"; };
+		56ED18E61BD12DB400672D86 /* Tinylog 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 6.xcdatamodel"; sourceTree = "<group>"; };
+		56ED18E71BD12DB400672D86 /* Tinylog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tinylog.xcdatamodel; sourceTree = "<group>"; };
+		56ED18E91BD12DD400672D86 /* TLIAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIAppDelegate.swift; path = Application/TLIAppDelegate.swift; sourceTree = "<group>"; };
 		7B28E3FF08E874E8FBA997B9 /* Pods_Tinylog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tinylog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8F271783A81E5BBE0791D9D /* Pods_TinylogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinylogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -89,7 +96,9 @@
 		564CE89E1BD0E39C008C055C /* Tinylog */ = {
 			isa = PBXGroup;
 			children = (
-				564CE89F1BD0E39C008C055C /* AppDelegate.swift */,
+				56ED18EB1BD12E0400672D86 /* Core Data */,
+				56ED18E91BD12DD400672D86 /* TLIAppDelegate.swift */,
+				56ED18E01BD12DB400672D86 /* Core Data Model */,
 				564CE8A11BD0E39C008C055C /* ViewController.swift */,
 				564CE8A31BD0E39C008C055C /* Main.storyboard */,
 				564CE8A61BD0E39C008C055C /* Assets.xcassets */,
@@ -106,6 +115,21 @@
 				564CE8B61BD0E39C008C055C /* Info.plist */,
 			);
 			path = TinylogTests;
+			sourceTree = "<group>";
+		};
+		56ED18E01BD12DB400672D86 /* Core Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				56ED18E11BD12DB400672D86 /* Tinylog.xcdatamodeld */,
+			);
+			path = "Core Data Model";
+			sourceTree = "<group>";
+		};
+		56ED18EB1BD12E0400672D86 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Core Data";
 			sourceTree = "<group>";
 		};
 		BF2095918E2B15668B278FB9 /* Pods */ = {
@@ -327,8 +351,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56ED18EA1BD12DD400672D86 /* TLIAppDelegate.swift in Sources */,
 				564CE8A21BD0E39C008C055C /* ViewController.swift in Sources */,
-				564CE8A01BD0E39C008C055C /* AppDelegate.swift in Sources */,
+				56ED18E81BD12DB400672D86 /* Tinylog.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,6 +559,24 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		56ED18E11BD12DB400672D86 /* Tinylog.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				56ED18E21BD12DB400672D86 /* Tinylog 2.xcdatamodel */,
+				56ED18E31BD12DB400672D86 /* Tinylog 3.xcdatamodel */,
+				56ED18E41BD12DB400672D86 /* Tinylog 4.xcdatamodel */,
+				56ED18E51BD12DB400672D86 /* Tinylog 5.xcdatamodel */,
+				56ED18E61BD12DB400672D86 /* Tinylog 6.xcdatamodel */,
+				56ED18E71BD12DB400672D86 /* Tinylog.xcdatamodel */,
+			);
+			currentVersion = 56ED18E61BD12DB400672D86 /* Tinylog 6.xcdatamodel */;
+			path = Tinylog.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 564CE8941BD0E39B008C055C /* Project object */;
 }

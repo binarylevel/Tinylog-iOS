@@ -1,0 +1,6 @@
+framework module SGReachability {
+  umbrella header "SGReachability-umbrella.h"
+
+  export *
+  module * { export * }
+}

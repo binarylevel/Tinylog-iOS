@@ -91,6 +91,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Tinylog/Mixpanel.framework"
   install_framework "Pods-Tinylog/PureLayout.framework"
   install_framework "Pods-Tinylog/Reachability.framework"
+  install_framework "Pods-Tinylog/SGReachability.framework"
   install_framework "Pods-Tinylog/SVProgressHUD.framework"
   install_framework "Pods-Tinylog/TTTAttributedLabel.framework"
 fi
@@ -102,6 +103,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Tinylog/Mixpanel.framework"
   install_framework "Pods-Tinylog/PureLayout.framework"
   install_framework "Pods-Tinylog/Reachability.framework"
+  install_framework "Pods-Tinylog/SGReachability.framework"
   install_framework "Pods-Tinylog/SVProgressHUD.framework"
   install_framework "Pods-Tinylog/TTTAttributedLabel.framework"
 fi

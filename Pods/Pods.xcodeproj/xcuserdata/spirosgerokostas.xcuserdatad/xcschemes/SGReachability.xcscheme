@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '9A3635A2DD4AE50C55FA340C'
-               BlueprintName = 'FBSDKShareKit'
+               BlueprintIdentifier = 'FA661F2C0498D20AEA6710AC'
+               BlueprintName = 'SGReachability'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'FBSDKShareKit.framework'>
+               BuildableName = 'SGReachability.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
