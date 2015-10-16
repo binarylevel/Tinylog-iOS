@@ -1,0 +1,539 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0BD76F1AD8E8AAF39E25A283 /* Pods_Tinylog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B28E3FF08E874E8FBA997B9 /* Pods_Tinylog.framework */; };
+		564CE8A01BD0E39C008C055C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE89F1BD0E39C008C055C /* AppDelegate.swift */; };
+		564CE8A21BD0E39C008C055C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE8A11BD0E39C008C055C /* ViewController.swift */; };
+		564CE8A51BD0E39C008C055C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564CE8A31BD0E39C008C055C /* Main.storyboard */; };
+		564CE8A71BD0E39C008C055C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 564CE8A61BD0E39C008C055C /* Assets.xcassets */; };
+		564CE8AA1BD0E39C008C055C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564CE8A81BD0E39C008C055C /* LaunchScreen.storyboard */; };
+		564CE8B51BD0E39C008C055C /* TinylogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE8B41BD0E39C008C055C /* TinylogTests.swift */; };
+		6BE5BC2A5E5851AE0CADC4DB /* Pods_TinylogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F271783A81E5BBE0791D9D /* Pods_TinylogTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		564CE8B11BD0E39C008C055C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 564CE8941BD0E39B008C055C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 564CE89B1BD0E39B008C055C;
+			remoteInfo = Tinylog;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1E9C5726D127EF64377DF523 /* Pods-Tinylog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinylog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tinylog/Pods-Tinylog.debug.xcconfig"; sourceTree = "<group>"; };
+		23A0808EE7B649C91435C8E7 /* Pods-Tinylog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinylog.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tinylog/Pods-Tinylog.release.xcconfig"; sourceTree = "<group>"; };
+		242F8901CEF3398A5561C510 /* Pods-TinylogTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinylogTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests.release.xcconfig"; sourceTree = "<group>"; };
+		5025D22A19B8119D39BB9C70 /* Pods-TinylogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinylogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests.debug.xcconfig"; sourceTree = "<group>"; };
+		564CE89C1BD0E39B008C055C /* Tinylog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinylog.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		564CE89F1BD0E39C008C055C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		564CE8A11BD0E39C008C055C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		564CE8A41BD0E39C008C055C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		564CE8A61BD0E39C008C055C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		564CE8A91BD0E39C008C055C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		564CE8AB1BD0E39C008C055C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		564CE8B01BD0E39C008C055C /* TinylogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinylogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		564CE8B41BD0E39C008C055C /* TinylogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinylogTests.swift; sourceTree = "<group>"; };
+		564CE8B61BD0E39C008C055C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B28E3FF08E874E8FBA997B9 /* Pods_Tinylog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tinylog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8F271783A81E5BBE0791D9D /* Pods_TinylogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinylogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		564CE8991BD0E39B008C055C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0BD76F1AD8E8AAF39E25A283 /* Pods_Tinylog.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		564CE8AD1BD0E39C008C055C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BE5BC2A5E5851AE0CADC4DB /* Pods_TinylogTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		564CE8931BD0E39B008C055C = {
+			isa = PBXGroup;
+			children = (
+				564CE89E1BD0E39C008C055C /* Tinylog */,
+				564CE8B31BD0E39C008C055C /* TinylogTests */,
+				564CE89D1BD0E39B008C055C /* Products */,
+				BF2095918E2B15668B278FB9 /* Pods */,
+				F82F84CCC4AD5C0BDBD9345E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		564CE89D1BD0E39B008C055C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				564CE89C1BD0E39B008C055C /* Tinylog.app */,
+				564CE8B01BD0E39C008C055C /* TinylogTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		564CE89E1BD0E39C008C055C /* Tinylog */ = {
+			isa = PBXGroup;
+			children = (
+				564CE89F1BD0E39C008C055C /* AppDelegate.swift */,
+				564CE8A11BD0E39C008C055C /* ViewController.swift */,
+				564CE8A31BD0E39C008C055C /* Main.storyboard */,
+				564CE8A61BD0E39C008C055C /* Assets.xcassets */,
+				564CE8A81BD0E39C008C055C /* LaunchScreen.storyboard */,
+				564CE8AB1BD0E39C008C055C /* Info.plist */,
+			);
+			path = Tinylog;
+			sourceTree = "<group>";
+		};
+		564CE8B31BD0E39C008C055C /* TinylogTests */ = {
+			isa = PBXGroup;
+			children = (
+				564CE8B41BD0E39C008C055C /* TinylogTests.swift */,
+				564CE8B61BD0E39C008C055C /* Info.plist */,
+			);
+			path = TinylogTests;
+			sourceTree = "<group>";
+		};
+		BF2095918E2B15668B278FB9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1E9C5726D127EF64377DF523 /* Pods-Tinylog.debug.xcconfig */,
+				23A0808EE7B649C91435C8E7 /* Pods-Tinylog.release.xcconfig */,
+				5025D22A19B8119D39BB9C70 /* Pods-TinylogTests.debug.xcconfig */,
+				242F8901CEF3398A5561C510 /* Pods-TinylogTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F82F84CCC4AD5C0BDBD9345E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7B28E3FF08E874E8FBA997B9 /* Pods_Tinylog.framework */,
+				B8F271783A81E5BBE0791D9D /* Pods_TinylogTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		564CE89B1BD0E39B008C055C /* Tinylog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 564CE8B91BD0E39C008C055C /* Build configuration list for PBXNativeTarget "Tinylog" */;
+			buildPhases = (
+				ABC7A8481968140060FC5CEE /* Check Pods Manifest.lock */,
+				564CE8981BD0E39B008C055C /* Sources */,
+				564CE8991BD0E39B008C055C /* Frameworks */,
+				564CE89A1BD0E39B008C055C /* Resources */,
+				744AB7D6BDF604266AF93DAD /* Embed Pods Frameworks */,
+				EE450A8F6A01A6F362FBCDF8 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tinylog;
+			productName = Tinylog;
+			productReference = 564CE89C1BD0E39B008C055C /* Tinylog.app */;
+			productType = "com.apple.product-type.application";
+		};
+		564CE8AF1BD0E39C008C055C /* TinylogTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 564CE8BC1BD0E39C008C055C /* Build configuration list for PBXNativeTarget "TinylogTests" */;
+			buildPhases = (
+				109E1AC3DFC86BC370FB9F4A /* Check Pods Manifest.lock */,
+				564CE8AC1BD0E39C008C055C /* Sources */,
+				564CE8AD1BD0E39C008C055C /* Frameworks */,
+				564CE8AE1BD0E39C008C055C /* Resources */,
+				795E7AA3C3FF3FB0FBD73C00 /* Embed Pods Frameworks */,
+				A82C57280EEC3BA5BE355B11 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				564CE8B21BD0E39C008C055C /* PBXTargetDependency */,
+			);
+			name = TinylogTests;
+			productName = TinylogTests;
+			productReference = 564CE8B01BD0E39C008C055C /* TinylogTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		564CE8941BD0E39B008C055C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Spiros Gerokostas";
+				TargetAttributes = {
+					564CE89B1BD0E39B008C055C = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+					564CE8AF1BD0E39C008C055C = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = 564CE89B1BD0E39B008C055C;
+					};
+				};
+			};
+			buildConfigurationList = 564CE8971BD0E39B008C055C /* Build configuration list for PBXProject "Tinylog" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 564CE8931BD0E39B008C055C;
+			productRefGroup = 564CE89D1BD0E39B008C055C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				564CE89B1BD0E39B008C055C /* Tinylog */,
+				564CE8AF1BD0E39C008C055C /* TinylogTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		564CE89A1BD0E39B008C055C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				564CE8AA1BD0E39C008C055C /* LaunchScreen.storyboard in Resources */,
+				564CE8A71BD0E39C008C055C /* Assets.xcassets in Resources */,
+				564CE8A51BD0E39C008C055C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		564CE8AE1BD0E39C008C055C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		109E1AC3DFC86BC370FB9F4A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		744AB7D6BDF604266AF93DAD /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tinylog/Pods-Tinylog-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		795E7AA3C3FF3FB0FBD73C00 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A82C57280EEC3BA5BE355B11 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ABC7A8481968140060FC5CEE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EE450A8F6A01A6F362FBCDF8 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tinylog/Pods-Tinylog-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		564CE8981BD0E39B008C055C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				564CE8A21BD0E39C008C055C /* ViewController.swift in Sources */,
+				564CE8A01BD0E39C008C055C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		564CE8AC1BD0E39C008C055C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				564CE8B51BD0E39C008C055C /* TinylogTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		564CE8B21BD0E39C008C055C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 564CE89B1BD0E39B008C055C /* Tinylog */;
+			targetProxy = 564CE8B11BD0E39C008C055C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		564CE8A31BD0E39C008C055C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				564CE8A41BD0E39C008C055C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		564CE8A81BD0E39C008C055C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				564CE8A91BD0E39C008C055C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		564CE8B71BD0E39C008C055C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		564CE8B81BD0E39C008C055C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		564CE8BA1BD0E39C008C055C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E9C5726D127EF64377DF523 /* Pods-Tinylog.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Tinylog/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.Tinylog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		564CE8BB1BD0E39C008C055C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23A0808EE7B649C91435C8E7 /* Pods-Tinylog.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Tinylog/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.Tinylog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		564CE8BD1BD0E39C008C055C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5025D22A19B8119D39BB9C70 /* Pods-TinylogTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = TinylogTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.TinylogTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tinylog.app/Tinylog";
+			};
+			name = Debug;
+		};
+		564CE8BE1BD0E39C008C055C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 242F8901CEF3398A5561C510 /* Pods-TinylogTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = TinylogTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.TinylogTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tinylog.app/Tinylog";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		564CE8971BD0E39B008C055C /* Build configuration list for PBXProject "Tinylog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				564CE8B71BD0E39C008C055C /* Debug */,
+				564CE8B81BD0E39C008C055C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		564CE8B91BD0E39C008C055C /* Build configuration list for PBXNativeTarget "Tinylog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				564CE8BA1BD0E39C008C055C /* Debug */,
+				564CE8BB1BD0E39C008C055C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		564CE8BC1BD0E39C008C055C /* Build configuration list for PBXNativeTarget "TinylogTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				564CE8BD1BD0E39C008C055C /* Debug */,
+				564CE8BE1BD0E39C008C055C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 564CE8941BD0E39B008C055C /* Project object */;
+}
