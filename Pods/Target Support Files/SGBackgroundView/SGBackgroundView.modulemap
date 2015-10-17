@@ -1,0 +1,6 @@
+framework module SGBackgroundView {
+  umbrella header "SGBackgroundView-umbrella.h"
+
+  export *
+  module * { export * }
+}

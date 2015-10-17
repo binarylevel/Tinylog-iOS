@@ -18,11 +18,11 @@ NSString * const IDMCloudServiceUserDefaultKey = @"IDMCloudServiceUserDefaultKey
 NSString * const IDMICloudService = @"icloud";
 NSString * const IDMICloudContainerIdentifier = @"iCloud.com.spirosgerokostas.Tinylog";
 
-@interface IDMSyncManager () <CDEPersistentStoreEnsembleDelegate>
+@interface TLISyncManager () <CDEPersistentStoreEnsembleDelegate>
 
 @end
 
-@implementation IDMSyncManager {
+@implementation TLISyncManager {
     id <CDECloudFileSystem> cloudFileSystem;
     NSUInteger activeMergeCount;
 }
@@ -35,7 +35,7 @@ NSString * const IDMICloudContainerIdentifier = @"iCloud.com.spirosgerokostas.Ti
     static id sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [[IDMSyncManager alloc] init];
+        sharedInstance = [[TLISyncManager alloc] init];
     });
     return sharedInstance;
 }

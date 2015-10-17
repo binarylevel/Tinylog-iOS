@@ -11,6 +11,7 @@ target :Tinylog do
 	pod 'FBSDKShareKit'
 	pod 'Mixpanel'
 	pod 'SGReachability'
+	pod 'SGBackgroundView'
 end
 
 target :TinylogTests do

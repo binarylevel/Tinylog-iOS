@@ -8,13 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		0BD76F1AD8E8AAF39E25A283 /* Pods_Tinylog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B28E3FF08E874E8FBA997B9 /* Pods_Tinylog.framework */; };
-		564CE8A21BD0E39C008C055C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE8A11BD0E39C008C055C /* ViewController.swift */; };
-		564CE8A51BD0E39C008C055C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564CE8A31BD0E39C008C055C /* Main.storyboard */; };
 		564CE8A71BD0E39C008C055C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 564CE8A61BD0E39C008C055C /* Assets.xcassets */; };
 		564CE8AA1BD0E39C008C055C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564CE8A81BD0E39C008C055C /* LaunchScreen.storyboard */; };
 		564CE8B51BD0E39C008C055C /* TinylogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE8B41BD0E39C008C055C /* TinylogTests.swift */; };
+		568B369E1BD22A240011A745 /* TLIList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B369C1BD22A240011A745 /* TLIList+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		568B369F1BD22A240011A745 /* TLIList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B369D1BD22A240011A745 /* TLIList.swift */; settings = {ASSET_TAGS = (); }; };
+		568B36A21BD22AC90011A745 /* TLITask+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36A01BD22AC90011A745 /* TLITask+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		568B36A31BD22AC90011A745 /* TLITask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36A11BD22AC90011A745 /* TLITask.swift */; settings = {ASSET_TAGS = (); }; };
+		568B36A61BD22AEF0011A745 /* TLITag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36A41BD22AEF0011A745 /* TLITag+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		568B36A71BD22AEF0011A745 /* TLITag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36A51BD22AEF0011A745 /* TLITag.swift */; settings = {ASSET_TAGS = (); }; };
+		568B36AA1BD22B080011A745 /* TLIMention+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36A81BD22B080011A745 /* TLIMention+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		568B36AB1BD22B080011A745 /* TLIMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36A91BD22B080011A745 /* TLIMention.swift */; settings = {ASSET_TAGS = (); }; };
+		568B36AE1BD22B230011A745 /* TLINotification+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36AC1BD22B230011A745 /* TLINotification+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		568B36AF1BD22B230011A745 /* TLINotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36AD1BD22B230011A745 /* TLINotification.swift */; settings = {ASSET_TAGS = (); }; };
+		568B36B21BD22FC90011A745 /* TLISetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36B11BD22FC90011A745 /* TLISetupViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		568B36B51BD230720011A745 /* UIColor+TinylogiOSAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36B41BD230720011A745 /* UIColor+TinylogiOSAdditions.swift */; settings = {ASSET_TAGS = (); }; };
+		568B36BA1BD231610011A745 /* TLIRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36B91BD231610011A745 /* TLIRoundedButton.swift */; settings = {ASSET_TAGS = (); }; };
+		568B36BC1BD232360011A745 /* TLIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36BB1BD232360011A745 /* TLIConstants.swift */; settings = {ASSET_TAGS = (); }; };
+		568B36BE1BD233A30011A745 /* TLIAnalyticsTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36BD1BD233A30011A745 /* TLIAnalyticsTracker.swift */; settings = {ASSET_TAGS = (); }; };
+		568B36C01BD262A40011A745 /* TLICoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36BF1BD262A40011A745 /* TLICoreDataTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		568B36C61BD266010011A745 /* TLIListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36C51BD266010011A745 /* TLIListsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		56ED18E81BD12DB400672D86 /* Tinylog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56ED18E11BD12DB400672D86 /* Tinylog.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
-		56ED18EA1BD12DD400672D86 /* TLIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ED18E91BD12DD400672D86 /* TLIAppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
+		56ED18F11BD1325600672D86 /* Ensembles.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 56ED18EF1BD1325600672D86 /* Ensembles.bundle */; settings = {ASSET_TAGS = (); }; };
+		56ED18F21BD1325600672D86 /* Ensembles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56ED18F01BD1325600672D86 /* Ensembles.framework */; settings = {ASSET_TAGS = (); }; };
+		56ED18F51BD133B000672D86 /* TLIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ED18F41BD133B000672D86 /* TLIAppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
+		56ED19021BD138E300672D86 /* TLISyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 56ED19011BD138E300672D86 /* TLISyncManager.m */; settings = {ASSET_TAGS = (); }; };
+		56ED19041BD13A2C00672D86 /* TLICDController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ED19031BD13A2C00672D86 /* TLICDController.swift */; settings = {ASSET_TAGS = (); }; };
 		6BE5BC2A5E5851AE0CADC4DB /* Pods_TinylogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F271783A81E5BBE0791D9D /* Pods_TinylogTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,21 +53,43 @@
 		242F8901CEF3398A5561C510 /* Pods-TinylogTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinylogTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests.release.xcconfig"; sourceTree = "<group>"; };
 		5025D22A19B8119D39BB9C70 /* Pods-TinylogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinylogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TinylogTests/Pods-TinylogTests.debug.xcconfig"; sourceTree = "<group>"; };
 		564CE89C1BD0E39B008C055C /* Tinylog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinylog.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		564CE8A11BD0E39C008C055C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		564CE8A41BD0E39C008C055C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		564CE8A61BD0E39C008C055C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		564CE8A91BD0E39C008C055C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		564CE8AB1BD0E39C008C055C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		564CE8B01BD0E39C008C055C /* TinylogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinylogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		564CE8B41BD0E39C008C055C /* TinylogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinylogTests.swift; sourceTree = "<group>"; };
 		564CE8B61BD0E39C008C055C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		568B369B1BD229860011A745 /* Tinylog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tinylog.entitlements; sourceTree = "<group>"; };
+		568B369C1BD22A240011A745 /* TLIList+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TLIList+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		568B369D1BD22A240011A745 /* TLIList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIList.swift; sourceTree = "<group>"; };
+		568B36A01BD22AC90011A745 /* TLITask+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TLITask+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		568B36A11BD22AC90011A745 /* TLITask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLITask.swift; sourceTree = "<group>"; };
+		568B36A41BD22AEF0011A745 /* TLITag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TLITag+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		568B36A51BD22AEF0011A745 /* TLITag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLITag.swift; sourceTree = "<group>"; };
+		568B36A81BD22B080011A745 /* TLIMention+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TLIMention+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		568B36A91BD22B080011A745 /* TLIMention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIMention.swift; sourceTree = "<group>"; };
+		568B36AC1BD22B230011A745 /* TLINotification+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TLINotification+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		568B36AD1BD22B230011A745 /* TLINotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLINotification.swift; sourceTree = "<group>"; };
+		568B36B11BD22FC90011A745 /* TLISetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLISetupViewController.swift; sourceTree = "<group>"; };
+		568B36B41BD230720011A745 /* UIColor+TinylogiOSAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+TinylogiOSAdditions.swift"; sourceTree = "<group>"; };
+		568B36B91BD231610011A745 /* TLIRoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIRoundedButton.swift; sourceTree = "<group>"; };
+		568B36BB1BD232360011A745 /* TLIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIConstants.swift; sourceTree = "<group>"; };
+		568B36BD1BD233A30011A745 /* TLIAnalyticsTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIAnalyticsTracker.swift; sourceTree = "<group>"; };
+		568B36BF1BD262A40011A745 /* TLICoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLICoreDataTableViewController.swift; path = "Core Data/TLICoreDataTableViewController.swift"; sourceTree = "<group>"; };
+		568B36C51BD266010011A745 /* TLIListsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIListsViewController.swift; sourceTree = "<group>"; };
 		56ED18E21BD12DB400672D86 /* Tinylog 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 2.xcdatamodel"; sourceTree = "<group>"; };
 		56ED18E31BD12DB400672D86 /* Tinylog 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 3.xcdatamodel"; sourceTree = "<group>"; };
 		56ED18E41BD12DB400672D86 /* Tinylog 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 4.xcdatamodel"; sourceTree = "<group>"; };
 		56ED18E51BD12DB400672D86 /* Tinylog 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 5.xcdatamodel"; sourceTree = "<group>"; };
 		56ED18E61BD12DB400672D86 /* Tinylog 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 6.xcdatamodel"; sourceTree = "<group>"; };
 		56ED18E71BD12DB400672D86 /* Tinylog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tinylog.xcdatamodel; sourceTree = "<group>"; };
-		56ED18E91BD12DD400672D86 /* TLIAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLIAppDelegate.swift; path = Application/TLIAppDelegate.swift; sourceTree = "<group>"; };
+		56ED18EF1BD1325600672D86 /* Ensembles.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Ensembles.bundle; sourceTree = "<group>"; };
+		56ED18F01BD1325600672D86 /* Ensembles.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Ensembles.framework; sourceTree = "<group>"; };
+		56ED18F41BD133B000672D86 /* TLIAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIAppDelegate.swift; sourceTree = "<group>"; };
+		56ED18F81BD1349C00672D86 /* Tinylog-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tinylog-Bridging-Header.h"; sourceTree = "<group>"; };
+		56ED19001BD138E300672D86 /* TLISyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLISyncManager.h; sourceTree = "<group>"; };
+		56ED19011BD138E300672D86 /* TLISyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLISyncManager.m; sourceTree = "<group>"; };
+		56ED19031BD13A2C00672D86 /* TLICDController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLICDController.swift; sourceTree = "<group>"; };
 		7B28E3FF08E874E8FBA997B9 /* Pods_Tinylog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tinylog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8F271783A81E5BBE0791D9D /* Pods_TinylogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinylogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -59,6 +100,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BD76F1AD8E8AAF39E25A283 /* Pods_Tinylog.framework in Frameworks */,
+				56ED18F21BD1325600672D86 /* Ensembles.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +118,7 @@
 		564CE8931BD0E39B008C055C = {
 			isa = PBXGroup;
 			children = (
+				56ED18EC1BD1325600672D86 /* Vendor */,
 				564CE89E1BD0E39C008C055C /* Tinylog */,
 				564CE8B31BD0E39C008C055C /* TinylogTests */,
 				564CE89D1BD0E39B008C055C /* Products */,
@@ -96,11 +139,16 @@
 		564CE89E1BD0E39C008C055C /* Tinylog */ = {
 			isa = PBXGroup;
 			children = (
+				568B36C11BD265A30011A745 /* View Controllers */,
+				568B36B71BD231500011A745 /* Views */,
+				568B36B31BD2305A0011A745 /* Extensions */,
+				568B36B01BD22FB10011A745 /* Setup */,
+				568B369B1BD229860011A745 /* Tinylog.entitlements */,
+				56ED18FC1BD1378900672D86 /* Network */,
+				56ED18F61BD133C300672D86 /* Headers */,
+				56ED18F31BD133B000672D86 /* Application */,
 				56ED18EB1BD12E0400672D86 /* Core Data */,
-				56ED18E91BD12DD400672D86 /* TLIAppDelegate.swift */,
 				56ED18E01BD12DB400672D86 /* Core Data Model */,
-				564CE8A11BD0E39C008C055C /* ViewController.swift */,
-				564CE8A31BD0E39C008C055C /* Main.storyboard */,
 				564CE8A61BD0E39C008C055C /* Assets.xcassets */,
 				564CE8A81BD0E39C008C055C /* LaunchScreen.storyboard */,
 				564CE8AB1BD0E39C008C055C /* Info.plist */,
@@ -117,10 +165,84 @@
 			path = TinylogTests;
 			sourceTree = "<group>";
 		};
+		568B36B01BD22FB10011A745 /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				568B36B11BD22FC90011A745 /* TLISetupViewController.swift */,
+			);
+			path = Setup;
+			sourceTree = "<group>";
+		};
+		568B36B31BD2305A0011A745 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				568B36B41BD230720011A745 /* UIColor+TinylogiOSAdditions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		568B36B71BD231500011A745 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				568B36B81BD231500011A745 /* Buttons */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		568B36B81BD231500011A745 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				568B36B91BD231610011A745 /* TLIRoundedButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		568B36C11BD265A30011A745 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				568B36C21BD265A30011A745 /* Lists */,
+				568B36C31BD265A30011A745 /* Settings */,
+				568B36C41BD265A30011A745 /* Tasks */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		568B36C21BD265A30011A745 /* Lists */ = {
+			isa = PBXGroup;
+			children = (
+				568B36C51BD266010011A745 /* TLIListsViewController.swift */,
+			);
+			path = Lists;
+			sourceTree = "<group>";
+		};
+		568B36C31BD265A30011A745 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		568B36C41BD265A30011A745 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
 		56ED18E01BD12DB400672D86 /* Core Data Model */ = {
 			isa = PBXGroup;
 			children = (
 				56ED18E11BD12DB400672D86 /* Tinylog.xcdatamodeld */,
+				568B36AC1BD22B230011A745 /* TLINotification+CoreDataProperties.swift */,
+				568B36AD1BD22B230011A745 /* TLINotification.swift */,
+				568B36A81BD22B080011A745 /* TLIMention+CoreDataProperties.swift */,
+				568B36A91BD22B080011A745 /* TLIMention.swift */,
+				568B36A41BD22AEF0011A745 /* TLITag+CoreDataProperties.swift */,
+				568B36A51BD22AEF0011A745 /* TLITag.swift */,
+				568B36A01BD22AC90011A745 /* TLITask+CoreDataProperties.swift */,
+				568B36A11BD22AC90011A745 /* TLITask.swift */,
+				568B369C1BD22A240011A745 /* TLIList+CoreDataProperties.swift */,
+				568B369D1BD22A240011A745 /* TLIList.swift */,
 			);
 			path = "Core Data Model";
 			sourceTree = "<group>";
@@ -128,8 +250,62 @@
 		56ED18EB1BD12E0400672D86 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				568B36BF1BD262A40011A745 /* TLICoreDataTableViewController.swift */,
 			);
 			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		56ED18EC1BD1325600672D86 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				56ED18ED1BD1325600672D86 /* Ensembles */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		56ED18ED1BD1325600672D86 /* Ensembles */ = {
+			isa = PBXGroup;
+			children = (
+				56ED18EE1BD1325600672D86 /* iOS */,
+			);
+			path = Ensembles;
+			sourceTree = "<group>";
+		};
+		56ED18EE1BD1325600672D86 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				56ED18EF1BD1325600672D86 /* Ensembles.bundle */,
+				56ED18F01BD1325600672D86 /* Ensembles.framework */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		56ED18F31BD133B000672D86 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				56ED18F41BD133B000672D86 /* TLIAppDelegate.swift */,
+				568B36BB1BD232360011A745 /* TLIConstants.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		56ED18F61BD133C300672D86 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				56ED18F81BD1349C00672D86 /* Tinylog-Bridging-Header.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		56ED18FC1BD1378900672D86 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				56ED19001BD138E300672D86 /* TLISyncManager.h */,
+				56ED19011BD138E300672D86 /* TLISyncManager.m */,
+				56ED19031BD13A2C00672D86 /* TLICDController.swift */,
+				568B36BD1BD233A30011A745 /* TLIAnalyticsTracker.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		BF2095918E2B15668B278FB9 /* Pods */ = {
@@ -202,11 +378,22 @@
 		564CE8941BD0E39B008C055C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = TLI;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Spiros Gerokostas";
 				TargetAttributes = {
 					564CE89B1BD0E39B008C055C = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = A22EW7MN8G;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					564CE8AF1BD0E39C008C055C = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -240,7 +427,7 @@
 			files = (
 				564CE8AA1BD0E39C008C055C /* LaunchScreen.storyboard in Resources */,
 				564CE8A71BD0E39C008C055C /* Assets.xcassets in Resources */,
-				564CE8A51BD0E39C008C055C /* Main.storyboard in Resources */,
+				56ED18F11BD1325600672D86 /* Ensembles.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,9 +538,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56ED18EA1BD12DD400672D86 /* TLIAppDelegate.swift in Sources */,
-				564CE8A21BD0E39C008C055C /* ViewController.swift in Sources */,
+				568B36B21BD22FC90011A745 /* TLISetupViewController.swift in Sources */,
+				56ED19021BD138E300672D86 /* TLISyncManager.m in Sources */,
+				56ED18F51BD133B000672D86 /* TLIAppDelegate.swift in Sources */,
+				568B36A61BD22AEF0011A745 /* TLITag+CoreDataProperties.swift in Sources */,
+				568B369E1BD22A240011A745 /* TLIList+CoreDataProperties.swift in Sources */,
+				568B36BA1BD231610011A745 /* TLIRoundedButton.swift in Sources */,
+				568B36BC1BD232360011A745 /* TLIConstants.swift in Sources */,
+				568B36AA1BD22B080011A745 /* TLIMention+CoreDataProperties.swift in Sources */,
+				56ED19041BD13A2C00672D86 /* TLICDController.swift in Sources */,
+				568B36A21BD22AC90011A745 /* TLITask+CoreDataProperties.swift in Sources */,
+				568B369F1BD22A240011A745 /* TLIList.swift in Sources */,
+				568B36AF1BD22B230011A745 /* TLINotification.swift in Sources */,
+				568B36B51BD230720011A745 /* UIColor+TinylogiOSAdditions.swift in Sources */,
+				568B36C61BD266010011A745 /* TLIListsViewController.swift in Sources */,
+				568B36AB1BD22B080011A745 /* TLIMention.swift in Sources */,
+				568B36A71BD22AEF0011A745 /* TLITag.swift in Sources */,
+				568B36A31BD22AC90011A745 /* TLITask.swift in Sources */,
+				568B36BE1BD233A30011A745 /* TLIAnalyticsTracker.swift in Sources */,
+				568B36AE1BD22B230011A745 /* TLINotification+CoreDataProperties.swift in Sources */,
 				56ED18E81BD12DB400672D86 /* Tinylog.xcdatamodeld in Sources */,
+				568B36C01BD262A40011A745 /* TLICoreDataTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,14 +581,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		564CE8A31BD0E39C008C055C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				564CE8A41BD0E39C008C055C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		564CE8A81BD0E39C008C055C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -483,10 +680,46 @@
 			baseConfigurationReference = 1E9C5726D127EF64377DF523 /* Pods-Tinylog.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Tinylog/Tinylog.entitlements;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/Ensembles/iOS",
+				);
 				INFOPLIST_FILE = Tinylog/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Bolts\"",
+					"-framework",
+					"\"FBSDKCoreKit\"",
+					"-framework",
+					"\"FBSDKLoginKit\"",
+					"-framework",
+					"\"FBSDKShareKit\"",
+					"-framework",
+					"\"Mixpanel\"",
+					"-framework",
+					"\"PureLayout\"",
+					"-framework",
+					"\"Reachability\"",
+					"-framework",
+					"\"SGBackgroundView\"",
+					"-framework",
+					"\"SGReachability\"",
+					"-framework",
+					"\"SVProgressHUD\"",
+					"-framework",
+					"\"TTTAttributedLabel\"",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.Tinylog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tinylog/Headers/Tinylog-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -495,10 +728,45 @@
 			baseConfigurationReference = 23A0808EE7B649C91435C8E7 /* Pods-Tinylog.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Tinylog/Tinylog.entitlements;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/Ensembles/iOS",
+				);
 				INFOPLIST_FILE = Tinylog/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Bolts\"",
+					"-framework",
+					"\"FBSDKCoreKit\"",
+					"-framework",
+					"\"FBSDKLoginKit\"",
+					"-framework",
+					"\"FBSDKShareKit\"",
+					"-framework",
+					"\"Mixpanel\"",
+					"-framework",
+					"\"PureLayout\"",
+					"-framework",
+					"\"Reachability\"",
+					"-framework",
+					"\"SGBackgroundView\"",
+					"-framework",
+					"\"SGReachability\"",
+					"-framework",
+					"\"SVProgressHUD\"",
+					"-framework",
+					"\"TTTAttributedLabel\"",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.Tinylog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tinylog/Headers/Tinylog-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -511,6 +779,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.TinylogTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tinylog/Headers/Tinylog-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tinylog.app/Tinylog";
 			};
 			name = Debug;
@@ -524,6 +793,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.TinylogTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tinylog/Headers/Tinylog-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tinylog.app/Tinylog";
 			};
 			name = Release;

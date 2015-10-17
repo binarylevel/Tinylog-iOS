@@ -59,6 +59,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SGBackgroundView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SGReachability.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -76,6 +81,82 @@
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict/>
+	<dict>
+		<key>07765F0EB41AEF6265C8E72469BBDD08</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>246D55E4EB6F539ACA0DA2DAD0E93821</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>57ADC05E440A960212657DE6DA1FEDD5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5D69761C2CD2A1E5C013537B29CAB4CF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5FDA1476988CB9BD17A35F0D627FA76B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6870FDCB5951D80E38F33FB51944F70B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>93409DD31FC729A6EBA469724744D1E8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>93CC3C27B5230121B15B294A2B046C9B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>94A50FB884552F1E25589DD6EA641782</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AFCE00444BBC213F5BD337070F6BFA1B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C5DB5104FED3C10F78978AFC810982B9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CB7049F12AFEAF86B0251B8EFC9E8A71</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D306E1A19F57F62CC2320ED0D34FE3F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D53BF10D0F4858F36E3A749CF8A93E86</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F5ACF367AE3BD7A7F2AF2D430901DF7B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
 </dict>
 </plist>

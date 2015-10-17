@@ -15,7 +15,7 @@ extern NSString * const IDMSyncActivityDidEndNotification;
 extern NSString * const IDMCloudServiceUserDefaultKey;
 extern NSString * const IDMICloudService;
 
-@interface IDMSyncManager : NSObject
+@interface TLISyncManager : NSObject
 
 @property (nonatomic, readonly, strong) CDEPersistentStoreEnsemble *ensemble;
 @property (nonatomic, readwrite, strong) NSManagedObjectContext *managedObjectContext;
