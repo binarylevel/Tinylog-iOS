@@ -25,14 +25,13 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         //Register defaults
-//        let standardDefaults = NSUserDefaults.standardUserDefaults()
-//        standardDefaults.registerDefaults([
-//            kTLIFontDefaultsKey: kTLIFontHelveticaNeueKey,
-//            TLIUserDefaults.kTLISyncMode: "off",
-//            TLISettingsThemePickerViewController.ThemeKeys.kTLIThemeDefaultsKey: TLISettingsThemePickerViewController.ThemeKeys.kTLIThemeDayDefaultsKey,
-//            "kFontSize": 17.0,
-//            "kSystemFontSize": "off",
-//            "kSetupScreen": "on"])
+        let standardDefaults = NSUserDefaults.standardUserDefaults()
+        standardDefaults.registerDefaults([
+            String(kTLIFontDefaultsKey): kTLIFontHelveticaNeueKey,
+            String(TLIUserDefaults.kTLISyncMode): "off",
+            "kFontSize": 17.0,
+            "kSystemFontSize": "off",
+            "kSetupScreen": "on"])
         
         do {
            
