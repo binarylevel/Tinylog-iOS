@@ -38,7 +38,7 @@ class TLICheckBoxButton: UIButton {
     }
     
     override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
-        var area:CGRect = CGRectInset(self.bounds, -20, -20)
+        let area:CGRect = CGRectInset(self.bounds, -20, -20)
         return CGRectContainsPoint(area, point)
     }
     

@@ -92,15 +92,15 @@ class TLIReminderViewController: UIViewController {
             let cdc:TLICDController = TLICDController.sharedInstance
             
             if let notification = task?.notification { //Exists just update the notification
-                task!.notification!.displayText = task!.displayLongText
-                task!.notification!.fireDate = task!.reminder!
-                task!.notification!.updatedAt = NSDate()
+                notification.displayText = task!.displayLongText
+                notification.fireDate = task!.reminder!
+                notification.updatedAt = NSDate()
             } else {
                 if let reminder = task!.reminder {
                     
                     let notification:TLINotification = NSEntityDescription.insertNewObjectForEntityForName("Notification", inManagedObjectContext: cdc.context!) as! TLINotification
                     notification.displayText = task!.displayLongText
-                    notification.fireDate = task!.reminder!
+                    notification.fireDate = reminder
                     notification.createdAt = NSDate()
                     notification.added = false
                     notification.updatedAt = nil
@@ -143,9 +143,9 @@ class TLIReminderViewController: UIViewController {
         let dateFormatter:NSDateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "h:mm a"
         let strDate:String = dateFormatter.stringFromDate(currentDate)
-        var time = calculateDates(currentDate)
+        let time = calculateDates(currentDate)
         
-        var redColor = UIColor(red: 254.0 / 255.0, green: 69.0 / 255.0, blue: 101.0 / 255.0, alpha: 1.0)
+        let redColor = UIColor(red: 254.0 / 255.0, green: 69.0 / 255.0, blue: 101.0 / 255.0, alpha: 1.0)
         
         if time == "Yesterday" {
             descriptionLabel?.textColor = redColor

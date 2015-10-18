@@ -405,7 +405,7 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
             
             //First we must delete local notification if reminder exists
             
-            if let reminder = task.reminder {
+            if let _ = task.reminder {
                 let app:UIApplication = UIApplication.sharedApplication()
                 let notifications:NSArray = app.scheduledLocalNotifications!
                 
@@ -413,11 +413,11 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
                     let temp:UILocalNotification = notification as! UILocalNotification
                     
                     if let userInfo:NSDictionary = temp.userInfo {
-                        let displayText: String? = userInfo.valueForKey("displayText") as? String
+                        //let displayText: String? = userInfo.valueForKey("displayText") as? String
                         let uniqueIdentifier: String? = userInfo.valueForKey("uniqueIdentifier") as? String
                         
                         if let taskNotification = task.notification {
-                            if uniqueIdentifier == task.notification!.uniqueIdentifier {
+                            if uniqueIdentifier == taskNotification.uniqueIdentifier {
                                 let fetchRequest:NSFetchRequest = NSFetchRequest(entityName: "Notification")
                                 let positionDescriptor  = NSSortDescriptor(key: "uniqueIdentifier", ascending: false)
                                 fetchRequest.sortDescriptors = [positionDescriptor]
@@ -449,20 +449,25 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
             fetchRequestTotal.sortDescriptors = [positionDescriptor]
             fetchRequestTotal.predicate  = NSPredicate(format: "archivedAt = nil AND list = %@", task.list!)
             fetchRequestTotal.fetchBatchSize = 20
-            let results:NSArray = cdc.context!.executeFetchRequest(fetchRequestTotal, error: nil)!
             
-            let fetchRequestCompleted:NSFetchRequest = NSFetchRequest(entityName: "Task")
-            fetchRequestCompleted.sortDescriptors = [positionDescriptor]
-            fetchRequestCompleted.predicate  = NSPredicate(format: "archivedAt = nil AND completed = %@ AND list = %@", NSNumber(bool: true), task.list!)
-            fetchRequestCompleted.fetchBatchSize = 20
-            let resultsCompleted:NSArray = cdc.context!.executeFetchRequest(fetchRequestCompleted, error: nil)!
-            
-            let total:Int = results.count - resultsCompleted.count
-            task.list!.total = total
-            
-            cdc.backgroundSaveContext()
-            self.setEditing(false, animated: true)
-            self.checkForTasks()
+            do {
+                let results:NSArray = try cdc.context!.executeFetchRequest(fetchRequestTotal)
+                
+                let fetchRequestCompleted:NSFetchRequest = NSFetchRequest(entityName: "Task")
+                fetchRequestCompleted.sortDescriptors = [positionDescriptor]
+                fetchRequestCompleted.predicate  = NSPredicate(format: "archivedAt = nil AND completed = %@ AND list = %@", NSNumber(bool: true), task.list!)
+                fetchRequestCompleted.fetchBatchSize = 20
+                let resultsCompleted:NSArray = try cdc.context!.executeFetchRequest(fetchRequestCompleted)
+                
+                let total:Int = results.count - resultsCompleted.count
+                task.list!.total = total
+                
+                cdc.backgroundSaveContext()
+                self.setEditing(false, animated: true)
+                self.checkForTasks()
+            } catch let error as NSError {
+                fatalError(error.localizedDescription)
+            }
         });
         archiveRowAction.backgroundColor = UIColor.tinylogMainColor()
         return [archiveRowAction];
@@ -488,13 +493,13 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         fetchedTasks = fetchedTasks.filter() { $0 as! TLITask != task }
         //println(fetchedTasks)
         
-        var index = destinationIndexPath.row
+        let index = destinationIndexPath.row
         fetchedTasks.insert(task, atIndex: index)
         
         //println(fetchedTasks)
         
-        for (index, task) in enumerate(fetchedTasks) {
-            let t = task as! TLITask
+        for (_, task) in fetchedTasks.enumerate() {
+            _ = task as! TLITask
             //println("before \(t.displayLongText): \(t.position)")
         }
         
@@ -507,14 +512,14 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         //        }
         
         var i:NSInteger = fetchedTasks.count
-        for (index, task) in enumerate(fetchedTasks) {
+        for (_, task) in fetchedTasks.enumerate() {
             let t = task as! TLITask
             t.position = NSNumber(integer: i--)
             //println("Item \(index): \(t.position)")
         }
         
-        for (index, task) in enumerate(fetchedTasks) {
-            let t = task as! TLITask
+        for (_, task) in fetchedTasks.enumerate() {
+            _ = task as! TLITask
             //println("after \(t.displayLongText): \(t.position)")
         }
         
@@ -530,8 +535,8 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         self.ignoreNextUpdates = true
         let task = self.taskAtIndexPath(sourceIndexPath)!
         updateTask(task, sourceIndexPath: sourceIndexPath, destinationIndexPath: destinationIndexPath)
-        var taskSource:TLITask = self.frc?.objectAtIndexPath(sourceIndexPath) as! TLITask
-        var taskDestination:TLITask = self.frc?.objectAtIndexPath(destinationIndexPath) as! TLITask
+        //var taskSource:TLITask = self.frc?.objectAtIndexPath(sourceIndexPath) as! TLITask
+        //var taskDestination:TLITask = self.frc?.objectAtIndexPath(destinationIndexPath) as! TLITask
         
         let cdc:TLICDController = TLICDController.sharedInstance
         cdc.backgroundSaveContext()
@@ -582,7 +587,7 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
             
             let height = isEstimatedRowHeightInCache(indexPath)
             if (height != nil) {
-                var cellSize:CGSize = cell.systemLayoutSizeFittingSize(CGSizeMake(self.view.frame.size.width, 0), withHorizontalFittingPriority: 1000, verticalFittingPriority: 52)
+                let cellSize:CGSize = cell.systemLayoutSizeFittingSize(CGSizeMake(self.view.frame.size.width, 0), withHorizontalFittingPriority: 1000, verticalFittingPriority: 52)
                 putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
             }
             return cell
@@ -596,7 +601,7 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
             
             let height = isEstimatedRowHeightInCache(indexPath)
             if (height != nil) {
-                var cellSize:CGSize = cell.systemLayoutSizeFittingSize(CGSizeMake(self.view.frame.size.width, 0), withHorizontalFittingPriority: 1000, verticalFittingPriority: 52)
+                let cellSize:CGSize = cell.systemLayoutSizeFittingSize(CGSizeMake(self.view.frame.size.width, 0), withHorizontalFittingPriority: 1000, verticalFittingPriority: 52)
                 putEstimatedCellHeightToCache(indexPath, height: cellSize.height)
             }
             return cell
@@ -606,10 +611,15 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if enableDidSelectRowAtIndexPath {
             let itemID:NSManagedObjectID = self.frc!.objectAtIndexPath(indexPath).objectID!
-            let task:TLITask = self.frc?.managedObjectContext.existingObjectWithID(itemID, error: nil) as! TLITask
             
-            dispatch_async(dispatch_get_main_queue()) {
-                self.editTask(task, indexPath: indexPath)
+            do {
+                let task:TLITask = try self.frc?.managedObjectContext.existingObjectWithID(itemID) as! TLITask
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.editTask(task, indexPath: indexPath)
+                }
+            } catch let error as NSError {
+              fatalError(error.localizedDescription)
             }
         }
     }
@@ -672,59 +682,63 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
     
     func addTaskView(addTaskView: TLIAddTaskView, title: NSString) {
         
-        let fetchRequest:NSFetchRequest = NSFetchRequest(entityName: "Task")
-        let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
-        
-        let IS_IPAD = (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
-        
-        if IS_IPAD {
-            fetchRequest.predicate = NSPredicate(format: "list = %@", self.managedObject!)
-        } else {
-            fetchRequest.predicate = NSPredicate(format: "list = %@", self.list!)
+        do {
+            let fetchRequest:NSFetchRequest = NSFetchRequest(entityName: "Task")
+            let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
+            
+            let IS_IPAD = (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+            
+            if IS_IPAD {
+                fetchRequest.predicate = NSPredicate(format: "list = %@", self.managedObject!)
+            } else {
+                fetchRequest.predicate = NSPredicate(format: "list = %@", self.list!)
+            }
+            
+            fetchRequest.sortDescriptors = [positionDescriptor]
+            let results:NSArray = try TLICDController.sharedInstance.context!.executeFetchRequest(fetchRequest)
+            
+            let cdc:TLICDController = TLICDController.sharedInstance
+            let task:TLITask = NSEntityDescription.insertNewObjectForEntityForName("Task", inManagedObjectContext: cdc.context!) as! TLITask
+            task.displayLongText = title as String
+            
+            if IS_IPAD {
+                task.list = self.managedObject!
+            } else {
+                task.list = self.list!
+            }
+            
+            task.position = NSNumber(integer: results.count + 1)
+            task.createdAt = NSDate()
+            task.checkBoxValue = "false"
+            task.completed = false
+            cdc.backgroundSaveContext()
+            
+            checkForTasks()
+            
+            if IS_IPAD {
+                updateFooterInfoText(self.managedObject!)
+            } else {
+                updateFooterInfoText(self.list!)
+            }
+            
+            TLIAnalyticsTracker.trackMixpanelEvent("Add New Task", properties: nil)
+        } catch let error as NSError {
+            fatalError(error.localizedDescription)
         }
-        
-        fetchRequest.sortDescriptors = [positionDescriptor]
-        let results:NSArray = TLICDController.sharedInstance.context!.executeFetchRequest(fetchRequest, error: nil)!
-        
-        let cdc:TLICDController = TLICDController.sharedInstance
-        let task:TLITask = NSEntityDescription.insertNewObjectForEntityForName("Task", inManagedObjectContext: cdc.context!) as! TLITask
-        task.displayLongText = title as String
-        
-        if IS_IPAD {
-            task.list = self.managedObject!
-        } else {
-            task.list = self.list!
-        }
-        
-        task.position = NSNumber(integer: results.count + 1)
-        task.createdAt = NSDate()
-        task.checkBoxValue = "false"
-        task.completed = false
-        cdc.backgroundSaveContext()
-        
-        checkForTasks()
-        
-        if IS_IPAD {
-            updateFooterInfoText(self.managedObject!)
-        } else {
-            updateFooterInfoText(self.list!)
-        }
-        
-        TLIAnalyticsTracker.trackMixpanelEvent("Add New Task", properties: nil)
     }
     
     func displayTransparentLayer() {
         self.tableView?.scrollEnabled = false
-        var addTransparentLayer:UIView = self.addTransparentLayer!
+        let addTransparentLayer:UIView = self.addTransparentLayer!
         UIView.animateWithDuration(0.3, delay: 0.0,
-            options: .CurveEaseInOut | .AllowUserInteraction, animations: {
+            options: [.CurveEaseInOut, .AllowUserInteraction], animations: {
                 addTransparentLayer.alpha = 1.0
             }, completion: nil)
     }
     
     func hideTransparentLayer() {
         self.tableView?.scrollEnabled = true
-        UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut | UIViewAnimationOptions.AllowUserInteraction, animations: {
+        UIView.animateWithDuration(0.3, delay: 0, options: [UIViewAnimationOptions.CurveEaseInOut, UIViewAnimationOptions.AllowUserInteraction], animations: {
             self.addTransparentLayer!.alpha = 0.0
             }, completion: { finished in
                 if finished {
@@ -745,23 +759,6 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
             UIApplication.sharedApplication().openURL(NSURL(string: NSString(format: "http://%@", url.host!) as String)!)
             TLIAnalyticsTracker.trackMixpanelEvent("Display Link", properties: nil)
         } else if url.scheme == "mention" {
-     
-            let cdc:TLICDController = TLICDController.sharedInstance
-            let fetchRequest:NSFetchRequest = NSFetchRequest(entityName: "Task")
-            let displayLongTextDescriptor  = NSSortDescriptor(key: "displayLongText", ascending: true)
-            fetchRequest.sortDescriptors = [displayLongTextDescriptor]
-            fetchRequest.predicate = NSPredicate(format: "ANY mentions.name == %@", url.host!)
-            
-            var error: NSError?
-            let results:NSArray = cdc.context!.executeFetchRequest(fetchRequest, error: &error)!
-            
-            if error != nil {
-                print("Error executing request for entity \(error?.localizedDescription)")
-            }
-            
-            //            for item in results {
-            //                var m = item as! TLITask
-            //            }
             
             let mentionsViewController:TLIMentionsViewController = TLIMentionsViewController()
             mentionsViewController.mention = url.host!
@@ -784,7 +781,7 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         editTaskViewController.task = task
         editTaskViewController.indexPath = indexPath
         editTaskViewController.delegate = self
-        var navigationController:UINavigationController = UINavigationController(rootViewController: editTaskViewController)
+        let navigationController:UINavigationController = UINavigationController(rootViewController: editTaskViewController)
         navigationController.modalPresentationStyle = UIModalPresentationStyle.FormSheet
         self.navigationController?.presentViewController(navigationController, animated: true, completion: nil)
         TLIAnalyticsTracker.trackMixpanelEvent("Edit Task", properties: nil)
@@ -804,7 +801,7 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
     func getEstimatedCellHeightFromCache(indexPath:NSIndexPath, defaultHeight:CGFloat)->CGFloat? {
         initEstimatedRowHeightCacheIfNeeded()
         
-        var height:CGFloat? = estimatedRowHeightCache!.valueForKey(NSString(format: "%ld", indexPath.row) as String) as? CGFloat
+        let height:CGFloat? = estimatedRowHeightCache!.valueForKey(NSString(format: "%ld", indexPath.row) as String) as? CGFloat
         
         if( height != nil) {
             return height!
@@ -842,62 +839,69 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
     
     func exportTasks(sender:UIButton) {
         if self.managedObject != nil || self.list != nil {
-            let cdc:TLICDController = TLICDController.sharedInstance
-            let fetchRequest:NSFetchRequest = NSFetchRequest(entityName: "Task")
-            let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
-            let displayLongTextDescriptor  = NSSortDescriptor(key: "displayLongText", ascending: true)
-            fetchRequest.sortDescriptors = [positionDescriptor, displayLongTextDescriptor]
             
-            let IS_IPAD = (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
-            
-            if IS_IPAD {
-                fetchRequest.predicate = NSPredicate(format: "list = %@", self.managedObject!)
-            } else {
-                fetchRequest.predicate = NSPredicate(format: "list = %@", self.list!)
+            do {
+                let cdc:TLICDController = TLICDController.sharedInstance
+                let fetchRequest:NSFetchRequest = NSFetchRequest(entityName: "Task")
+                let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
+                let displayLongTextDescriptor  = NSSortDescriptor(key: "displayLongText", ascending: true)
+                fetchRequest.sortDescriptors = [positionDescriptor, displayLongTextDescriptor]
+                
+                let IS_IPAD = (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+                
+                if IS_IPAD {
+                    fetchRequest.predicate = NSPredicate(format: "list = %@", self.managedObject!)
+                } else {
+                    fetchRequest.predicate = NSPredicate(format: "list = %@", self.list!)
+                }
+                
+                fetchRequest.fetchBatchSize = 20
+                let tasks:NSArray = try cdc.context!.executeFetchRequest(fetchRequest)
+                
+                var output:NSString = ""
+                var listTitle:NSString = ""
+                
+                if IS_IPAD {
+                    listTitle = self.managedObject!.title!
+                } else {
+                    listTitle = self.list!.title!
+                }
+                
+                output = output.stringByAppendingString(NSString(format: "%@\n", listTitle) as String)
+                
+                for task in tasks {
+                    let taskItem:TLITask = task as! TLITask
+                    let displayLongText:NSString = NSString(format: "- %@\n", taskItem.displayLongText!)
+                    output = output.stringByAppendingString(displayLongText as String)
+                }
+                
+                let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: [output], applicationActivities: nil)
+                activityViewController.excludedActivityTypes =  [
+                    UIActivityTypePostToTwitter,
+                    UIActivityTypePostToFacebook,
+                    UIActivityTypePostToWeibo,
+                    UIActivityTypeCopyToPasteboard,
+                    UIActivityTypeAssignToContact,
+                    UIActivityTypeSaveToCameraRoll,
+                    UIActivityTypeAddToReadingList,
+                    UIActivityTypePostToFlickr,
+                    UIActivityTypePostToVimeo,
+                    UIActivityTypePostToTencentWeibo
+                ]
+                
+                if IS_IPAD {
+                    let popup:UIPopoverController = UIPopoverController(contentViewController: activityViewController)
+                    popup.presentPopoverFromRect(sender.bounds, inView: sender, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+                } else {
+                    self.navigationController?.presentViewController(activityViewController, animated: true, completion: nil)
+                }
+                
+                TLIAnalyticsTracker.trackMixpanelEvent("Export Tasks", properties: nil)
+            } catch let error as NSError {
+                fatalError(error.localizedDescription)
             }
             
-            fetchRequest.fetchBatchSize = 20
-            let tasks:NSArray = cdc.context!.executeFetchRequest(fetchRequest, error: nil)!
-            
-            var output:NSString = ""
-            var listTitle:NSString = ""
-            
-            if IS_IPAD {
-                listTitle = self.managedObject!.title!
-            } else {
-                listTitle = self.list!.title!
-            }
-            
-            output = output.stringByAppendingString(NSString(format: "%@\n", listTitle) as String)
-            
-            for task in tasks {
-                let taskItem:TLITask = task as! TLITask
-                let displayLongText:NSString = NSString(format: "- %@\n", taskItem.displayLongText!)
-                output = output.stringByAppendingString(displayLongText as String)
-            }
-            
-            let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: [output], applicationActivities: nil)
-            activityViewController.excludedActivityTypes =  [
-                UIActivityTypePostToTwitter,
-                UIActivityTypePostToFacebook,
-                UIActivityTypePostToWeibo,
-                UIActivityTypeCopyToPasteboard,
-                UIActivityTypeAssignToContact,
-                UIActivityTypeSaveToCameraRoll,
-                UIActivityTypeAddToReadingList,
-                UIActivityTypePostToFlickr,
-                UIActivityTypePostToVimeo,
-                UIActivityTypePostToTencentWeibo
-            ]
-            
-            if IS_IPAD {
-                let popup:UIPopoverController = UIPopoverController(contentViewController: activityViewController)
-                popup.presentPopoverFromRect(sender.bounds, inView: sender, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
-            } else {
-                self.navigationController?.presentViewController(activityViewController, animated: true, completion: nil)
-            }
-            
-            TLIAnalyticsTracker.trackMixpanelEvent("Export Tasks", properties: nil)
+
         }
     }
 }

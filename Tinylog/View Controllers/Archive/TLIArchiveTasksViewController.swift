@@ -451,7 +451,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController, TTTAttribut
         editTaskViewController.task = task
         editTaskViewController.indexPath = indexPath
         editTaskViewController.delegate = self
-        var navigationController:UINavigationController = UINavigationController(rootViewController: editTaskViewController)
+        let navigationController:UINavigationController = UINavigationController(rootViewController: editTaskViewController)
         navigationController.modalPresentationStyle = UIModalPresentationStyle.FormSheet
         self.navigationController?.presentViewController(navigationController, animated: true, completion: nil)
     }
@@ -470,7 +470,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController, TTTAttribut
     func getEstimatedCellHeightFromCache(indexPath:NSIndexPath, defaultHeight:CGFloat)->CGFloat? {
         initEstimatedRowHeightCacheIfNeeded()
         
-        var height:CGFloat? = estimatedRowHeightCache!.valueForKey(NSString(format: "%ld", indexPath.row) as String) as? CGFloat
+        let height:CGFloat? = estimatedRowHeightCache!.valueForKey(NSString(format: "%ld", indexPath.row) as String) as? CGFloat
         
         if( height != nil) {
             return height!
@@ -515,33 +515,38 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController, TTTAttribut
         fetchRequest.sortDescriptors = [positionDescriptor, displayLongTextDescriptor]
         fetchRequest.predicate  = NSPredicate(format: "list = %@", self.list!)
         fetchRequest.fetchBatchSize = 20
-        let tasks:NSArray = cdc.context!.executeFetchRequest(fetchRequest, error: nil)!
         
-        var output:NSString = ""
-        
-        let listTitle:NSString = self.list!.title
-        output = output.stringByAppendingString(NSString(format: "%@\n", listTitle) as String)
-        
-        for task in tasks {
-            let taskItem:TLITask = task as! TLITask
-            let displayLongText:NSString = NSString(format: "- %@\n", taskItem.displayLongText)
-            output = output.stringByAppendingString(displayLongText as String)
+        do {
+            let tasks:NSArray = try cdc.context!.executeFetchRequest(fetchRequest)
+            
+            var output:NSString = ""
+            
+            let listTitle:NSString = self.list!.title!
+            output = output.stringByAppendingString(NSString(format: "%@\n", listTitle) as String)
+            
+            for task in tasks {
+                let taskItem:TLITask = task as! TLITask
+                let displayLongText:NSString = NSString(format: "- %@\n", taskItem.displayLongText!)
+                output = output.stringByAppendingString(displayLongText as String)
+            }
+            
+            let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: [output], applicationActivities: nil)
+            activityViewController.excludedActivityTypes =  [
+                UIActivityTypePostToTwitter,
+                UIActivityTypePostToFacebook,
+                UIActivityTypePostToWeibo,
+                UIActivityTypeCopyToPasteboard,
+                UIActivityTypeAssignToContact,
+                UIActivityTypeSaveToCameraRoll,
+                UIActivityTypeAddToReadingList,
+                UIActivityTypePostToFlickr,
+                UIActivityTypePostToVimeo,
+                UIActivityTypePostToTencentWeibo
+            ]
+            self.navigationController?.presentViewController(activityViewController, animated: true, completion: nil)
+        } catch let error as NSError {
+            fatalError(error.localizedDescription)
         }
-        
-        let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: [output], applicationActivities: nil)
-        activityViewController.excludedActivityTypes =  [
-            UIActivityTypePostToTwitter,
-            UIActivityTypePostToFacebook,
-            UIActivityTypePostToWeibo,
-            UIActivityTypeCopyToPasteboard,
-            UIActivityTypeAssignToContact,
-            UIActivityTypeSaveToCameraRoll,
-            UIActivityTypeAddToReadingList,
-            UIActivityTypePostToFlickr,
-            UIActivityTypePostToVimeo,
-            UIActivityTypePostToTencentWeibo
-        ]
-        self.navigationController?.presentViewController(activityViewController, animated: true, completion: nil)
     }
 }
 

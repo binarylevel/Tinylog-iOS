@@ -51,7 +51,7 @@ class TLIResultsTableViewController: TLICoreDataTableViewController {
     
     func configureFetch() {
         let cdc:TLICDController = TLICDController.sharedInstance
-        var fetchRequest:NSFetchRequest = NSFetchRequest(entityName: "List")
+        let fetchRequest:NSFetchRequest = NSFetchRequest(entityName: "List")
         let positionDescriptor  = NSSortDescriptor(key: "position", ascending: false)
         let remoteIDDescriptor  = NSSortDescriptor(key: "remoteID", ascending: true)
         fetchRequest.sortDescriptors = [positionDescriptor, remoteIDDescriptor]
@@ -61,7 +61,7 @@ class TLIResultsTableViewController: TLICoreDataTableViewController {
     
     override func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let list:TLIList = self.frc?.objectAtIndexPath(indexPath) as! TLIList
-        var listTableViewCell:TLIListTableViewCell = cell as! TLIListTableViewCell
+        let listTableViewCell:TLIListTableViewCell = cell as! TLIListTableViewCell
         listTableViewCell.currentList = list
     }
     
