@@ -29,8 +29,6 @@
 		568B36C01BD262A40011A745 /* TLICoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36BF1BD262A40011A745 /* TLICoreDataTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		568B36C61BD266010011A745 /* TLIListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36C51BD266010011A745 /* TLIListsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		56ED18E81BD12DB400672D86 /* Tinylog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56ED18E11BD12DB400672D86 /* Tinylog.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
-		56ED18F11BD1325600672D86 /* Ensembles.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 56ED18EF1BD1325600672D86 /* Ensembles.bundle */; settings = {ASSET_TAGS = (); }; };
-		56ED18F21BD1325600672D86 /* Ensembles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56ED18F01BD1325600672D86 /* Ensembles.framework */; settings = {ASSET_TAGS = (); }; };
 		56ED18F51BD133B000672D86 /* TLIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ED18F41BD133B000672D86 /* TLIAppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		56ED19021BD138E300672D86 /* TLISyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 56ED19011BD138E300672D86 /* TLISyncManager.m */; settings = {ASSET_TAGS = (); }; };
 		56ED19041BD13A2C00672D86 /* TLICDController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ED19031BD13A2C00672D86 /* TLICDController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -83,8 +81,6 @@
 		56ED18E51BD12DB400672D86 /* Tinylog 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 5.xcdatamodel"; sourceTree = "<group>"; };
 		56ED18E61BD12DB400672D86 /* Tinylog 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Tinylog 6.xcdatamodel"; sourceTree = "<group>"; };
 		56ED18E71BD12DB400672D86 /* Tinylog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tinylog.xcdatamodel; sourceTree = "<group>"; };
-		56ED18EF1BD1325600672D86 /* Ensembles.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Ensembles.bundle; sourceTree = "<group>"; };
-		56ED18F01BD1325600672D86 /* Ensembles.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Ensembles.framework; sourceTree = "<group>"; };
 		56ED18F41BD133B000672D86 /* TLIAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIAppDelegate.swift; sourceTree = "<group>"; };
 		56ED18F81BD1349C00672D86 /* Tinylog-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tinylog-Bridging-Header.h"; sourceTree = "<group>"; };
 		56ED19001BD138E300672D86 /* TLISyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLISyncManager.h; sourceTree = "<group>"; };
@@ -100,7 +96,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BD76F1AD8E8AAF39E25A283 /* Pods_Tinylog.framework in Frameworks */,
-				56ED18F21BD1325600672D86 /* Ensembles.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,26 +253,8 @@
 		56ED18EC1BD1325600672D86 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				56ED18ED1BD1325600672D86 /* Ensembles */,
 			);
 			path = Vendor;
-			sourceTree = "<group>";
-		};
-		56ED18ED1BD1325600672D86 /* Ensembles */ = {
-			isa = PBXGroup;
-			children = (
-				56ED18EE1BD1325600672D86 /* iOS */,
-			);
-			path = Ensembles;
-			sourceTree = "<group>";
-		};
-		56ED18EE1BD1325600672D86 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				56ED18EF1BD1325600672D86 /* Ensembles.bundle */,
-				56ED18F01BD1325600672D86 /* Ensembles.framework */,
-			);
-			path = iOS;
 			sourceTree = "<group>";
 		};
 		56ED18F31BD133B000672D86 /* Application */ = {
@@ -427,7 +404,6 @@
 			files = (
 				564CE8AA1BD0E39C008C055C /* LaunchScreen.storyboard in Resources */,
 				564CE8A71BD0E39C008C055C /* Assets.xcassets in Resources */,
-				56ED18F11BD1325600672D86 /* Ensembles.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,6 +608,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -670,6 +647,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -679,6 +657,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1E9C5726D127EF64377DF523 /* Pods-Tinylog.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Tinylog/Tinylog.entitlements;
@@ -720,6 +699,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tinylog/Headers/Tinylog-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -727,6 +707,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 23A0808EE7B649C91435C8E7 /* Pods-Tinylog.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Tinylog/Tinylog.entitlements;
@@ -767,6 +748,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.Tinylog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tinylog/Headers/Tinylog-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};
@@ -775,6 +757,7 @@
 			baseConfigurationReference = 5025D22A19B8119D39BB9C70 /* Pods-TinylogTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TinylogTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.TinylogTests;
@@ -789,6 +772,7 @@
 			baseConfigurationReference = 242F8901CEF3398A5561C510 /* Pods-TinylogTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TinylogTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.TinylogTests;

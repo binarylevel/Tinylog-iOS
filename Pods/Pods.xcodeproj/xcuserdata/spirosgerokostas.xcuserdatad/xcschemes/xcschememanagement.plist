@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Ensembles.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -82,12 +87,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>07765F0EB41AEF6265C8E72469BBDD08</key>
+		<key>1CF8E11D160FE211F1247305505544DA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>246D55E4EB6F539ACA0DA2DAD0E93821</key>
+		<key>2094C3B9D3E6A2949EA072D600FB9475</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>223265B7DA10A011C49B567E63BFF88C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4CAC95BAD79AE7D179A7730EDB6C3D1A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,17 +122,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6870FDCB5951D80E38F33FB51944F70B</key>
+		<key>6CFC30984388609F8A2B5878F576CDE1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>93409DD31FC729A6EBA469724744D1E8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>93CC3C27B5230121B15B294A2B046C9B</key>
+		<key>894B923837421283D38CC5CEE4023139</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -127,7 +137,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AFCE00444BBC213F5BD337070F6BFA1B</key>
+		<key>9D87D02A17858E549AA8C5A85222D2B4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B10A36FAF3DC83F4C7DBD4BE924E3D21</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -143,11 +158,6 @@
 			<true/>
 		</dict>
 		<key>D306E1A19F57F62CC2320ED0D34FE3F8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D53BF10D0F4858F36E3A749CF8A93E86</key>
 		<dict>
 			<key>primary</key>
 			<true/>

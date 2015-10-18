@@ -1,0 +1,1 @@
+../../../Ensembles/Framework/Source/General/NSFileCoordinator+CDEAdditions.h

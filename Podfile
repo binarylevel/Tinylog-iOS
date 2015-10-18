@@ -12,6 +12,7 @@ target :Tinylog do
 	pod 'Mixpanel'
 	pod 'SGReachability'
 	pod 'SGBackgroundView'
+	pod "Ensembles", "~> 1.0"
 end
 
 target :TinylogTests do

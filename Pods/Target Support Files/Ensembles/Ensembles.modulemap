@@ -1,0 +1,6 @@
+framework module Ensembles {
+  umbrella header "Ensembles-umbrella.h"
+
+  export *
+  module * { export * }
+}

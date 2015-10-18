@@ -4,7 +4,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
-#import "MPCategoryHelpers.h"
+#import "UIView+MPHelpers.h"
 #import "MPLogger.h"
 #import "MPNotification.h"
 #import "MPNotificationViewController.h"
@@ -147,7 +147,11 @@
     return UIStatusBarAnimationFade;
 }
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+#else
 - (NSUInteger)supportedInterfaceOrientations
+#endif
 {
     return UIInterfaceOrientationMaskPortrait;
 }
@@ -271,12 +275,15 @@
     self.bodyLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.bodyLabel.numberOfLines = 0;
 
-    UIColor *backgroundColor = [UIColor mp_applicationPrimaryColor];
-    if (!backgroundColor) {
-        backgroundColor = [UIColor mp_darkEffectColor];
+    if (!self.backgroundColor) {
+        self.backgroundColor = [UIColor mp_applicationPrimaryColor];
+        if (!self.backgroundColor) {
+            self.backgroundColor = [UIColor mp_darkEffectColor];
+        }
     }
-    backgroundColor = [backgroundColor colorWithAlphaComponent:0.95f];
-    self.view.backgroundColor = backgroundColor;
+
+    UIColor *backgroundColorWithAlphaComponent = [self.backgroundColor colorWithAlphaComponent:0.95f];
+    self.view.backgroundColor = backgroundColorWithAlphaComponent;
 
     if (self.notification != nil) {
         if (self.notification.image != nil) {

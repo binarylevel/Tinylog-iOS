@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Tinylog/Bolts.framework"
+  install_framework "Pods-Tinylog/Ensembles.framework"
   install_framework "Pods-Tinylog/FBSDKCoreKit.framework"
   install_framework "Pods-Tinylog/FBSDKLoginKit.framework"
   install_framework "Pods-Tinylog/FBSDKShareKit.framework"
@@ -98,6 +99,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Tinylog/Bolts.framework"
+  install_framework "Pods-Tinylog/Ensembles.framework"
   install_framework "Pods-Tinylog/FBSDKCoreKit.framework"
   install_framework "Pods-Tinylog/FBSDKLoginKit.framework"
   install_framework "Pods-Tinylog/FBSDKShareKit.framework"

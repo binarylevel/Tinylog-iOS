@@ -17,7 +17,6 @@
 #import "MPABTestDesignerTweakRequestMessage.h"
 #import "MPABTestDesignerTweakResponseMessage.h"
 #import "MPApplicationStateSerializer.h"
-#import "MPCategoryHelpers.h"
 #import "MPClassDescription.h"
 #import "MPDesignerEventBindingMessage.h"
 #import "MPDesignerSessionCollection.h"
@@ -54,6 +53,7 @@
 #import "UIColor+MPColor.h"
 #import "UIImage+MPAverageColor.h"
 #import "UIImage+MPImageEffects.h"
+#import "UIView+MPHelpers.h"
 
 FOUNDATION_EXPORT double MixpanelVersionNumber;
 FOUNDATION_EXPORT const unsigned char MixpanelVersionString[];
