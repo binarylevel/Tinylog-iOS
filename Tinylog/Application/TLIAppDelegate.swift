@@ -58,7 +58,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
         let IS_IPAD = (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
         
         if  IS_IPAD {
-            //self.window?.rootViewController = TLISplitViewController()
+            self.window?.rootViewController = TLISplitViewController()
             TLIAnalyticsTracker.trackMixpanelEvent("Open App", properties: ["device": "ipad"])
         } else {
             let listsViewController:TLIListsViewController = TLIListsViewController()
