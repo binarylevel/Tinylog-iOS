@@ -59,8 +59,8 @@
 		568B36BE1BD233A30011A745 /* TLIAnalyticsTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36BD1BD233A30011A745 /* TLIAnalyticsTracker.swift */; settings = {ASSET_TAGS = (); }; };
 		568B36C01BD262A40011A745 /* TLICoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36BF1BD262A40011A745 /* TLICoreDataTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		568B36C61BD266010011A745 /* TLIListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36C51BD266010011A745 /* TLIListsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		56B275791BD558D3000BE396 /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B275781BD558D3000BE396 /* NSDate+Utilities.m */; settings = {ASSET_TAGS = (); }; };
 		56D4E6351BD39D2300852DC1 /* TLIReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D4E6341BD39D2300852DC1 /* TLIReminderViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		56D4E6391BD39DE300852DC1 /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D4E6381BD39DE300852DC1 /* NSDate+Utilities.m */; settings = {ASSET_TAGS = (); }; };
 		56D4E63B1BD39E9F00852DC1 /* TLIListsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D4E63A1BD39E9F00852DC1 /* TLIListsFooterView.swift */; settings = {ASSET_TAGS = (); }; };
 		56D4E63D1BD39EC600852DC1 /* TLIAddListButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D4E63C1BD39EC600852DC1 /* TLIAddListButton.swift */; settings = {ASSET_TAGS = (); }; };
 		56D4E63F1BD39EE100852DC1 /* TLIArchiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D4E63E1BD39EE100852DC1 /* TLIArchiveButton.swift */; settings = {ASSET_TAGS = (); }; };
@@ -159,9 +159,9 @@
 		568B36BD1BD233A30011A745 /* TLIAnalyticsTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIAnalyticsTracker.swift; sourceTree = "<group>"; };
 		568B36BF1BD262A40011A745 /* TLICoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TLICoreDataTableViewController.swift; path = "Core Data/TLICoreDataTableViewController.swift"; sourceTree = "<group>"; };
 		568B36C51BD266010011A745 /* TLIListsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIListsViewController.swift; sourceTree = "<group>"; };
+		56B275771BD558D3000BE396 /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
+		56B275781BD558D3000BE396 /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
 		56D4E6341BD39D2300852DC1 /* TLIReminderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIReminderViewController.swift; sourceTree = "<group>"; };
-		56D4E6371BD39DE300852DC1 /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
-		56D4E6381BD39DE300852DC1 /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
 		56D4E63A1BD39E9F00852DC1 /* TLIListsFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIListsFooterView.swift; sourceTree = "<group>"; };
 		56D4E63C1BD39EC600852DC1 /* TLIAddListButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIAddListButton.swift; sourceTree = "<group>"; };
 		56D4E63E1BD39EE100852DC1 /* TLIArchiveButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIArchiveButton.swift; sourceTree = "<group>"; };
@@ -319,7 +319,6 @@
 			isa = PBXGroup;
 			children = (
 				56186EB11BD4231C001B7EF3 /* Resources */,
-				56ED18EC1BD1325600672D86 /* Vendor */,
 				564CE89E1BD0E39C008C055C /* Tinylog */,
 				564CE8B31BD0E39C008C055C /* TinylogTests */,
 				564CE89D1BD0E39B008C055C /* Products */,
@@ -383,6 +382,8 @@
 				563B79451BD381C800EE86CD /* UIFont+TinylogiOSAdditions.swift */,
 				563B79851BD39A7000EE86CD /* String+TinylogiOSAdditions.swift */,
 				56D4E6521BD3AB2A00852DC1 /* UIImage+TinylogiOSAdditions.swift */,
+				56B275771BD558D3000BE396 /* NSDate+Utilities.h */,
+				56B275781BD558D3000BE396 /* NSDate+Utilities.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -467,15 +468,6 @@
 			path = Tasks;
 			sourceTree = "<group>";
 		};
-		56D4E6361BD39DE300852DC1 /* NSDate-Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				56D4E6371BD39DE300852DC1 /* NSDate+Utilities.h */,
-				56D4E6381BD39DE300852DC1 /* NSDate+Utilities.m */,
-			);
-			path = "NSDate-Extensions";
-			sourceTree = "<group>";
-		};
 		56D4E6481BD3A29B00852DC1 /* Archive */ = {
 			isa = PBXGroup;
 			children = (
@@ -517,14 +509,6 @@
 				568B36BF1BD262A40011A745 /* TLICoreDataTableViewController.swift */,
 			);
 			name = "Core Data";
-			sourceTree = "<group>";
-		};
-		56ED18EC1BD1325600672D86 /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				56D4E6361BD39DE300852DC1 /* NSDate-Extensions */,
-			);
-			path = Vendor;
 			sourceTree = "<group>";
 		};
 		56ED18F31BD133B000672D86 /* Application */ = {
@@ -828,7 +812,6 @@
 				568B36B51BD230720011A745 /* UIColor+TinylogiOSAdditions.swift in Sources */,
 				568B36C61BD266010011A745 /* TLIListsViewController.swift in Sources */,
 				568B36AB1BD22B080011A745 /* TLIMention.swift in Sources */,
-				56D4E6391BD39DE300852DC1 /* NSDate+Utilities.m in Sources */,
 				568B36A71BD22AEF0011A745 /* TLITag.swift in Sources */,
 				563B796E1BD3943700EE86CD /* TLICircleButton.swift in Sources */,
 				563B79681BD392DC00EE86CD /* TLIDrawingUtils.m in Sources */,
@@ -844,6 +827,7 @@
 				56D4E63F1BD39EE100852DC1 /* TLIArchiveButton.swift in Sources */,
 				56D4E6511BD3A4D600852DC1 /* TLITaskTableViewCell.swift in Sources */,
 				563B79651BD3905500EE86CD /* TLIAboutViewController.swift in Sources */,
+				56B275791BD558D3000BE396 /* NSDate+Utilities.m in Sources */,
 				563B79611BD38EF400EE86CD /* TLITextField.m in Sources */,
 				56D4E64F1BD3A48700852DC1 /* TLITasksViewController.swift in Sources */,
 				563B79821BD3963E00EE86CD /* TLIKeyboardBar.swift in Sources */,
