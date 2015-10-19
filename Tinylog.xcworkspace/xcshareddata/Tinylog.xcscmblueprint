@@ -9,18 +9,12 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A747825C-0445-4BE3-AE64-433AD69DEB08",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "1F601A37F0218B98FD4991D9D51BA9E46A39A47A" : "Tinylog\/Vendor\/NSDate-Extensions\/",
     "8902AC10CA8129AFC926EF773B59624DC9002873" : "Tinylog\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Tinylog",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Tinylog.xcworkspace",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
-    {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/erica\/NSDate-Extensions",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1F601A37F0218B98FD4991D9D51BA9E46A39A47A"
-    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/sger\/Tinylog-iOS.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",

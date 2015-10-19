@@ -13,6 +13,8 @@ target :Tinylog do
 	pod 'SGReachability'
 	pod 'SGBackgroundView'
 	pod "Ensembles", "~> 1.0"
+	pod 'Fabric'
+	pod 'Crashlytics'
 end
 
 target :TinylogTests do

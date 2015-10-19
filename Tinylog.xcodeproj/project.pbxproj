@@ -318,6 +318,7 @@
 		564CE8931BD0E39B008C055C = {
 			isa = PBXGroup;
 			children = (
+				565E7C621BD55EF000E05C8A /* Vendor */,
 				56186EB11BD4231C001B7EF3 /* Resources */,
 				564CE89E1BD0E39C008C055C /* Tinylog */,
 				564CE8B31BD0E39C008C055C /* TinylogTests */,
@@ -365,6 +366,13 @@
 				564CE8B61BD0E39C008C055C /* Info.plist */,
 			);
 			path = TinylogTests;
+			sourceTree = "<group>";
+		};
+		565E7C621BD55EF000E05C8A /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Vendor;
 			sourceTree = "<group>";
 		};
 		568B36B01BD22FB10011A745 /* Setup */ = {
@@ -572,6 +580,7 @@
 				564CE89A1BD0E39B008C055C /* Resources */,
 				744AB7D6BDF604266AF93DAD /* Embed Pods Frameworks */,
 				EE450A8F6A01A6F362FBCDF8 /* Copy Pods Resources */,
+				565E7C671BD5600E00E05C8A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -686,6 +695,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		565E7C671BD5600E00E05C8A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" 88300c2a59d5352c19153a01c6671ab3339d663e 6365883efd310f74cbfc6417d341fef3d8ffdc069ab00826bde1b7645eaf54ed";
 		};
 		744AB7D6BDF604266AF93DAD /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -965,8 +987,12 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Tinylog/Tinylog.entitlements;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/Crashlytics",
+				);
 				INFOPLIST_FILE = Tinylog/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1013,8 +1039,12 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Tinylog/Tinylog.entitlements;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/Crashlytics",
+				);
 				INFOPLIST_FILE = Tinylog/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

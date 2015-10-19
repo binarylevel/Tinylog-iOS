@@ -11,6 +11,9 @@ import Reachability
 import SGReachability
 import FBSDKCoreKit
 import Mixpanel
+import Fabric
+import Crashlytics
+
 
 @UIApplicationMain
 class TLIAppDelegate: UIResponder, UIApplicationDelegate {
@@ -50,6 +53,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
             syncManager.synchronizeWithCompletion(nil)
         }
         
+        Crashlytics.startWithAPIKey("88300c2a59d5352c19153a01c6671ab3339d663e")
         Mixpanel.sharedInstanceWithToken(kMixpanelToken)
         SGReachabilityController.sharedController()
         
