@@ -29,6 +29,7 @@ class TLISettingsFontPickerViewController: TLIGroupedTableViewController {
     
     struct FontKeys {
         static var kTLIFontDefaultsKey: NSString = "TLIFontDefaults"
+        static var kTLIFontSFDefaultsKey: NSString = ".SFUIText-Regular"
         static var kTLIFontHelveticaNeueDefaultsKey: NSString = "HelveticaNeue"
         static var kTLIFontAvenirDefaultsKey: NSString = "Avenir"
         static var kTLIFontHoeflerDefaultsKey: NSString = "Hoefler"
@@ -54,33 +55,64 @@ class TLISettingsFontPickerViewController: TLIGroupedTableViewController {
         var onceToken:dispatch_once_t = 0
         dispatch_once(&onceToken) { () -> Void in
             
-            map = NSDictionary(objects: [
-                "Helvetica Neue",
-                "Avenir",
-                "Hoefler",
-                "Courier",
-                "Georgia",
-                "Menlo",
-                "Times New Roman",
-                "Palatino",
-                "Iowan Old Style"], forKeys: [
-                FontKeys.kTLIFontHelveticaNeueDefaultsKey,
-                FontKeys.kTLIFontAvenirDefaultsKey,
-                FontKeys.kTLIFontHoeflerDefaultsKey,
-                FontKeys.kTLIFontCourierDefaultsKey,
-                FontKeys.kTLIFontGeorgiaDefaultsKey,
-                FontKeys.kTLIFontMenloDefaultsKey,
-                FontKeys.kTLIFontTimesNewRomanDefaultsKey,
-                FontKeys.kTLIFontPalatinoDefaultsKey,
-                FontKeys.kTLIFontIowanDefaultsKey])
+            if #available(iOS 9, *) {
+                map = NSDictionary(objects: [
+                    "SF",
+                    "Helvetica Neue",
+                    "Avenir",
+                    "Hoefler",
+                    "Courier",
+                    "Georgia",
+                    "Menlo",
+                    "Times New Roman",
+                    "Palatino",
+                    "Iowan Old Style"], forKeys: [
+                        FontKeys.kTLIFontSFDefaultsKey,
+                        FontKeys.kTLIFontHelveticaNeueDefaultsKey,
+                        FontKeys.kTLIFontAvenirDefaultsKey,
+                        FontKeys.kTLIFontHoeflerDefaultsKey,
+                        FontKeys.kTLIFontCourierDefaultsKey,
+                        FontKeys.kTLIFontGeorgiaDefaultsKey,
+                        FontKeys.kTLIFontMenloDefaultsKey,
+                        FontKeys.kTLIFontTimesNewRomanDefaultsKey,
+                        FontKeys.kTLIFontPalatinoDefaultsKey,
+                        FontKeys.kTLIFontIowanDefaultsKey])
+            } else {
+                map = NSDictionary(objects: [
+                    "Helvetica Neue",
+                    "Avenir",
+                    "Hoefler",
+                    "Courier",
+                    "Georgia",
+                    "Menlo",
+                    "Times New Roman",
+                    "Palatino",
+                    "Iowan Old Style"], forKeys: [
+                        FontKeys.kTLIFontHelveticaNeueDefaultsKey,
+                        FontKeys.kTLIFontAvenirDefaultsKey,
+                        FontKeys.kTLIFontHoeflerDefaultsKey,
+                        FontKeys.kTLIFontCourierDefaultsKey,
+                        FontKeys.kTLIFontGeorgiaDefaultsKey,
+                        FontKeys.kTLIFontMenloDefaultsKey,
+                        FontKeys.kTLIFontTimesNewRomanDefaultsKey,
+                        FontKeys.kTLIFontPalatinoDefaultsKey,
+                        FontKeys.kTLIFontIowanDefaultsKey])
+            }
         }
         return map
     }
     
     func keys()->NSArray? {
-        let arr = NSArray(objects: FontKeys.kTLIFontHelveticaNeueDefaultsKey, FontKeys.kTLIFontAvenirDefaultsKey, FontKeys.kTLIFontHoeflerDefaultsKey, FontKeys.kTLIFontCourierDefaultsKey, FontKeys.kTLIFontGeorgiaDefaultsKey, FontKeys.kTLIFontMenloDefaultsKey, FontKeys.kTLIFontTimesNewRomanDefaultsKey, FontKeys.kTLIFontPalatinoDefaultsKey, FontKeys.kTLIFontIowanDefaultsKey)
-        let sortedArray = arr.sortedArrayUsingSelector("localizedCaseInsensitiveCompare:")
-        return sortedArray
+        
+        if #available(iOS 9, *) {
+            let arr = NSArray(objects: FontKeys.kTLIFontSFDefaultsKey, FontKeys.kTLIFontHelveticaNeueDefaultsKey, FontKeys.kTLIFontAvenirDefaultsKey, FontKeys.kTLIFontHoeflerDefaultsKey, FontKeys.kTLIFontCourierDefaultsKey, FontKeys.kTLIFontGeorgiaDefaultsKey, FontKeys.kTLIFontMenloDefaultsKey, FontKeys.kTLIFontTimesNewRomanDefaultsKey, FontKeys.kTLIFontPalatinoDefaultsKey, FontKeys.kTLIFontIowanDefaultsKey)
+            let sortedArray = arr.sortedArrayUsingSelector("localizedCaseInsensitiveCompare:")
+            return sortedArray
+        } else {
+            let arr = NSArray(objects: FontKeys.kTLIFontHelveticaNeueDefaultsKey, FontKeys.kTLIFontAvenirDefaultsKey, FontKeys.kTLIFontHoeflerDefaultsKey, FontKeys.kTLIFontCourierDefaultsKey, FontKeys.kTLIFontGeorgiaDefaultsKey, FontKeys.kTLIFontMenloDefaultsKey, FontKeys.kTLIFontTimesNewRomanDefaultsKey, FontKeys.kTLIFontPalatinoDefaultsKey, FontKeys.kTLIFontIowanDefaultsKey)
+            let sortedArray = arr.sortedArrayUsingSelector("localizedCaseInsensitiveCompare:")
+            return sortedArray
+        }
     }
     
     class func selectedKey()->NSString? {

@@ -84,8 +84,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
         navigationBar.barTintColor = UIColor.tinylogNavigationBarDayColor()
         navigationBar.tintColor = UIColor.tinylogMainColor()
         
-        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName : UIFont(name: "HelveticaNeue-Medium", size: 18.0)!, NSForegroundColorAttributeName : UIColor.tinylogTextColor()]
-        
+        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName : UIFont.mediumFontWithSize(18.0), NSForegroundColorAttributeName : UIColor.tinylogTextColor()]
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
         
         //Register for custom notifications
@@ -132,6 +131,13 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidBeginNotification:", name: IDMSyncActivityDidBeginNotification, object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearPassedNotifications", name: "TLIClearPassedNotifications", object: nil)
+        
+        if #available(iOS 8.2, *) {
+            let fontMedium = UIFont.systemFontOfSize(18, weight: UIFontWeightBlack)
+             print(fontMedium)
+        } else {
+            // Fallback on earlier versions
+        }
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
