@@ -16,10 +16,9 @@ class TLIRoundedButton: UIButton {
     }
     
     func setup() {
-        
         self.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         self.contentEdgeInsets = UIEdgeInsetsMake(10.0, 20.0, 10.0, 20.0)
-        self.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 17.0)
+        self.titleLabel?.font = UIFont.mediumFontWithSize(17.0)
     }
     
     required init(coder aDecoder: NSCoder) {

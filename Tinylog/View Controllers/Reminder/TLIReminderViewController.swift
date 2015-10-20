@@ -13,44 +13,43 @@ class TLIReminderViewController: UIViewController {
     
     var task:TLITask?
     var isReminderRemoved = false
-    var orientation:String = "portrait"
+    var didSetupContraints = false
     
-    lazy var datePicker:UIDatePicker? = {
-        let datePicker:UIDatePicker = UIDatePicker()
-        datePicker.center = self.view.center
+    lazy var datePicker:UIDatePicker = {
+        let datePicker:UIDatePicker = UIDatePicker.newAutoLayoutView()
         datePicker.backgroundColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
         datePicker.calendar = NSCalendar.currentCalendar()
         datePicker.minuteInterval = 15
         datePicker.addTarget(self, action: "changeDate:", forControlEvents: UIControlEvents.ValueChanged)
         return datePicker
-        }()
+    }()
     
-    lazy var removeReminderButton:TLIRoundedButton? = {
-        let removeReminderButton = TLIRoundedButton()
+    lazy var removeReminderButton:TLIRoundedButton = {
+        let removeReminderButton = TLIRoundedButton.newAutoLayoutView()
         removeReminderButton.setTitle("Remove", forState: UIControlState.Normal)
         removeReminderButton.backgroundColor = UIColor.tinylogTextColor()
         removeReminderButton.addTarget(self, action: "removeReminder:", forControlEvents: UIControlEvents.TouchDown)
         return removeReminderButton
-        }()
+    }()
     
-    lazy var addReminderButton:TLIRoundedButton? = {
-        let addReminderButton = TLIRoundedButton()
+    lazy var addReminderButton:TLIRoundedButton = {
+        let addReminderButton = TLIRoundedButton.newAutoLayoutView()
         addReminderButton.setTitle("Done", forState: UIControlState.Normal)
         addReminderButton.addTarget(self, action: "addReminder:", forControlEvents: UIControlEvents.TouchDown)
         addReminderButton.backgroundColor = UIColor.tinylogMainColor()
         return addReminderButton
-        }()
+    }()
     
-    lazy var descriptionLabel:UILabel? = {
-        let descriptionLabel:UILabel = UILabel(frame: CGRectMake(0.0, 74.0, self.view.frame.size.width, 64.0))
+    lazy var descriptionLabel:UILabel = {
+        let descriptionLabel:UILabel = UILabel.newAutoLayoutView()
         descriptionLabel.lineBreakMode = .ByTruncatingTail
         descriptionLabel.numberOfLines = 2
         descriptionLabel.textAlignment = .Center
         descriptionLabel.textColor = UIColor.tinylogMainColor()
         descriptionLabel.text = ""
-        descriptionLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
+        descriptionLabel.font = UIFont.mediumFontWithSize(20.0)
         return descriptionLabel
-        }()
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,30 +57,23 @@ class TLIReminderViewController: UIViewController {
         self.title = "Reminder"
         
         if let reminder = task?.reminder {
-            datePicker?.setDate(reminder, animated: false)
+            datePicker.setDate(reminder, animated: false)
         } else {
-            datePicker?.setDate(NSDate(), animated: false)
+            datePicker.setDate(NSDate(), animated: false)
         }
-        
-        self.view.addSubview(descriptionLabel!)
-        self.view.addSubview(removeReminderButton!)
-        self.view.addSubview(addReminderButton!)
-        self.view.addSubview(datePicker!)
-        
+     
         setDateText()
+    }
+    
+    override func loadView() {
+        view = UIView()
+        view.addSubview(descriptionLabel)
+        view.addSubview(datePicker)
+        view.addSubview(addReminderButton)
+        view.addSubview(removeReminderButton)
+        view.setNeedsUpdateConstraints()
+    }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "deviceOrientationChanged", name: UIDeviceOrientationDidChangeNotification, object: nil)
-    }
-    
-    func deviceOrientationChanged() {
-        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
-            self.orientation = "landscape"
-        }
-        if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
-            self.orientation = "portrait"
-        }
-    }
-    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         NSNotificationCenter.defaultCenter().postNotificationName("TLIClearPassedNotifications", object: nil)
@@ -107,17 +99,15 @@ class TLIReminderViewController: UIViewController {
                     
                     //create the relationship
                     task?.notification = notification
-                    //println("create new notification with \(notification.uniqueIdentifier)")
                 }
             }
-            
-            //Save core date
+        
             cdc.backgroundSaveContext()
             
             let syncManager:TLISyncManager = TLISyncManager.sharedSyncManager()
             if syncManager.canSynchronize() {
                 syncManager.synchronizeWithCompletion { (error) -> Void in
-                }
+            }
                 
             } else {
                 NSNotificationCenter.defaultCenter().postNotificationName(IDMSyncActivityDidEndNotification, object: nil)
@@ -126,7 +116,7 @@ class TLIReminderViewController: UIViewController {
     }
     
     func changeDate(sender:UIDatePicker) {
-        let date:NSDate = datePicker!.date
+        let date:NSDate = datePicker.date
         task?.reminder = date
         setDateText()
     }
@@ -148,12 +138,12 @@ class TLIReminderViewController: UIViewController {
         let redColor = UIColor(red: 254.0 / 255.0, green: 69.0 / 255.0, blue: 101.0 / 255.0, alpha: 1.0)
         
         if time == "Yesterday" {
-            descriptionLabel?.textColor = redColor
+            descriptionLabel.textColor = redColor
         } else {
-            descriptionLabel?.textColor = UIColor.tinylogMainColor()
+            descriptionLabel.textColor = UIColor.tinylogMainColor()
         }
         
-        descriptionLabel!.text = "\(time) at \(strDate)"
+        descriptionLabel.text = "\(time) at \(strDate)"
     }
     
     func calculateDates(date:NSDate)->String {
@@ -189,60 +179,6 @@ class TLIReminderViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
-        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
-            self.orientation = "landscape"
-        }
-        if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
-            self.orientation = "portrait"
-        }
-        
-        var screenHeight = UIScreen.mainScreen().bounds.size.height
-        let screenWidth = UIScreen.mainScreen().bounds.size.width
-        if screenHeight < screenWidth {
-            screenHeight = screenWidth
-        }
-        
-        if self.orientation == "portrait" {
-            
-            let IS_IPAD = (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
-            
-            if IS_IPAD {
-                descriptionLabel?.frame = CGRectMake(0.0, 100.0, self.view.frame.size.width, 64.0)
-            } else {
-                if screenHeight > 480 && screenHeight < 667 { //iPhone 5/5s
-                    descriptionLabel?.frame = CGRectMake(0.0, 100.0, self.view.frame.size.width, 64.0)
-                } else if screenHeight > 480 && screenHeight < 736 { //iPhone 6
-                    descriptionLabel?.frame = CGRectMake(0.0, 120.0, self.view.frame.size.width, 64.0)
-                } else if ( screenHeight > 480 ){ //iPhone 6 Plus
-                    descriptionLabel?.frame = CGRectMake(0.0, 140.0, self.view.frame.size.width, 64.0)
-                } else { //iPhone 4/4s
-                    descriptionLabel?.frame = CGRectMake(0.0, 74.0, self.view.frame.size.width, 64.0)
-                }
-            }
-            
-        } else {
-            
-            let IS_IPAD = (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
-            
-            if IS_IPAD {
-                descriptionLabel?.frame = CGRectMake(0.0, 100.0, self.view.frame.size.width, 64.0)
-            } else {
-                if screenHeight > 480 && screenHeight < 667 { //iPhone 5/5s
-                    descriptionLabel?.frame = CGRectMake(0.0, 26.0, self.view.frame.size.width, 64.0)
-                } else if screenHeight > 480 && screenHeight < 736 { //iPhone 6
-                    descriptionLabel?.frame = CGRectMake(0.0, 42.0, self.view.frame.size.width, 64.0)
-                } else if ( screenHeight > 480 ){ //iPhone 6 Plus
-                    descriptionLabel?.frame = CGRectMake(0.0, 60.0, self.view.frame.size.width, 64.0)
-                } else { //iPhone 4/4s
-                    descriptionLabel?.frame = CGRectMake(0.0, 26.0, self.view.frame.size.width, 64.0)
-                }
-            }
-        }
-        
-        datePicker?.frame = CGRectMake(0.0, round(self.view.frame.size.height / 2.0 - datePicker!.frame.size.height / 2.0), self.view.frame.size.width, 0.0)
-        removeReminderButton!.frame = CGRectMake(0.0, self.view.frame.size.height - 55.0, self.view.frame.size.width / 2.0, 55.0)
-        addReminderButton!.frame = CGRectMake(removeReminderButton!.frame.origin.x + removeReminderButton!.frame.size.width, self.view.frame.size.height - 55.0, self.view.frame.size.width / 2.0, 55.0)
     }
     
     func removeReminder(sender:TLIRoundedButton) {
@@ -253,7 +189,7 @@ class TLIReminderViewController: UIViewController {
     }
     
     func addReminder(sender:TLIRoundedButton) {
-        let date:NSDate = datePicker!.date
+        let date:NSDate = datePicker.date
         task?.reminder = date
         
         if task?.reminder?.timeIntervalSinceNow < 0 {
@@ -268,6 +204,35 @@ class TLIReminderViewController: UIViewController {
         }
         
         TLIAnalyticsTracker.trackMixpanelEvent("Add Reminder", properties: nil)
+    }
+    
+    override func updateViewConstraints() {
+        
+        let smallPadding: CGFloat = 20.0
+        
+        if !didSetupContraints {
+            
+            descriptionLabel.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Vertical)
+        
+            descriptionLabel.autoPinToTopLayoutGuideOfViewController(self, withInset: smallPadding)
+            descriptionLabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: smallPadding)
+            descriptionLabel.autoPinEdgeToSuperviewEdge(.Trailing, withInset: smallPadding)
+            
+            datePicker.autoCenterInSuperview()
+            
+            addReminderButton.autoMatchDimension(.Width, toDimension: .Width, ofView: self.view, withMultiplier: 0.5)
+            addReminderButton.autoSetDimension(.Height, toSize: 55.0)
+            addReminderButton.autoPinEdgeToSuperviewEdge(.Left)
+            addReminderButton.autoPinEdgeToSuperviewEdge(.Bottom)
+            
+            removeReminderButton.autoMatchDimension(.Width, toDimension: .Width, ofView: self.view, withMultiplier: 0.5)
+            removeReminderButton.autoSetDimension(.Height, toSize: 55.0)
+            removeReminderButton.autoPinEdgeToSuperviewEdge(.Bottom)
+            removeReminderButton.autoPinEdge(.Left, toEdge: .Right, ofView: addReminderButton)
+            
+            didSetupContraints = true
+        }
+        super.updateViewConstraints()
     }
 }
 
