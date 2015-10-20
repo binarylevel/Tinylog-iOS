@@ -58,7 +58,7 @@ class TLISettingsTableViewController: UITableViewController, MFMailComposeViewCo
     
     func configureCell(cell:UITableViewCell, indexPath:NSIndexPath) {
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        cell.textLabel?.font = UIFont(name: "HelveticaNeue", size: 17.0)
+        cell.textLabel?.font = UIFont.regularFontWithSize(17.0)
         cell.textLabel?.textColor = UIColor.tinylogTextColor()
         
         let selectedBackgroundView = UIView(frame: cell.frame)
@@ -177,7 +177,7 @@ class TLISettingsTableViewController: UITableViewController, MFMailComposeViewCo
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel!.font = UIFont(name: "HelveticaNeue", size: 16.0)
+        header.textLabel!.font = UIFont.regularFontWithSize(16.0)
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

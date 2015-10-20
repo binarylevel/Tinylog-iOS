@@ -28,6 +28,7 @@ class TLITextFieldCell: UITableViewCell, UITextFieldDelegate, TLITextFieldCellDe
         textField?.delegate = self
         textField?.font = UIFont.regularFontWithSize(17.0)
         textField?.textColor = UIColor.tinylogTextColor()
+        textField?.clearButtonEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, -20.0)
         self.contentView.addSubview(textField!)
     }
     

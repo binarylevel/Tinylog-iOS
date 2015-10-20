@@ -57,7 +57,7 @@ class TLISettingsFontPickerViewController: TLIGroupedTableViewController {
             
             if #available(iOS 9, *) {
                 map = NSDictionary(objects: [
-                    "SF",
+                    "San Francisco",
                     "Helvetica Neue",
                     "Avenir",
                     "Hoefler",
