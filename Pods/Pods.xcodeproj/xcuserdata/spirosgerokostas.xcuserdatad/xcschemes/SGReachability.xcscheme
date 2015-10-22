@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'A5B98DF15CBA444430C11FBB'
+               BlueprintIdentifier = '25D32B5E40FC6B01ABFB7D5A'
                BlueprintName = 'SGReachability'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'SGReachability.framework'>

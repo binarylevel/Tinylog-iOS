@@ -21,7 +21,7 @@ PODS:
   - FBSDKCoreKit/no-arc (4.7.0):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc
-  - FBSDKLoginKit (4.7.0):
+  - FBSDKLoginKit (4.7.0.1):
     - FBSDKCoreKit
   - FBSDKShareKit (4.7.0):
     - FBSDKCoreKit
@@ -61,7 +61,7 @@ SPEC CHECKSUMS:
   Ensembles: 90013c435ff874a7a9ccb7a334b74b93ac53dc12
   Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
   FBSDKCoreKit: eb580bfc2040ad44f4c0b4f4d0befb1d35bce59c
-  FBSDKLoginKit: 01bce8dd3f3a26a023b0ba4ffdde7ef5062889fe
+  FBSDKLoginKit: 028c5a205990441123764609fe795e65027c447f
   FBSDKShareKit: 1f927bb05e4d36a99d5d5bf2f4b1ff294ce3e15c
   Mixpanel: 42ae6168effc48481d957f7883dd8514a398738d
   Nimble: 472e75466819eb8c06299233e87c694a9b51328a
