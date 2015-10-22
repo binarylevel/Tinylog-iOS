@@ -1,0 +1,6 @@
+framework module LRMocky {
+  umbrella header "LRMocky-umbrella.h"
+
+  export *
+  module * { export * }
+}

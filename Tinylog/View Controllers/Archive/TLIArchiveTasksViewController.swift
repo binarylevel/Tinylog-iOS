@@ -496,16 +496,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController, TTTAttribut
         self.currentIndexPath = indexPath
         self.tableView?.reloadData()
     }
-    
-    func delay(delay:Double, closure:()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), closure)
-    }
-    
+        
     func exportTasks(sender:UIButton) {
         
         let cdc:TLICDController = TLICDController.sharedInstance

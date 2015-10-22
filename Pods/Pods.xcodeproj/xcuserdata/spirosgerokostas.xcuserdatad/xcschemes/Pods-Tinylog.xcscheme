@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '50517B305614CF50636D25F4'
+               BlueprintIdentifier = '060D55517049320478F7E4C3'
                BlueprintName = 'Pods-Tinylog'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_Tinylog.framework'>

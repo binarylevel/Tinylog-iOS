@@ -128,7 +128,7 @@ class TLISettingsTableViewController: UITableViewController, MFMailComposeViewCo
         userDefaults.setObject(value, forKey: TLIUserDefaults.kTLISyncMode as String)
         userDefaults.synchronize()
         
-        self.delay(0.2, closure: { () -> () in
+        $.delay(0.2, closure: { () -> () in
             let syncManager = TLISyncManager.sharedSyncManager()
             
             if value == "on" {
@@ -150,15 +150,6 @@ class TLISettingsTableViewController: UITableViewController, MFMailComposeViewCo
                 }
             }
         })
-    }
-    
-    func delay(delay:Double, closure:()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), closure)
     }
     
     func close(sender:UIButton) {

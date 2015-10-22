@@ -84,10 +84,18 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-TinylogTests/Nimble.framework"
-  install_framework "Pods-TinylogTests/Quick.framework"
+  install_framework "Pods-TinylogTests/Expecta.framework"
+  install_framework "Pods-TinylogTests/LRMocky.framework"
+  install_framework "Pods-TinylogTests/OCHamcrest.framework"
+  install_framework "Pods-TinylogTests/OCMock.framework"
+  install_framework "Pods-TinylogTests/OCMockito.framework"
+  install_framework "Pods-TinylogTests/Specta.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-TinylogTests/Nimble.framework"
-  install_framework "Pods-TinylogTests/Quick.framework"
+  install_framework "Pods-TinylogTests/Expecta.framework"
+  install_framework "Pods-TinylogTests/LRMocky.framework"
+  install_framework "Pods-TinylogTests/OCHamcrest.framework"
+  install_framework "Pods-TinylogTests/OCMock.framework"
+  install_framework "Pods-TinylogTests/OCMockito.framework"
+  install_framework "Pods-TinylogTests/Specta.framework"
 fi

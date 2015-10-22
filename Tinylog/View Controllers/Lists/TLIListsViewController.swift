@@ -387,7 +387,7 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
         let displaySetupScreen:NSString = userDefaults.objectForKey("kSetupScreen") as! NSString
         
         if displaySetupScreen == "on" {
-            self.delay(0.1, closure: { () -> () in
+            $.delay(0.1, closure: { () -> () in
                 self.displaySetup()
             })
         } else if displaySetupScreen == "off" {
@@ -719,11 +719,6 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
         default:
             return ""
         }
-    }
-    
-    func delay(delay:Double, closure:()->()) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))),
-            dispatch_get_main_queue(), closure)
     }
 }
 

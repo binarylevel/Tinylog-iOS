@@ -41,6 +41,8 @@
 		563B79861BD39A7000EE86CD /* String+TinylogiOSAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563B79851BD39A7000EE86CD /* String+TinylogiOSAdditions.swift */; };
 		564CE8A71BD0E39C008C055C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 564CE8A61BD0E39C008C055C /* Assets.xcassets */; };
 		564CE8B51BD0E39C008C055C /* TinylogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE8B41BD0E39C008C055C /* TinylogTests.swift */; };
+		568476B51BD92D3300B7D1F8 /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568476B41BD92D3300B7D1F8 /* UtilsTests.swift */; };
+		568476B81BD92E0B00B7D1F8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568476B71BD92E0B00B7D1F8 /* Utils.swift */; };
 		568B369E1BD22A240011A745 /* TLIList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B369C1BD22A240011A745 /* TLIList+CoreDataProperties.swift */; };
 		568B369F1BD22A240011A745 /* TLIList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B369D1BD22A240011A745 /* TLIList.swift */; };
 		568B36A21BD22AC90011A745 /* TLITask+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B36A01BD22AC90011A745 /* TLITask+CoreDataProperties.swift */; };
@@ -140,6 +142,8 @@
 		564CE8B01BD0E39C008C055C /* TinylogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinylogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		564CE8B41BD0E39C008C055C /* TinylogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinylogTests.swift; sourceTree = "<group>"; };
 		564CE8B61BD0E39C008C055C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		568476B41BD92D3300B7D1F8 /* UtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
+		568476B71BD92E0B00B7D1F8 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		568B369B1BD229860011A745 /* Tinylog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tinylog.entitlements; sourceTree = "<group>"; };
 		568B369C1BD22A240011A745 /* TLIList+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TLIList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		568B369D1BD22A240011A745 /* TLIList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLIList.swift; sourceTree = "<group>"; };
@@ -340,6 +344,7 @@
 		564CE89E1BD0E39C008C055C /* Tinylog */ = {
 			isa = PBXGroup;
 			children = (
+				568476B61BD92E0100B7D1F8 /* Helpers */,
 				563B796F1BD3947F00EE86CD /* Protocols */,
 				563B79571BD38E2B00EE86CD /* Utils */,
 				568B36C11BD265A30011A745 /* View Controllers */,
@@ -363,6 +368,7 @@
 			children = (
 				564CE8B41BD0E39C008C055C /* TinylogTests.swift */,
 				564CE8B61BD0E39C008C055C /* Info.plist */,
+				568476B41BD92D3300B7D1F8 /* UtilsTests.swift */,
 			);
 			path = TinylogTests;
 			sourceTree = "<group>";
@@ -372,6 +378,14 @@
 			children = (
 			);
 			path = Vendor;
+			sourceTree = "<group>";
+		};
+		568476B61BD92E0100B7D1F8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				568476B71BD92E0B00B7D1F8 /* Utils.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		568B36B01BD22FB10011A745 /* Setup */ = {
@@ -858,6 +872,7 @@
 				568B36BE1BD233A30011A745 /* TLIAnalyticsTracker.swift in Sources */,
 				563B79841BD3970900EE86CD /* TLITextFieldCell.swift in Sources */,
 				563B79501BD38BB000EE86CD /* TLIGroupedTableViewCell.swift in Sources */,
+				568476B81BD92E0B00B7D1F8 /* Utils.swift in Sources */,
 				563B794D1BD38A7100EE86CD /* TLISettingsTableViewController.swift in Sources */,
 				563B79491BD388C000EE86CD /* TLIGroupedTableViewController.swift in Sources */,
 				56D4E63F1BD39EE100852DC1 /* TLIArchiveButton.swift in Sources */,
@@ -882,6 +897,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				564CE8B51BD0E39C008C055C /* TinylogTests.swift in Sources */,
+				568476B51BD92D3300B7D1F8 /* UtilsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -918,6 +934,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -964,6 +981,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1083,9 +1101,25 @@
 			baseConfigurationReference = 5025D22A19B8119D39BB9C70 /* Pods-TinylogTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TinylogTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Expecta\"",
+					"-framework",
+					"\"LRMocky\"",
+					"-framework",
+					"\"OCHamcrest\"",
+					"-framework",
+					"\"OCMock\"",
+					"-framework",
+					"\"OCMockito\"",
+					"-framework",
+					"\"Specta\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.TinylogTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tinylog/Headers/Tinylog-Bridging-Header.h";
@@ -1098,9 +1132,25 @@
 			baseConfigurationReference = 242F8901CEF3398A5561C510 /* Pods-TinylogTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TinylogTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Expecta\"",
+					"-framework",
+					"\"LRMocky\"",
+					"-framework",
+					"\"OCHamcrest\"",
+					"-framework",
+					"\"OCMock\"",
+					"-framework",
+					"\"OCMockito\"",
+					"-framework",
+					"\"Specta\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.spirosgerokostas.TinylogTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tinylog/Headers/Tinylog-Bridging-Header.h";

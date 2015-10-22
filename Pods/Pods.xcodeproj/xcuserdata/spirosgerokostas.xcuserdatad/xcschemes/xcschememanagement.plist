@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Expecta.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,12 +34,27 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>LRMocky.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Mixpanel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Nimble.xcscheme</key>
+		<key>OCHamcrest.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>OCMock.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>OCMockito.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -50,11 +70,6 @@
 			<false/>
 		</dict>
 		<key>PureLayout.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Quick.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -79,6 +94,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Specta.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>TTTAttributedLabel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -87,6 +107,16 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>04F6AC3DA638CFD7339EAB4C2A6452E6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0D888F29E05E498D0CD91A51D28599A5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1CF8E11D160FE211F1247305505544DA</key>
 		<dict>
 			<key>primary</key>
@@ -102,6 +132,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>3A79BD89C5E6571EDF274DA7059791D1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>4CAC95BAD79AE7D179A7730EDB6C3D1A</key>
 		<dict>
 			<key>primary</key>
@@ -113,11 +148,6 @@
 			<true/>
 		</dict>
 		<key>5D69761C2CD2A1E5C013537B29CAB4CF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5FDA1476988CB9BD17A35F0D627FA76B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -147,12 +177,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C5DB5104FED3C10F78978AFC810982B9</key>
+		<key>B2C353A27DB8D12702E039FA9FE3183D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CB7049F12AFEAF86B0251B8EFC9E8A71</key>
+		<key>BCB13CDF5AD4DCA2BA0D08522E4CBCF8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -162,7 +192,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>F17E39C47DD42CF232C70F19A476DA29</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>F5ACF367AE3BD7A7F2AF2D430901DF7B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FC0E2E560D9635C2797541CE60300C38</key>
 		<dict>
 			<key>primary</key>
 			<true/>
