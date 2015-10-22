@@ -36,16 +36,16 @@ class TLISetupViewController: UIViewController {
         return descriptionLabel
     }()
     
-    lazy var notNowButton:TLIRoundedButton? = {
-        let notNowButton = TLIRoundedButton()
+    lazy var notNowButton:TLIRoundedButton = {
+        let notNowButton = TLIRoundedButton.newAutoLayoutView()
         notNowButton.setTitle("Later", forState: UIControlState.Normal)
         notNowButton.backgroundColor = UIColor.tinylogTextColor()
         notNowButton.addTarget(self, action: "disableiCloudAndDismiss:", forControlEvents: UIControlEvents.TouchDown)
         return notNowButton
     }()
     
-    lazy var useiCloudButton:TLIRoundedButton? = {
-        let useiCloudButton = TLIRoundedButton()
+    lazy var useiCloudButton:TLIRoundedButton = {
+        let useiCloudButton = TLIRoundedButton.newAutoLayoutView()
         useiCloudButton.setTitle("Use iCloud", forState: UIControlState.Normal)
         useiCloudButton.addTarget(self, action: "enableiCloudAndDismiss:", forControlEvents: UIControlEvents.TouchDown)
         useiCloudButton.backgroundColor = UIColor.tinylogMainColor()
@@ -65,20 +65,13 @@ class TLISetupViewController: UIViewController {
     }
     
     override func loadView() {
-        super.loadView()
         self.view = UIView()
         self.view.addSubview(cloudImageView!)
-        self.view.addSubview(notNowButton!)
-        self.view.addSubview(useiCloudButton!)
+        self.view.addSubview(notNowButton)
+        self.view.addSubview(useiCloudButton)
         self.view.addSubview(subtitleLabel!)
         self.view.addSubview(descriptionLabel!)
         self.view.setNeedsUpdateConstraints()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        notNowButton!.frame = CGRectMake(0.0, self.view.frame.size.height - 55.0, self.view.frame.size.width / 2.0, 55.0)
-        useiCloudButton!.frame = CGRectMake(notNowButton!.frame.origin.x + notNowButton!.frame.size.width, self.view.frame.size.height - 55.0, self.view.frame.size.width / 2.0, 55.0)
     }
     
     override func updateViewConstraints() {
@@ -96,6 +89,16 @@ class TLISetupViewController: UIViewController {
             descriptionLabel!.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 20.0)
             descriptionLabel!.autoPinEdge(ALEdge.Top, toEdge: ALEdge.Bottom, ofView: subtitleLabel!, withOffset: 20.0)
             
+            notNowButton.autoMatchDimension(.Width, toDimension: .Width, ofView: self.view, withMultiplier: 0.5)
+            notNowButton.autoSetDimension(.Height, toSize: 55.0)
+            notNowButton.autoPinEdgeToSuperviewEdge(.Left)
+            notNowButton.autoPinEdgeToSuperviewEdge(.Bottom)
+            
+            useiCloudButton.autoMatchDimension(.Width, toDimension: .Width, ofView: self.view, withMultiplier: 0.5)
+            useiCloudButton.autoSetDimension(.Height, toSize: 55.0)
+            useiCloudButton.autoPinEdgeToSuperviewEdge(.Bottom)
+            useiCloudButton.autoPinEdge(.Left, toEdge: .Right, ofView: notNowButton)
+
             didSetupConstraints = true
         }
         
@@ -103,10 +106,12 @@ class TLISetupViewController: UIViewController {
     }
     
     func enableiCloudAndDismiss(button:TLIRoundedButton) {
+        
         let userDefaults = NSUserDefaults.standardUserDefaults()
         userDefaults.setObject("off", forKey: "kSetupScreen")
         userDefaults.setObject("on", forKey: TLIUserDefaults.kTLISyncMode as String)
         userDefaults.synchronize()
+        
         let syncManager = TLISyncManager.sharedSyncManager()
         syncManager.connectToSyncService(IDMICloudService, withCompletion: { (error) -> Void in
             if error != nil {
@@ -119,16 +124,20 @@ class TLISetupViewController: UIViewController {
                 }
             }
         })
+        
         self.dismissViewControllerAnimated(true, completion: nil)
         TLIAnalyticsTracker.trackMixpanelEvent("Enable iCloud", properties: nil)
     }
     
     func disableiCloudAndDismiss(button:TLIRoundedButton) {
+        
         let userDefaults = NSUserDefaults.standardUserDefaults()
         userDefaults.setObject("off", forKey: "kSetupScreen")
         userDefaults.setObject("off", forKey: TLIUserDefaults.kTLISyncMode as String)
         userDefaults.synchronize()
+        
         self.dismissViewControllerAnimated(true, completion: nil)
+        
         TLIAnalyticsTracker.trackMixpanelEvent("Disable iCloud", properties: nil)
     }
 }

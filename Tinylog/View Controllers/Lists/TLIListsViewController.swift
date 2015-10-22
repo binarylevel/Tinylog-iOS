@@ -6,14 +6,6 @@
 //  Copyright © 2015 Spiros Gerokostas. All rights reserved.
 //
 
-//
-//  TLIListsViewController.swift
-//  Tinylog
-//
-//  Created by Spiros Gerokostas on 9/6/14.
-//  Copyright (c) 2014 Spiros Gerokostas. All rights reserved.
-//
-
 import UIKit
 import CoreData
 
@@ -37,21 +29,25 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
     let kEstimateRowHeight = 61
     let kCellIdentifier = "CellIdentifier"
     var editingIndexPath:NSIndexPath?
-    var listsFooterView:TLIListsFooterView?
     var estimatedRowHeightCache:NSMutableDictionary?
     var resultsTableViewController:TLIResultsTableViewController?
     var searchController:UISearchController?
     var topBarView:UIView?
+    var didSetupContraints = false
     
+    var listsFooterView:TLIListsFooterView? = {
+        let listsFooterView = TLIListsFooterView.newAutoLayoutView()
+        return listsFooterView
+    }()
+
     lazy var noListsLabel:UILabel? = {
-        let noListsLabel:UILabel = UILabel()
+        let noListsLabel:UILabel = UILabel.newAutoLayoutView()
         noListsLabel.font = UIFont(name: "HelveticaNeue", size: 16.0)
         noListsLabel.textColor = UIColor.tinylogTextColor()
         noListsLabel.textAlignment = NSTextAlignment.Center
         noListsLabel.text = "Tap + icon to create a new list."
-        noListsLabel.frame = CGRectMake(self.view.frame.size.width / 2.0 - self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0 - 44.0 / 2.0, self.view.frame.size.width, 44.0)
         return noListsLabel
-        }()
+    }()
     
     func configureFetch() {
         let cdc:TLICDController = TLICDController.sharedInstance
@@ -80,10 +76,11 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
         self.view.backgroundColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
         self.tableView?.backgroundColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
         
+        self.tableView?.translatesAutoresizingMaskIntoConstraints = false
         self.tableView?.backgroundView = UIView()
         self.tableView?.backgroundView?.backgroundColor = UIColor.clearColor()
         self.tableView?.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.tableView?.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height - 50.0)
+        //self.tableView?.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height - 50.0)
         
         self.tableView?.registerClass(TLIListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         self.tableView?.rowHeight = UITableViewAutomaticDimension
@@ -119,31 +116,25 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
         self.navigationItem.hidesBackButton = true
         self.navigationItem.leftBarButtonItem = settingsBarButtonItem
         
-        listsFooterView = TLIListsFooterView(frame: CGRectMake(0.0, self.view.frame.size.height - 51.0, self.view.frame.size.width, 51.0))
         listsFooterView?.addListButton?.addTarget(self, action: "addNewList:", forControlEvents: UIControlEvents.TouchDown)
         listsFooterView?.archiveButton?.addTarget(self, action: "displayArchive:", forControlEvents: UIControlEvents.TouchDown)
-        self.view.addSubview(listsFooterView!)
-        
-        self.view.addSubview(self.noListsLabel!)
         
         setEditing(false, animated: false)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidEndNotification:", name: IDMSyncActivityDidEndNotification, object: nil)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidBeginNotification:", name: IDMSyncActivityDidBeginNotification, object: nil)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFonts", name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "appBecomeActive", name: UIApplicationDidBecomeActiveNotification, object: nil)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onChangeSize:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
         
         definesPresentationContext = true
-        
-        //deleteMentionWithName("series")
-        //deleteTagWithName("hashtags")
-        //viewAllTags()
-        //viewAllMentions()
+    }
+    
+    override func loadView() {
+        super.loadView()
+        view.addSubview(noListsLabel!)
+        view.addSubview(listsFooterView!)
+        view.setNeedsUpdateConstraints()
     }
     
     func deleteMentionWithName(name:String) {
@@ -247,6 +238,25 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
         }
     }
     
+    override func updateViewConstraints() {
+        
+        if !didSetupContraints {
+            
+            tableView?.autoMatchDimension(.Width, toDimension: .Width, ofView: self.view)
+            tableView?.autoMatchDimension(.Height, toDimension: .Height, ofView: self.view, withOffset: -50.0)
+            
+            noListsLabel?.autoCenterInSuperview()
+            
+            listsFooterView?.autoMatchDimension(.Width, toDimension: .Width, ofView: self.view)
+            listsFooterView?.autoSetDimension(.Height, toSize: 51.0)
+            listsFooterView?.autoPinEdgeToSuperviewEdge(.Left)
+            listsFooterView?.autoPinEdgeToSuperviewEdge(.Bottom)
+            
+            didSetupContraints = true
+        }
+        super.updateViewConstraints()
+    }
+    
     func appBecomeActive() {
         startSync()
     }
@@ -296,11 +306,22 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        listsFooterView?.frame = CGRectMake(0.0, self.view.frame.size.height - 51.0, self.view.frame.size.width, 51.0)
-        noListsLabel!.frame = CGRectMake(self.view.frame.size.width / 2.0 - self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0 - 44.0 / 2.0, self.view.frame.size.width, 44.0)
     }
     
-    func addNewList(sender:UIButton) {
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+            super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+            // Code here will execute before the rotation begins.
+            // Equivalent to placing it in the deprecated method -[willRotateToInterfaceOrientation:duration:]
+            coordinator.animateAlongsideTransition({ (context) -> Void in
+                // Place code here to perform animations during the rotation.
+                // You can pass nil for this closure if not necessary.
+            }, completion: { (context) -> Void in
+                self.tableView?.reloadData()
+                self.view.setNeedsUpdateConstraints()
+            })
+    }
+    
+    func addNewList(sender:UIButton?) {
         let addListViewController:TLIAddListViewController = TLIAddListViewController()
         addListViewController.delegate = self
         addListViewController.mode = "create"
@@ -425,7 +446,7 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
                         let temp:UILocalNotification = notification as! UILocalNotification
                         
                         if let userInfo:NSDictionary = temp.userInfo {
-                            //let displayText: String? = userInfo.valueForKey("displayText") as? String
+                       
                             let uniqueIdentifier: String? = userInfo.valueForKey("uniqueIdentifier") as? String
                             
                             if uniqueIdentifier == tmpTask.notification!.uniqueIdentifier {
@@ -484,34 +505,11 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
         let index = destinationIndexPath.row
         fetchedLists.insert(list, atIndex: index)
         
-        //println(fetchedLists)
-        
-        //for (index, list) in enumerate(fetchedLists) {
-        // let t = list as! TLIList
-        //println("before \(t.title): \(t.position)")
-        //}
-        
-        
-        //        var i:NSInteger = 1
-        //        for (index, list) in enumerate(fetchedLists) {
-        //            let t = list as TLIList
-        //            t.position = NSNumber(integer: i++)
-        //            println("Item \(index): \(t.position)")
-        //        }
-        
         var i:NSInteger = fetchedLists.count
         for (_, list) in fetchedLists.enumerate() {
             let t = list as! TLIList
             t.position = NSNumber(integer: i--)
-            //println("Item \(index): \(t.position)")
         }
-        
-        //for (index, list) in enumerate(fetchedLists) {
-        // let t = list as! TLIList
-        //println("after \(t.title): \(t.position)")
-        //}
-        
-        //reverse
     }
     
     func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
@@ -523,14 +521,11 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
         self.ignoreNextUpdates = true
         let list = self.listAtIndexPath(sourceIndexPath)!
         updateList(list, sourceIndexPath: sourceIndexPath, destinationIndexPath: destinationIndexPath)
-        //var listSource:TLIList = self.frc?.objectAtIndexPath(sourceIndexPath) as! TLIList
-        //var listDestination:TLIList = self.frc?.objectAtIndexPath(destinationIndexPath) as! TLIList
         let cdc:TLICDController = TLICDController.sharedInstance
         cdc.backgroundSaveContext()
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        //52.0
         return floor(getEstimatedCellHeightFromCache(indexPath, defaultHeight: 61)!)
     }
     
@@ -727,11 +722,7 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
     }
     
     func delay(delay:Double, closure:()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))),
             dispatch_get_main_queue(), closure)
     }
 }

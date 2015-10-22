@@ -63,7 +63,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 cell.textLabel?.text = "Use System Size"
-                cell.textLabel?.font = UIFont(name: "HelveticaNeue", size: 17.0)
+                cell.textLabel?.font = UIFont.systemFontOfSize(17.0)
                 cell.textLabel?.textColor = UIColor.tinylogTextColor()
                 
                 let switchMode:UISwitch = UISwitch(frame: CGRectMake(0, 0, self.view.frame.size.width, 20.0))

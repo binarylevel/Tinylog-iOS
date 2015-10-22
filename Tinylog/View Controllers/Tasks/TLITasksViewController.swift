@@ -413,7 +413,7 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
                     let temp:UILocalNotification = notification as! UILocalNotification
                     
                     if let userInfo:NSDictionary = temp.userInfo {
-                        //let displayText: String? = userInfo.valueForKey("displayText") as? String
+          
                         let uniqueIdentifier: String? = userInfo.valueForKey("uniqueIdentifier") as? String
                         
                         if let taskNotification = task.notification {
@@ -489,41 +489,17 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
     func updateTask(task:TLITask, sourceIndexPath:NSIndexPath, destinationIndexPath:NSIndexPath) {
         var fetchedTasks:[AnyObject] = self.frc?.fetchedObjects as [AnyObject]!
         
-        //println(fetchedTasks)
         fetchedTasks = fetchedTasks.filter() { $0 as! TLITask != task }
-        //println(fetchedTasks)
-        
+      
         let index = destinationIndexPath.row
         fetchedTasks.insert(task, atIndex: index)
         
-        //println(fetchedTasks)
-        
-        for (_, task) in fetchedTasks.enumerate() {
-            _ = task as! TLITask
-            //println("before \(t.displayLongText): \(t.position)")
-        }
-        
-        
-        //        var i:NSInteger = 1
-        //        for (index, list) in enumerate(fetchedLists) {
-        //            let t = list as TLIList
-        //            t.position = NSNumber(integer: i++)
-        //            println("Item \(index): \(t.position)")
-        //        }
-        
         var i:NSInteger = fetchedTasks.count
+        
         for (_, task) in fetchedTasks.enumerate() {
             let t = task as! TLITask
             t.position = NSNumber(integer: i--)
-            //println("Item \(index): \(t.position)")
         }
-        
-        for (_, task) in fetchedTasks.enumerate() {
-            _ = task as! TLITask
-            //println("after \(t.displayLongText): \(t.position)")
-        }
-        
-        //reverse
     }
     
     func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {

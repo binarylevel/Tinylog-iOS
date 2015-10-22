@@ -17,6 +17,17 @@ import Crashlytics
 
 @UIApplicationMain
 class TLIAppDelegate: UIResponder, UIApplicationDelegate {
+    
+    enum ShortcutIdentifier: String {
+        case CreateNewList
+        
+        init?(fullIdentifier: String) {
+            guard let shortIdentifier = fullIdentifier.componentsSeparatedByString(".").last else {
+                return nil
+            }
+            self.init(rawValue: shortIdentifier)
+        }
+    }
 
     var window: UIWindow?
     var networkMode:String?
@@ -24,8 +35,25 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
     class func sharedAppDelegate()->TLIAppDelegate {
         return UIApplication.sharedApplication().delegate as! TLIAppDelegate
     }
+    
+    @available(iOS 9.0, *)
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem,
+        completionHandler: (Bool) -> Void) {
+            
+            completionHandler(handleShortcut(shortcutItem))
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        if #available(iOS 9.0, *) {
+            if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem {
+                print(shortcutItem)
+                handleShortcut(shortcutItem)
+                return false
+            }
+        } else {
+            print("quick actions not supported")
+        }
         
         //Register defaults
         let standardDefaults = NSUserDefaults.standardUserDefaults()
@@ -209,15 +237,25 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
+        
+        
         var identifier:UIBackgroundTaskIdentifier = 0
         identifier = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({ () -> Void in
         })
-        dispatch_async(dispatch_get_global_queue(0, 0)) {
+        dispatch_async(dispatch_get_main_queue()) {
             TLICDController.sharedInstance.backgroundSaveContext()
             TLISyncManager.sharedSyncManager().synchronizeWithCompletion({ (error) -> Void in
                 UIApplication.sharedApplication().endBackgroundTask(identifier)
             })
+            
         }
+
+//        dispatch_async(dispatch_get_global_queue(0, 0)) {
+//            TLICDController.sharedInstance.backgroundSaveContext()
+//            TLISyncManager.sharedSyncManager().synchronizeWithCompletion({ (error) -> Void in
+//                UIApplication.sharedApplication().endBackgroundTask(identifier)
+//            })
+        //}
         UIApplication.sharedApplication().applicationIconBadgeNumber =  0
         Mixpanel.sharedInstance().flush()
     }
@@ -338,6 +376,32 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
         TLIAnalyticsTracker.trackMixpanelEvent("", properties: [
             "uniqueIdentifier": uniqueIdentifier!,
             "displayText": displayText!])
+    }
+    
+    @available(iOS 9.0, *)
+    func handleShortcut(shortcutItem:UIApplicationShortcutItem)->Bool {
+        let shortcutType = shortcutItem.type
+        print(shortcutType)
+        guard let shortcutIdentifier = ShortcutIdentifier(fullIdentifier: shortcutType) else {
+            return false
+        }
+        
+        return selectTabBarItemForIdentifier(shortcutIdentifier)
+    }
+    
+    private func selectTabBarItemForIdentifier(identifier: ShortcutIdentifier) -> Bool {
+    
+        switch (identifier) {
+        case .CreateNewList:
+            print("create new list")
+            if let navigationController = window?.rootViewController as? UINavigationController {
+                if let vc = navigationController.viewControllers[0] as? TLIListsViewController {
+                    vc.addNewList(nil)
+                }
+            }
+
+            return true
+        }
     }
 }
 

@@ -58,7 +58,7 @@ class TLISettingsTableViewController: UITableViewController, MFMailComposeViewCo
     
     func configureCell(cell:UITableViewCell, indexPath:NSIndexPath) {
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        cell.textLabel?.font = UIFont.regularFontWithSize(17.0)
+        cell.textLabel?.font = UIFont.systemFontOfSize(17.0)
         cell.textLabel?.textColor = UIColor.tinylogTextColor()
         
         let selectedBackgroundView = UIView(frame: cell.frame)

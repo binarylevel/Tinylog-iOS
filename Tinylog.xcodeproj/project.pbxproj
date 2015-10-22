@@ -40,7 +40,6 @@
 		563B79841BD3970900EE86CD /* TLITextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563B79831BD3970900EE86CD /* TLITextFieldCell.swift */; settings = {ASSET_TAGS = (); }; };
 		563B79861BD39A7000EE86CD /* String+TinylogiOSAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563B79851BD39A7000EE86CD /* String+TinylogiOSAdditions.swift */; settings = {ASSET_TAGS = (); }; };
 		564CE8A71BD0E39C008C055C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 564CE8A61BD0E39C008C055C /* Assets.xcassets */; };
-		564CE8AA1BD0E39C008C055C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564CE8A81BD0E39C008C055C /* LaunchScreen.storyboard */; };
 		564CE8B51BD0E39C008C055C /* TinylogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE8B41BD0E39C008C055C /* TinylogTests.swift */; };
 		568B369E1BD22A240011A745 /* TLIList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B369C1BD22A240011A745 /* TLIList+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
 		568B369F1BD22A240011A745 /* TLIList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B369D1BD22A240011A745 /* TLIList.swift */; settings = {ASSET_TAGS = (); }; };
@@ -81,6 +80,7 @@
 		56ED18F51BD133B000672D86 /* TLIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ED18F41BD133B000672D86 /* TLIAppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		56ED19021BD138E300672D86 /* TLISyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 56ED19011BD138E300672D86 /* TLISyncManager.m */; settings = {ASSET_TAGS = (); }; };
 		56ED19041BD13A2C00672D86 /* TLICDController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ED19031BD13A2C00672D86 /* TLICDController.swift */; settings = {ASSET_TAGS = (); }; };
+		56F058671BD7CC5800B67412 /* SGTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F058661BD7CC5800B67412 /* SGTextField.swift */; settings = {ASSET_TAGS = (); }; };
 		6BE5BC2A5E5851AE0CADC4DB /* Pods_TinylogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F271783A81E5BBE0791D9D /* Pods_TinylogTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -136,7 +136,6 @@
 		563B79851BD39A7000EE86CD /* String+TinylogiOSAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+TinylogiOSAdditions.swift"; sourceTree = "<group>"; };
 		564CE89C1BD0E39B008C055C /* Tinylog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinylog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		564CE8A61BD0E39C008C055C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		564CE8A91BD0E39C008C055C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		564CE8AB1BD0E39C008C055C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		564CE8B01BD0E39C008C055C /* TinylogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinylogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		564CE8B41BD0E39C008C055C /* TinylogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinylogTests.swift; sourceTree = "<group>"; };
@@ -189,6 +188,7 @@
 		56ED19001BD138E300672D86 /* TLISyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLISyncManager.h; sourceTree = "<group>"; };
 		56ED19011BD138E300672D86 /* TLISyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLISyncManager.m; sourceTree = "<group>"; };
 		56ED19031BD13A2C00672D86 /* TLICDController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLICDController.swift; sourceTree = "<group>"; };
+		56F058661BD7CC5800B67412 /* SGTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGTextField.swift; sourceTree = "<group>"; };
 		7B28E3FF08E874E8FBA997B9 /* Pods_Tinylog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tinylog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8F271783A81E5BBE0791D9D /* Pods_TinylogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinylogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -353,7 +353,6 @@
 				56ED18EB1BD12E0400672D86 /* Core Data */,
 				56ED18E01BD12DB400672D86 /* Core Data Model */,
 				564CE8A61BD0E39C008C055C /* Assets.xcassets */,
-				564CE8A81BD0E39C008C055C /* LaunchScreen.storyboard */,
 				564CE8AB1BD0E39C008C055C /* Info.plist */,
 			);
 			path = Tinylog;
@@ -411,6 +410,7 @@
 				56D4E63A1BD39E9F00852DC1 /* TLIListsFooterView.swift */,
 				56D4E6461BD39FDE00852DC1 /* TLITouchableView.swift */,
 				56D4E6541BD3AC7200852DC1 /* TLITasksFooterView.swift */,
+				56F058661BD7CC5800B67412 /* SGTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -667,7 +667,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				56186EB41BD42329001B7EF3 /* beep-xylo.aif in Resources */,
-				564CE8AA1BD0E39C008C055C /* LaunchScreen.storyboard in Resources */,
 				564CE8A71BD0E39C008C055C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -812,6 +811,7 @@
 				56D4E63D1BD39EC600852DC1 /* TLIAddListButton.swift in Sources */,
 				56D4E6531BD3AB2A00852DC1 /* UIImage+TinylogiOSAdditions.swift in Sources */,
 				56D4E64A1BD3A2A400852DC1 /* TLIArchiveViewController.swift in Sources */,
+				56F058671BD7CC5800B67412 /* SGTextField.swift in Sources */,
 				56D4E6431BD39F2B00852DC1 /* TLIListTableViewCell.swift in Sources */,
 				56D4E6571BD3AC9200852DC1 /* TLIExportTasksButton.swift in Sources */,
 				56D4E6351BD39D2300852DC1 /* TLIReminderViewController.swift in Sources */,
@@ -894,17 +894,6 @@
 			targetProxy = 564CE8B11BD0E39C008C055C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		564CE8A81BD0E39C008C055C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				564CE8A91BD0E39C008C055C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		564CE8B71BD0E39C008C055C /* Debug */ = {
