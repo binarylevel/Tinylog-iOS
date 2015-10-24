@@ -126,6 +126,9 @@ class TLIListTableViewCell: TLITableViewCell {
             } else if TLISettingsFontPickerViewController.selectedKey() == "Iowan" {
                 listLabel.font = UIFont.preferredIowanFontForTextStyle(UIFontTextStyleBody)
                 totalTasksLabel.font = UIFont.preferredIowanFontForTextStyle(UIFontTextStyleBody)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "SanFrancisco" {
+                listLabel.font = UIFont.preferredSFFontForTextStyle(UIFontTextStyleBody)
+                totalTasksLabel.font = UIFont.preferredSFFontForTextStyle(UIFontTextStyleBody)
             }
         } else {
             let fontSize:Float = userDefaults.floatForKey("kFontSize")

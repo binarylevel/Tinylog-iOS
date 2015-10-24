@@ -103,7 +103,6 @@ class TLIMenuColorsView: UIView {
     
     func layoutButtons() {
         var index:Int = 0
-        //let count:Int = buttonsContainer!.subviews.count
         let buttons:NSArray = buttonsContainer!.subviews as NSArray
         var rect:CGRect = CGRectMake(0.0, 0.0, radius, radius)
         for item in buttons {

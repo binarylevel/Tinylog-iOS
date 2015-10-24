@@ -56,13 +56,24 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         //Register defaults
-        let standardDefaults = NSUserDefaults.standardUserDefaults()
-        standardDefaults.registerDefaults([
-            String(kTLIFontDefaultsKey): kTLIFontHelveticaNeueKey,
-            String(TLIUserDefaults.kTLISyncMode): "off",
-            "kFontSize": 17.0,
-            "kSystemFontSize": "off",
-            "kSetupScreen": "on"])
+        
+        if #available(iOS 9, *) {
+            let standardDefaults = NSUserDefaults.standardUserDefaults()
+            standardDefaults.registerDefaults([
+                String(kTLIFontDefaultsKey): kTLIFontSanFranciscoKey,
+                String(TLIUserDefaults.kTLISyncMode): "off",
+                "kFontSize": 17.0,
+                "kSystemFontSize": "off",
+                "kSetupScreen": "on"])
+        } else {
+            let standardDefaults = NSUserDefaults.standardUserDefaults()
+            standardDefaults.registerDefaults([
+                String(kTLIFontDefaultsKey): kTLIFontHelveticaNeueKey,
+                String(TLIUserDefaults.kTLISyncMode): "off",
+                "kFontSize": 17.0,
+                "kSystemFontSize": "off",
+                "kSetupScreen": "on"])
+        }
         
         do {
            
@@ -155,17 +166,8 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidEndNotification:", name: IDMSyncActivityDidEndNotification, object: nil)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidBeginNotification:", name: IDMSyncActivityDidBeginNotification, object: nil)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearPassedNotifications", name: "TLIClearPassedNotifications", object: nil)
-        
-        if #available(iOS 8.2, *) {
-            let fontMedium = UIFont.systemFontOfSize(18, weight: UIFontWeightBlack)
-             print(fontMedium)
-        } else {
-            // Fallback on earlier versions
-        }
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }

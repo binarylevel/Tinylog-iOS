@@ -225,6 +225,9 @@ class TLIReminderTaskTableViewCell: TLITableViewCell {
             } else if TLISettingsFontPickerViewController.selectedKey() == "Iowan" {
                 taskLabel.font = UIFont.preferredIowanFontForTextStyle(UIFontTextStyleBody)
                 dateLabel.font = UIFont.preferredIowanFontForTextStyle(UIFontTextStyleHeadline)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "SanFrancisco" {
+                taskLabel.font = UIFont.preferredIowanFontForTextStyle(UIFontTextStyleBody)
+                dateLabel.font = UIFont.preferredIowanFontForTextStyle(UIFontTextStyleHeadline)
             }
         } else {
             let fontSize:Float = userDefaults.floatForKey("kFontSize")

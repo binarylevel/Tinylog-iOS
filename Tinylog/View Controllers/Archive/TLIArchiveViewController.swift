@@ -54,7 +54,7 @@ class TLIArchiveViewController: TLICoreDataTableViewController, UITextFieldDeleg
     
     lazy var noListsLabel:UILabel? = {
         let noTasksLabel:UILabel = UILabel()
-        noTasksLabel.font = UIFont(name: "HelveticaNeue", size: 16.0)
+        noTasksLabel.font = UIFont.tinylogFontOfSize(16.0)
         noTasksLabel.textColor = UIColor.tinylogTextColor()
         noTasksLabel.textAlignment = NSTextAlignment.Center
         noTasksLabel.text = "No Archives"

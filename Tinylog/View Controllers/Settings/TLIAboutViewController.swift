@@ -57,9 +57,9 @@ class TLIAboutViewController: TLIGroupedTableViewController, UIGestureRecognizer
     
     func configureCell(cell:UITableViewCell, indexPath:NSIndexPath) {
         
-        cell.textLabel?.font = UIFont(name: "HelveticaNeue", size: 17.0)
+        cell.textLabel?.font = UIFont.tinylogFontOfSize(17.0)
         cell.textLabel?.textColor = UIColor.tinylogTextColor()
-        cell.detailTextLabel?.font = UIFont(name: "HelveticaNeue", size: 15.0)
+        cell.detailTextLabel?.font = UIFont.tinylogFontOfSize(15.0)
         
         let selectedBackgroundView = UIView(frame: cell.frame)
         selectedBackgroundView.backgroundColor = UIColor(red: 244.0 / 255.0, green: 244.0 / 255.0, blue: 244.0 / 255.0, alpha: 1.0)
@@ -101,7 +101,7 @@ class TLIAboutViewController: TLIGroupedTableViewController, UIGestureRecognizer
             let label = UILabel(frame: CGRectMake(17.0, 5.0, self.tableView.frame.size.width - 17.0, 44.0))
             view.addSubview(label)
             label.numberOfLines = 0
-            label.font = UIFont(name: "HelveticaNeue", size: 14.0)
+            label.font = UIFont.tinylogFontOfSize(14.0)
             label.textColor = UIColor.tinylogTextColor()
             label.text = "Logo created by John Anagnostou \n(behance.net/tzoAnagnostou)"
             label.userInteractionEnabled = true

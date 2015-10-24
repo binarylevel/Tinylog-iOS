@@ -16,7 +16,7 @@ class TLIListsFooterView: UIView {
         infoLabel.font = UIFont.regularFontWithSize(14.0)
         infoLabel.textColor = UIColor.tinylogTextColor()
         infoLabel.verticalAlignment = TTTAttributedLabelVerticalAlignment.Top
-        infoLabel.text = "Lorem ipsum dolor sit amet"
+        infoLabel.text = ""
         return infoLabel
     }()
     

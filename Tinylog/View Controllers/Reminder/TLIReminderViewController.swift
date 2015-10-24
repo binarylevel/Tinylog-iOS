@@ -196,7 +196,7 @@ class TLIReminderViewController: UIViewController {
             SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Gradient)
             SVProgressHUD.setBackgroundColor(UIColor.tinylogMainColor())
             SVProgressHUD.setForegroundColor(UIColor.whiteColor())
-            SVProgressHUD.setFont(UIFont(name: "HelveticaNeue", size: 14.0))
+            SVProgressHUD.setFont(UIFont.tinylogFontOfSize(14.0))
             SVProgressHUD.showErrorWithStatus("Please select a time in the near future")
         } else {
             setDateText()

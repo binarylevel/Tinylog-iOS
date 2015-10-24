@@ -14,13 +14,13 @@ class TLIResultsTableViewController: TLICoreDataTableViewController {
     
     lazy var noResultsLabel:UILabel? = {
         let noResultsLabel:UILabel = UILabel()
-        noResultsLabel.font = UIFont(name: "HelveticaNeue", size: 16.0)
+        noResultsLabel.font = UIFont.tinylogFontOfSize(16.0)
         noResultsLabel.textColor = UIColor.tinylogTextColor()
         noResultsLabel.textAlignment = NSTextAlignment.Center
         noResultsLabel.text = "No Results"
         noResultsLabel.frame = CGRectMake(self.view.frame.size.width / 2.0 - self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0 - 44.0 / 2.0, self.view.frame.size.width, 44.0)
         return noResultsLabel
-        }()
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +66,6 @@ class TLIResultsTableViewController: TLICoreDataTableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as! TLIListTableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell

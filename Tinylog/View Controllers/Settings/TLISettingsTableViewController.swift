@@ -58,7 +58,7 @@ class TLISettingsTableViewController: UITableViewController, MFMailComposeViewCo
     
     func configureCell(cell:UITableViewCell, indexPath:NSIndexPath) {
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        cell.textLabel?.font = UIFont.systemFontOfSize(17.0)
+        cell.textLabel?.font = UIFont.tinylogFontOfSize(17.0)
         cell.textLabel?.textColor = UIColor.tinylogTextColor()
         
         let selectedBackgroundView = UIView(frame: cell.frame)
@@ -93,7 +93,7 @@ class TLISettingsTableViewController: UITableViewController, MFMailComposeViewCo
                 cell.detailTextLabel?.font = UIFont.tinylogFontOfSize(16.0, key: TLISettingsFontPickerViewController.selectedKey()!)
             } else if indexPath.row == 1 {
                 cell.textLabel?.text = "Text Size"
-                cell.detailTextLabel?.font = UIFont(name: "HelveticaNeue", size: 16.0)
+                cell.detailTextLabel?.font = UIFont.tinylogFontOfSize(16.0)
                 let userDefaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                 let useSystemFontSize:String = userDefaults.objectForKey("kSystemFontSize") as! String
                 
@@ -138,7 +138,7 @@ class TLISettingsTableViewController: UITableViewController, MFMailComposeViewCo
                             SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Black)
                             SVProgressHUD.setBackgroundColor(UIColor.tinylogMainColor())
                             SVProgressHUD.setForegroundColor(UIColor.whiteColor())
-                            SVProgressHUD.setFont(UIFont(name: "HelveticaNeue", size: 14.0))
+                            SVProgressHUD.setFont(UIFont.tinylogFontOfSize(14.0))
                             SVProgressHUD.showErrorWithStatus("You are not logged in to iCloud.Tap Settings > iCloud to login.")
                         }
                     }

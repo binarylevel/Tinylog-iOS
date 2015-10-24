@@ -13,10 +13,14 @@ let kTLIBoldFontName:NSString = "HelveticaNeue-Bold"
 let kTLIBoldItalicFontName:NSString = "HelveticaNeue-BoldItalic"
 let kTLIItalicFontName:NSString = "HelveticaNeue-Italic"
 
-let kTLIRegularSFFontName:NSString = ".SFUIText-Regular"
-let kTLIBoldSFFontName:NSString = ".SFUIText-Heavy"
-let kTLIBoldItalicSFFontName:NSString = ".SFUIText-Semibold"
-let kTLIItalicSFFontName:NSString = ".SFUIText-Semibold"
+@available(iOS 8.2, *)
+let kTLIRegularSFFontName:NSString = UIFont.systemFontOfSize(10.0, weight: UIFontWeightRegular).fontName //".SFUIText-Regular"
+@available(iOS 8.2, *)
+let kTLIBoldSFFontName:NSString = UIFont.systemFontOfSize(10.0, weight: UIFontWeightBold).fontName //".SFUIText-Bold"
+@available(iOS 8.2, *)
+let kTLIBoldItalicSFFontName:NSString = UIFont.systemFontOfSize(10.0, weight: UIFontWeightMedium).fontName //".SFUIText-Medium"
+@available(iOS 8.2, *)
+let kTLIItalicSFFontName:NSString = UIFont.systemFontOfSize(10.0, weight: UIFontWeightLight).fontName //".SFUIText-Light"
 
 let kTLIFontRegularKey:NSString = "Regular"
 let kTLIFontItalicKey:NSString = "Italic"
@@ -24,7 +28,7 @@ let kTLIFontBoldKey:NSString = "Bold"
 let kTLIFontBoldItalicKey:NSString = "BoldItalic"
 
 let kTLIFontDefaultsKey:NSString = "TLIFontDefaults"
-let kTLIFontSanFranciscoKey:NSString = ".SFUIText-Regular"
+let kTLIFontSanFranciscoKey:NSString = "SanFrancisco"
 let kTLIFontHelveticaNeueKey:NSString = "HelveticaNeue"
 let kTLIFontAvenirKey:NSString = "Avenir"
 let kTLIFontHoeflerKey:NSString = "Hoefler"
@@ -69,22 +73,13 @@ extension UIFont {
                     kTLIFontItalicKey,
                     kTLIFontBoldKey,
                     kTLIFontBoldItalicKey])
-            
-            let defaultFontSF = NSDictionary(objects: [
-                kTLIRegularSFFontName,
-                kTLIItalicSFFontName,
-                kTLIBoldSFFontName,
-                kTLIBoldItalicSFFontName], forKeys: [
-                    kTLIFontRegularKey,
-                    kTLIFontItalicKey,
-                    kTLIFontBoldKey,
-                    kTLIFontBoldItalicKey])
+
             
             let sf = NSDictionary(objects: [
                 ".SFUIText-Regular",
-                ".SFUIText-Medium",
-                ".SFUIText-Heavy",
-                ".SFUIText-Heavy"], forKeys: [
+                ".SFUIText-Light",
+                ".SFUIText-Bold",
+                ".SFUIText-Medium"], forKeys: [
                     kTLIFontRegularKey,
                     kTLIFontItalicKey,
                     kTLIFontBoldKey,
@@ -181,6 +176,17 @@ extension UIFont {
                     kTLIFontBoldItalicKey])
         
             if #available(iOS 9, *) {
+                
+                let defaultFontSF = NSDictionary(objects: [
+                    kTLIRegularSFFontName,
+                    kTLIItalicSFFontName,
+                    kTLIBoldSFFontName,
+                    kTLIBoldItalicSFFontName], forKeys: [
+                        kTLIFontRegularKey,
+                        kTLIFontItalicKey,
+                        kTLIFontBoldKey,
+                        kTLIFontBoldItalicKey])
+                
                 fontDictionary = NSDictionary(objects: [
                     defaultFontSF,
                     sf,
@@ -815,6 +821,77 @@ extension UIFont {
         } else {
             return UIFont(name: fontNameRegular as String, size: fontSize)
         }
+    }
+    
+    class func preferredSFFontForTextStyle(textStyle:NSString)->UIFont? {
+        var fontSize:CGFloat = 16.0
+        let contentSize:NSString = UIApplication.sharedApplication().preferredContentSizeCategory
+        //let fontNameRegular:NSString = "IowanOldStyle-Roman"
+        //let fontNameMedium:NSString = "IowanOldStyle-Bold"
+        var fontSizeOffsetDictionary:Dictionary<String, Dictionary<String, AnyObject>>? = nil
+        
+        var onceToken:dispatch_once_t = 0
+        dispatch_once(&onceToken) { () -> Void in
+            fontSizeOffsetDictionary = [
+                UIContentSizeCategoryLarge:[UIFontTextStyleBody:1,
+                    UIFontTextStyleHeadline:1,
+                    UIFontTextStyleSubheadline:-1,
+                    UIFontTextStyleCaption1:-4,
+                    UIFontTextStyleCaption2:-5,
+                    UIFontTextStyleFootnote:-3],
+                
+                UIContentSizeCategoryExtraSmall:[UIFontTextStyleBody:-2,
+                    UIFontTextStyleHeadline:-2,
+                    UIFontTextStyleSubheadline:-4,
+                    UIFontTextStyleCaption1:-5,
+                    UIFontTextStyleCaption2:-5,
+                    UIFontTextStyleFootnote:-4],
+                
+                UIContentSizeCategorySmall:[UIFontTextStyleBody:-1,
+                    UIFontTextStyleHeadline:-1,
+                    UIFontTextStyleSubheadline:-3,
+                    UIFontTextStyleCaption1:-5,
+                    UIFontTextStyleCaption2:-5,
+                    UIFontTextStyleFootnote:-4],
+                
+                UIContentSizeCategoryMedium:[UIFontTextStyleBody:0,
+                    UIFontTextStyleHeadline:0,
+                    UIFontTextStyleSubheadline:-2,
+                    UIFontTextStyleCaption1:-5,
+                    UIFontTextStyleCaption2:-5,
+                    UIFontTextStyleFootnote:-4],
+                
+                UIContentSizeCategoryExtraExtraLarge:[UIFontTextStyleBody:3,
+                    UIFontTextStyleHeadline:3,
+                    UIFontTextStyleSubheadline:1,
+                    UIFontTextStyleCaption1:-2,
+                    UIFontTextStyleCaption2:-3,
+                    UIFontTextStyleFootnote:-1],
+                
+                UIContentSizeCategoryExtraExtraExtraLarge:[UIFontTextStyleBody:4,
+                    UIFontTextStyleHeadline:4,
+                    UIFontTextStyleSubheadline:2,
+                    UIFontTextStyleCaption1:-1,
+                    UIFontTextStyleCaption2:-2,
+                    UIFontTextStyleFootnote:0]]
+        }
+        
+        let content = fontSizeOffsetDictionary![contentSize as String]
+        let value:AnyObject = content![textStyle as String]!
+        fontSize += value as! CGFloat
+        
+        if textStyle == UIFontTextStyleHeadline || textStyle ==  UIFontTextStyleSubheadline {
+       
+            if #available(iOS 8.2, *) {
+                return UIFont.systemFontOfSize(fontSize, weight: UIFontWeightMedium)
+            }
+        } else {
+
+            if #available(iOS 8.2, *) {
+                return UIFont.systemFontOfSize(fontSize, weight: UIFontWeightRegular)
+            }
+        }
+        return  UIFont.systemFontOfSize(fontSize)
     }
 }
 

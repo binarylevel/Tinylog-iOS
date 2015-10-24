@@ -65,12 +65,27 @@ class TLIHelpTableViewCell: TLITableViewCell {
         let userDefaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let useSystemFontSize:String = userDefaults.objectForKey("kSystemFontSize") as! String
         
-        if useSystemFontSize == "on" {
+        if useSystemFontSize == "on" {            
             if TLISettingsFontPickerViewController.selectedKey() == "Avenir" {
-                helpLabel.font = UIFont.preferredAvenirFontForTextStyle(UIFontTextStyleBody)
+                 helpLabel.font = UIFont.preferredAvenirFontForTextStyle(UIFontTextStyleBody)
             } else if TLISettingsFontPickerViewController.selectedKey() == "HelveticaNeue" {
                 helpLabel.font = UIFont.preferredHelveticaNeueFontForTextStyle(UIFontTextStyleBody)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "Courier" {
+                 helpLabel.font = UIFont.preferredCourierFontForTextStyle(UIFontTextStyleBody)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "Georgia" {
+                 helpLabel.font = UIFont.preferredGeorgiaFontForTextStyle(UIFontTextStyleBody)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "Menlo" {
+                 helpLabel.font = UIFont.preferredMenloFontForTextStyle(UIFontTextStyleBody)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "TimesNewRoman" {
+                 helpLabel.font = UIFont.preferredTimesNewRomanFontForTextStyle(UIFontTextStyleBody)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "Palatino" {
+                 helpLabel.font = UIFont.preferredPalatinoFontForTextStyle(UIFontTextStyleBody)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "Iowan" {
+                 helpLabel.font = UIFont.preferredIowanFontForTextStyle(UIFontTextStyleBody)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "SanFrancisco" {
+                 helpLabel.font = UIFont.preferredSFFontForTextStyle(UIFontTextStyleBody)
             }
+
         } else {
             let fontSize:Float = userDefaults.floatForKey("kFontSize")
             helpLabel.font = UIFont.tinylogFontOfSize(CGFloat(fontSize))

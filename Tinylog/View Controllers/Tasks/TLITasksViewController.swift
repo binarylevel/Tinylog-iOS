@@ -18,50 +18,55 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
     var estimatedRowHeightCache:NSMutableDictionary?
     var currentIndexPath:NSIndexPath?
     var focusTextField:Bool?
-    var tasksFooterView:TLITasksFooterView?
+    
+    var topConstraint: NSLayoutConstraint?
+    var heightConstraint: NSLayoutConstraint?
+    
+    var tasksFooterView:TLITasksFooterView? = {
+        let tasksFooterView = TLITasksFooterView.newAutoLayoutView()
+        return tasksFooterView
+    }()
+    
     var orientation:String = "portrait"
     var enableDidSelectRowAtIndexPath = true
+    var didSetupContraints = false
     
     lazy var addTransparentLayer:UIView? = {
-        let addTransparentLayer:UIView = UIView()
+        let addTransparentLayer:UIView = UIView.newAutoLayoutView()
         addTransparentLayer.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleBottomMargin]
         addTransparentLayer.backgroundColor = UIColor(white: 1.0, alpha: 0.9)
         addTransparentLayer.alpha = 0.0
         let tapGestureRecognizer:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "transparentLayerTapped:")
         addTransparentLayer.addGestureRecognizer(tapGestureRecognizer)
         return addTransparentLayer
-        }()
+    }()
     
     lazy var noTasksLabel:UILabel? = {
-        let noTasksLabel:UILabel = UILabel()
-        noTasksLabel.font = UIFont(name: "HelveticaNeue", size: 18.0)
+        let noTasksLabel:UILabel = UILabel.newAutoLayoutView()
+        noTasksLabel.font = UIFont.regularFontWithSize(18.0)
         noTasksLabel.textColor = UIColor.tinylogTextColor()
-        noTasksLabel.textAlignment = NSTextAlignment.Center
         noTasksLabel.text = "Tap text field to create a new task."
-        noTasksLabel.frame = CGRectMake(self.view.frame.size.width / 2.0 - self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0 - 44.0 / 2.0, self.view.frame.size.width, 44.0)
         noTasksLabel.hidden = true
         return noTasksLabel
-        }()
+    }()
     
     lazy var noListSelected:UILabel? = {
-        let size = self.getDetailViewSize()
-        let noListSelected:UILabel = UILabel()
-        noListSelected.font = UIFont(name: "HelveticaNeue", size: 16.0)
+        let noListSelected:UILabel = UILabel.newAutoLayoutView()
+        noListSelected.font = UIFont.regularFontWithSize(16.0)
         noListSelected.textColor = UIColor.tinylogTextColor()
         noListSelected.textAlignment = NSTextAlignment.Center
         noListSelected.text = "No List Selected"
         noListSelected.sizeToFit()
-        noListSelected.frame = CGRectMake(size.width / 2.0 - noListSelected.frame.size.width / 2.0, size.height / 2.0 - noListSelected.frame.size.height / 2.0, noListSelected.frame.size.width, noListSelected.frame.size.height)
         noListSelected.hidden = true
         return noListSelected
-        }()
+    }()
     
     lazy var addTaskView:TLIAddTaskView? = {
         let header:TLIAddTaskView = TLIAddTaskView(frame: CGRectMake(0.0, 0.0, self.tableView!.bounds.size.width, TLIAddTaskView.height()))
         header.closeButton?.addTarget(self, action: "transparentLayerTapped:", forControlEvents: UIControlEvents.TouchDown)
         header.delegate = self
         return header
-        }()
+    }()
     
     func getDetailViewSize() -> CGSize {
         var detailViewController: UIViewController
@@ -140,19 +145,17 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
+        
+        self.tableView?.translatesAutoresizingMaskIntoConstraints = false
         self.tableView?.backgroundColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
         self.tableView?.separatorStyle = UITableViewCellSeparatorStyle.None
-        
         self.tableView?.registerClass(TLITaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         self.tableView?.registerClass(TLIReminderTaskTableViewCell.self, forCellReuseIdentifier: kReminderCellIdentifier)
         self.tableView?.rowHeight = UITableViewAutomaticDimension
         self.tableView?.estimatedRowHeight = TLITableViewCell.cellHeight()
-        self.tableView?.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height - 50.0)
-        
-        tasksFooterView = TLITasksFooterView(frame: CGRectMake(0.0, self.view.frame.size.height - 51.0, self.view.frame.size.width, 51.0))
+    
         tasksFooterView?.exportTasksButton?.addTarget(self, action: "exportTasks:", forControlEvents: UIControlEvents.TouchDown)
         tasksFooterView?.archiveButton?.addTarget(self, action: "displayArchive:", forControlEvents: UIControlEvents.TouchDown)
-        self.view.addSubview(tasksFooterView!)
         
         let IS_IPAD = (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
         
@@ -164,26 +167,12 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
             updateFooterInfoText(list!)
         }
         
-        self.view.addSubview(self.noTasksLabel!)
-        
-        if IS_IPAD {
-            self.view.addSubview(self.noListSelected!)
-        }
-        
-        self.view.addSubview(self.addTransparentLayer!)
-        
         setEditing(false, animated: false)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onChangeSize:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "deviceOrientationChanged", name: UIDeviceOrientationDidChangeNotification, object: nil)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidEndNotification:", name: IDMSyncActivityDidEndNotification, object: nil)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidBeginNotification:", name: IDMSyncActivityDidBeginNotification, object: nil)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "appBecomeActive", name: UIApplicationDidBecomeActiveNotification, object: nil)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFonts", name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
     }
     
@@ -237,8 +226,6 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         }
     }
     
-
-    
     func syncActivityDidEndNotification(notification:NSNotification) {
         if TLISyncManager.sharedSyncManager().canSynchronize() {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
@@ -253,54 +240,68 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         }
     }
     
-    func deviceOrientationChanged() {
-        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
-            self.orientation = "landscape"
-        }
-        if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
-            self.orientation = "portrait"
-        }
-        
-        var posY:CGFloat = 0.0
-        
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            if self.orientation == "portrait" {
-                posY = 64.0 + TLIAddTaskView.height()
-            } else {
-                posY = 64.0 + TLIAddTaskView.height()
-            }
-        } else {
-            if self.orientation == "portrait" {
-                posY = 64.0 + TLIAddTaskView.height()
-            } else {
-                posY = 32.0 + TLIAddTaskView.height()
-            }
-        }
-        
-        self.addTransparentLayer!.frame = CGRectMake(0.0, posY, self.view.frame.size.width, self.view.frame.size.height - 51.0 - posY)
-        
-        let IS_IPAD = (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
-        
-        if IS_IPAD {
-            let size = self.getDetailViewSize()
-            self.noListSelected!.frame = CGRectMake(size.width / 2.0 - self.noListSelected!.frame.size.width / 2.0, size.height / 2.0 - self.noListSelected!.frame.size.height / 2.0, self.noListSelected!.frame.size.width, self.noListSelected!.frame.size.height)
-        }
-        
-        self.noTasksLabel!.frame = CGRectMake(self.view.frame.size.width / 2.0 - self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0 - 44.0 / 2.0, self.view.frame.size.width, 44.0)
-    }
-    
     override func loadView() {
         super.loadView()
+
+        view.addSubview(noListSelected!)
+        view.addSubview(noTasksLabel!)
+        view.addSubview(tasksFooterView!)
+        view.addSubview(addTransparentLayer!)
+        
+        view.setNeedsUpdateConstraints()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
-            self.orientation = "landscape"
+    override func updateViewConstraints() {
+        
+        if !didSetupContraints {
+        
+            tableView?.autoMatchDimension(.Width, toDimension: .Width, ofView: self.view)
+            tableView?.autoMatchDimension(.Height, toDimension: .Height, ofView: self.view, withOffset: -50.0)
+            
+            noListSelected?.autoCenterInSuperview()
+            noTasksLabel?.autoCenterInSuperview()
+            
+            tasksFooterView?.autoMatchDimension(.Width, toDimension: .Width, ofView: self.view)
+            tasksFooterView?.autoSetDimension(.Height, toSize: 51.0)
+            tasksFooterView?.autoPinEdgeToSuperviewEdge(.Left)
+            tasksFooterView?.autoPinEdgeToSuperviewEdge(.Bottom)
+            
+            addTransparentLayer?.autoMatchDimension(.Width, toDimension: .Width, ofView: self.view)
+            
+            didSetupContraints = true
         }
-        if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
-            self.orientation = "portrait"
+        
+        
+        topConstraint?.autoRemove()
+        heightConstraint?.autoRemove()
+     
+        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            
+            if (UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation) || UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
+                
+                let posY = 64.0 + TLIAddTaskView.height()
+                
+                topConstraint = addTransparentLayer?.autoPinEdgeToSuperviewEdge(.Top, withInset: posY)
+                heightConstraint = addTransparentLayer?.autoMatchDimension(.Height, toDimension: .Height, ofView: self.view, withOffset: -51.0 - posY)
+            }
+        } else {
+            
+            if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
+                
+                let posY = 64.0 + TLIAddTaskView.height()
+                
+                topConstraint = addTransparentLayer?.autoPinEdgeToSuperviewEdge(.Top, withInset: posY)
+                 heightConstraint = addTransparentLayer?.autoMatchDimension(.Height, toDimension: .Height, ofView: self.view, withOffset: -51.0 - posY)
+            } else {
+                
+                let posY = 32.0 + TLIAddTaskView.height()
+                
+                topConstraint = addTransparentLayer?.autoPinEdgeToSuperviewEdge(.Top, withInset: posY)
+                 heightConstraint = addTransparentLayer?.autoMatchDimension(.Height, toDimension: .Height, ofView: self.view, withOffset: -51.0 - posY)
+            }
         }
+
+        super.updateViewConstraints()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -355,34 +356,25 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tasksFooterView?.frame = CGRectMake(0.0, self.view.frame.size.height - 51.0, self.view.frame.size.width, 51.0)
+        //tasksFooterView?.frame = CGRectMake(0.0, self.view.frame.size.height - 51.0, self.view.frame.size.width, 51.0)
         
-        var posY:CGFloat = 0.0
+//        var posY:CGFloat = 0.0
+//        
+//        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+//            if self.orientation == "portrait" {
+//                posY = 64.0 + TLIAddTaskView.height()
+//            } else {
+//                posY = 64.0 + TLIAddTaskView.height()
+//            }
+//        } else {
+//            if self.orientation == "portrait" {
+//                posY = 64.0 + TLIAddTaskView.height()
+//            } else {
+//                posY = 32.0 + TLIAddTaskView.height()
+//            }
+//        }
         
-        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            if self.orientation == "portrait" {
-                posY = 64.0 + TLIAddTaskView.height()
-            } else {
-                posY = 64.0 + TLIAddTaskView.height()
-            }
-        } else {
-            if self.orientation == "portrait" {
-                posY = 64.0 + TLIAddTaskView.height()
-            } else {
-                posY = 32.0 + TLIAddTaskView.height()
-            }
-        }
-        
-        self.addTransparentLayer!.frame = CGRectMake(0.0, posY, self.view.frame.size.width, self.view.frame.size.height - 51.0 - posY)
-        
-        let IS_IPAD = (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
-        
-        if IS_IPAD {
-            let size = self.getDetailViewSize()
-            self.noListSelected!.frame = CGRectMake(size.width / 2.0 - self.noListSelected!.frame.size.width / 2.0, size.height / 2.0 - self.noListSelected!.frame.size.height / 2.0, self.noListSelected!.frame.size.width, self.noListSelected!.frame.size.height)
-        }
-        
-        self.noTasksLabel!.frame = CGRectMake(self.view.frame.size.width / 2.0 - self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0 - 44.0 / 2.0, self.view.frame.size.width, 44.0)
+        //self.addTransparentLayer!.frame = CGRectMake(0.0, posY, self.view.frame.size.width, self.view.frame.size.height - 51.0 - posY)
     }
     
     override func setEditing(editing: Bool, animated: Bool) {
@@ -867,8 +859,6 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
             } catch let error as NSError {
                 fatalError(error.localizedDescription)
             }
-            
-
         }
     }
 }

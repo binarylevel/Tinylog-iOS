@@ -18,49 +18,49 @@ import UIKit
 
 class TLIAddTaskView: UIView, UITextFieldDelegate {
     
-    var textField:TLITextField?
-    var tagsContainerView:UIView?
-    var taskContainerView:UIView?
-    var tagsView:TLITagsView?
+    var textField:TLITextField? = {
+        let textField = TLITextField.newAutoLayoutView()
+        textField.backgroundColor = UIColor.clearColor()
+        textField.font = UIFont.tinylogFontOfSize(17.0)
+        textField.textColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
+        textField.placeholder = "Add new task"
+        textField.setValue(UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0), forKeyPath: "_placeholderLabel.textColor")
+        textField.autocapitalizationType = UITextAutocapitalizationType.Sentences
+        textField.autocorrectionType = UITextAutocorrectionType.Yes
+        textField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
+        textField.textAlignment = NSTextAlignment.Left
+        textField.returnKeyType = UIReturnKeyType.Done
+        textField.tintColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
+        return textField
+    }()
+    
+    var closeButton:TLICloseButton? = {
+        let closeButton = TLICloseButton.newAutoLayoutView()
+        closeButton.hidden = true
+        return closeButton
+    }()
+    
     var delegate:TLIAddTaskViewDelegate?
-    var closeButton:TLICloseButton?
+    var didSetupContraints = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         self.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         self.backgroundColor = UIColor.tinylogMainColor()
         
-        textField = TLITextField(frame: CGRectZero)
-        textField?.backgroundColor = UIColor.clearColor()
-        textField?.font = UIFont.tinylogFontOfSize(17.0)
-        textField?.textColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
-        textField?.placeholder = "Add new task"
-        textField?.setValue(UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0), forKeyPath: "_placeholderLabel.textColor")
-        textField?.autocapitalizationType = UITextAutocapitalizationType.Sentences
-        textField?.autocorrectionType = UITextAutocorrectionType.Yes
-        textField?.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
-        textField?.textAlignment = NSTextAlignment.Left
-        textField?.returnKeyType = UIReturnKeyType.Done
-        textField?.delegate = self
-        textField?.tintColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
+        textField!.delegate = self
         self.addSubview(textField!)
         
-        closeButton = TLICloseButton()
-        closeButton?.hidden = true
         self.addSubview(closeButton!)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFonts", name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
+        
+        setNeedsUpdateConstraints()
     }
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let size:CGSize = self.bounds.size
-        textField?.frame = CGRectMake(17.0, 0.0, size.width - 17.0, TLIAddTaskView.height())
-        closeButton?.frame = CGRectMake(size.width - 34.0, size.height  / 2.0 - 18.0 / 2.0, 18.0, 18.0)
     }
     
     class func height()->CGFloat {
@@ -95,6 +95,26 @@ class TLIAddTaskView: UIView, UITextFieldDelegate {
         textField.text = nil
         delegate?.addTaskView(self, title: title)
         return false
+    }
+    
+    override func updateConstraints() {
+        
+        let smallPadding:CGFloat = 16.0
+        
+        if !didSetupContraints {
+            
+            textField!.autoPinEdgeToSuperviewEdge(.Top, withInset: 10.0)
+            textField!.autoPinEdgeToSuperviewEdge(.Leading, withInset: 16.0)
+            textField!.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 50.0)
+            textField!.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 10.0)
+
+            closeButton?.autoSetDimensionsToSize(CGSize(width: 18.0, height: 18.0))
+            closeButton?.autoAlignAxisToSuperviewAxis(.Horizontal)
+            closeButton?.autoPinEdgeToSuperviewEdge(.Right, withInset: smallPadding)
+            
+            didSetupContraints = true
+        }
+        super.updateConstraints()
     }
 }
 

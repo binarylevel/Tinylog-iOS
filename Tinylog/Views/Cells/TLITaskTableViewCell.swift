@@ -144,6 +144,8 @@ class TLITaskTableViewCell: TLITableViewCell {
                 taskLabel.font = UIFont.preferredPalatinoFontForTextStyle(UIFontTextStyleBody)
             } else if TLISettingsFontPickerViewController.selectedKey() == "Iowan" {
                 taskLabel.font = UIFont.preferredIowanFontForTextStyle(UIFontTextStyleBody)
+            } else if TLISettingsFontPickerViewController.selectedKey() == "SanFrancisco" {
+                taskLabel.font = UIFont.preferredSFFontForTextStyle(UIFontTextStyleBody)
             }
         } else {
             let fontSize:Float = userDefaults.floatForKey("kFontSize")

@@ -42,7 +42,7 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
 
     lazy var noListsLabel:UILabel? = {
         let noListsLabel:UILabel = UILabel.newAutoLayoutView()
-        noListsLabel.font = UIFont(name: "HelveticaNeue", size: 16.0)
+        noListsLabel.font = UIFont.tinylogFontOfSize(16.0)
         noListsLabel.textColor = UIColor.tinylogTextColor()
         noListsLabel.textAlignment = NSTextAlignment.Center
         noListsLabel.text = "Tap + icon to create a new list."
@@ -80,7 +80,6 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
         self.tableView?.backgroundView = UIView()
         self.tableView?.backgroundView?.backgroundColor = UIColor.clearColor()
         self.tableView?.separatorStyle = UITableViewCellSeparatorStyle.None
-        //self.tableView?.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height - 50.0)
         
         self.tableView?.registerClass(TLIListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         self.tableView?.rowHeight = UITableViewAutomaticDimension

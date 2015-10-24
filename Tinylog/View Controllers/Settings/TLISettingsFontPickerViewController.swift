@@ -29,7 +29,7 @@ class TLISettingsFontPickerViewController: TLIGroupedTableViewController {
     
     struct FontKeys {
         static var kTLIFontDefaultsKey: NSString = "TLIFontDefaults"
-        static var kTLIFontSFDefaultsKey: NSString = ".SFUIText-Regular"
+        static var kTLIFontSFDefaultsKey: NSString = "SanFrancisco"
         static var kTLIFontHelveticaNeueDefaultsKey: NSString = "HelveticaNeue"
         static var kTLIFontAvenirDefaultsKey: NSString = "Avenir"
         static var kTLIFontHoeflerDefaultsKey: NSString = "Hoefler"
