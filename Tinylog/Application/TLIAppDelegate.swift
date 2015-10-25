@@ -9,11 +9,9 @@
 import UIKit
 import Reachability
 import SGReachability
-import FBSDKCoreKit
 import Mixpanel
 import Fabric
 import Crashlytics
-
 
 @UIApplicationMain
 class TLIAppDelegate: UIResponder, UIApplicationDelegate {
@@ -169,7 +167,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidBeginNotification:", name: IDMSyncActivityDidBeginNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearPassedNotifications", name: "TLIClearPassedNotifications", object: nil)
         
-        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        return true
     }
     
     func syncLocalNotifications() {
@@ -252,12 +250,6 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
             
         }
 
-//        dispatch_async(dispatch_get_global_queue(0, 0)) {
-//            TLICDController.sharedInstance.backgroundSaveContext()
-//            TLISyncManager.sharedSyncManager().synchronizeWithCompletion({ (error) -> Void in
-//                UIApplication.sharedApplication().endBackgroundTask(identifier)
-//            })
-        //}
         UIApplication.sharedApplication().applicationIconBadgeNumber =  0
         Mixpanel.sharedInstance().flush()
     }
@@ -267,7 +259,6 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
-        FBSDKAppEvents.activateApp()
         TLISyncManager.sharedSyncManager().synchronizeWithCompletion(nil)
         UIApplication.sharedApplication().applicationIconBadgeNumber =  0
     }

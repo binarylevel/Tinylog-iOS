@@ -84,11 +84,7 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-Tinylog/Bolts.framework"
   install_framework "Pods-Tinylog/Ensembles.framework"
-  install_framework "Pods-Tinylog/FBSDKCoreKit.framework"
-  install_framework "Pods-Tinylog/FBSDKLoginKit.framework"
-  install_framework "Pods-Tinylog/FBSDKShareKit.framework"
   install_framework "Pods-Tinylog/Mixpanel.framework"
   install_framework "Pods-Tinylog/PureLayout.framework"
   install_framework "Pods-Tinylog/Reachability.framework"
@@ -98,11 +94,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Tinylog/TTTAttributedLabel.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-Tinylog/Bolts.framework"
   install_framework "Pods-Tinylog/Ensembles.framework"
-  install_framework "Pods-Tinylog/FBSDKCoreKit.framework"
-  install_framework "Pods-Tinylog/FBSDKLoginKit.framework"
-  install_framework "Pods-Tinylog/FBSDKShareKit.framework"
   install_framework "Pods-Tinylog/Mixpanel.framework"
   install_framework "Pods-Tinylog/PureLayout.framework"
   install_framework "Pods-Tinylog/Reachability.framework"
