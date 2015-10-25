@@ -146,13 +146,13 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         
         self.view.backgroundColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
         
-        self.tableView?.translatesAutoresizingMaskIntoConstraints = false
         self.tableView?.backgroundColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
         self.tableView?.separatorStyle = UITableViewCellSeparatorStyle.None
         self.tableView?.registerClass(TLITaskTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         self.tableView?.registerClass(TLIReminderTaskTableViewCell.self, forCellReuseIdentifier: kReminderCellIdentifier)
         self.tableView?.rowHeight = UITableViewAutomaticDimension
         self.tableView?.estimatedRowHeight = TLITableViewCell.cellHeight()
+        self.tableView?.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height - 50.0)
     
         tasksFooterView?.exportTasksButton?.addTarget(self, action: "exportTasks:", forControlEvents: UIControlEvents.TouchDown)
         tasksFooterView?.archiveButton?.addTarget(self, action: "displayArchive:", forControlEvents: UIControlEvents.TouchDown)
@@ -255,8 +255,8 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         
         if !didSetupContraints {
         
-            tableView?.autoMatchDimension(.Width, toDimension: .Width, ofView: self.view)
-            tableView?.autoMatchDimension(.Height, toDimension: .Height, ofView: self.view, withOffset: -50.0)
+            //tableView?.autoMatchDimension(.Width, toDimension: .Width, ofView: self.view)
+            //tableView?.autoMatchDimension(.Height, toDimension: .Height, ofView: self.view, withOffset: -50.0)
             
             noListSelected?.autoCenterInSuperview()
             noTasksLabel?.autoCenterInSuperview()
@@ -270,7 +270,6 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
             
             didSetupContraints = true
         }
-        
         
         topConstraint?.autoRemove()
         heightConstraint?.autoRemove()
@@ -356,27 +355,21 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        //tasksFooterView?.frame = CGRectMake(0.0, self.view.frame.size.height - 51.0, self.view.frame.size.width, 51.0)
-        
-//        var posY:CGFloat = 0.0
-//        
-//        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-//            if self.orientation == "portrait" {
-//                posY = 64.0 + TLIAddTaskView.height()
-//            } else {
-//                posY = 64.0 + TLIAddTaskView.height()
-//            }
-//        } else {
-//            if self.orientation == "portrait" {
-//                posY = 64.0 + TLIAddTaskView.height()
-//            } else {
-//                posY = 32.0 + TLIAddTaskView.height()
-//            }
-//        }
-        
-        //self.addTransparentLayer!.frame = CGRectMake(0.0, posY, self.view.frame.size.width, self.view.frame.size.height - 51.0 - posY)
     }
     
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        // Code here will execute before the rotation begins.
+        // Equivalent to placing it in the deprecated method -[willRotateToInterfaceOrientation:duration:]
+        coordinator.animateAlongsideTransition({ (context) -> Void in
+            // Place code here to perform animations during the rotation.
+            // You can pass nil for this closure if not necessary.
+            }, completion: { (context) -> Void in
+                self.tableView?.reloadData()
+                self.view.setNeedsUpdateConstraints()
+        })
+    }
+
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         if editing {
@@ -734,11 +727,7 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
             TLIAnalyticsTracker.trackMixpanelEvent("Display Mentions", properties: nil)
         }
     }
-    
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-    }
-    
+        
     func transparentLayerTapped(gesture:UITapGestureRecognizer) {
         self.addTaskView?.textField?.resignFirstResponder()
     }

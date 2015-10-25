@@ -74,16 +74,15 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
         self.title = "My Lists"
         
         self.view.backgroundColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
-        self.tableView?.backgroundColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
         
-        self.tableView?.translatesAutoresizingMaskIntoConstraints = false
+        self.tableView?.backgroundColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
         self.tableView?.backgroundView = UIView()
         self.tableView?.backgroundView?.backgroundColor = UIColor.clearColor()
         self.tableView?.separatorStyle = UITableViewCellSeparatorStyle.None
-        
         self.tableView?.registerClass(TLIListTableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         self.tableView?.rowHeight = UITableViewAutomaticDimension
         self.tableView?.estimatedRowHeight = 61
+        self.tableView?.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height - 50.0)
         
         resultsTableViewController = TLIResultsTableViewController()
         resultsTableViewController?.tableView?.delegate = self
@@ -240,9 +239,6 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
     override func updateViewConstraints() {
         
         if !didSetupContraints {
-            
-            tableView?.autoMatchDimension(.Width, toDimension: .Width, ofView: self.view)
-            tableView?.autoMatchDimension(.Height, toDimension: .Height, ofView: self.view, withOffset: -50.0)
             
             noListsLabel?.autoCenterInSuperview()
             

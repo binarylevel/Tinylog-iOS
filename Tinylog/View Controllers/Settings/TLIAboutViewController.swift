@@ -76,10 +76,10 @@ class TLIAboutViewController: TLIGroupedTableViewController, UIGestureRecognizer
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
                 cell.textLabel?.text = "Web"
-                cell.detailTextLabel?.text = "tinylogapp.com"
+                cell.detailTextLabel?.text = "www.spirosgerokostas.com/tinylog"
             } else if indexPath.row == 1 {
                 cell.textLabel?.text = "Email"
-                cell.detailTextLabel?.text = "support@tinylogapp.com"
+                cell.detailTextLabel?.text = "spiros.gerokostas@gmail.com"
             } else if indexPath.row == 2 {
                 cell.textLabel?.text = "Twitter"
                 cell.detailTextLabel?.text = "@tinylogapp"
@@ -145,7 +145,7 @@ class TLIAboutViewController: TLIGroupedTableViewController, UIGestureRecognizer
             }
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
-                let path: NSURL = NSURL(string: "http://www.tinylogapp.com")!
+                let path: NSURL = NSURL(string: "http://www.spirosgerokostas.com/tinylog/")!
                 UIApplication.sharedApplication().openURL(path)
             } else if indexPath.row == 1 {
                 if MFMailComposeViewController.canSendMail() {
@@ -157,7 +157,7 @@ class TLIAboutViewController: TLIGroupedTableViewController, UIGestureRecognizer
                     let mailer:MFMailComposeViewController = MFMailComposeViewController()
                     mailer.mailComposeDelegate = self
                     mailer.setSubject("Tinylog \(version)")
-                    mailer.setToRecipients(["support@tinylogapp.com"])
+                    mailer.setToRecipients(["spiros.gerokostas@gmail.com"])
                     
                     let systemVersion = UIDevice.currentDevice().systemVersion
                     let stringBody = "---\nApp: Tinylog \(version) (\(build))\nDevice: \(deviceModel) (\(systemVersion))"
