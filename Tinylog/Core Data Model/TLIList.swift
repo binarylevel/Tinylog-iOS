@@ -10,6 +10,16 @@ import Foundation
 import CoreData
 
 class TLIList: NSManagedObject {
+    
+    static let entityName = "List"
+
+    init(context:NSManagedObjectContext, title:String, color:String) {
+        let entity = NSEntityDescription.entityForName(TLIList.entityName, inManagedObjectContext: context)!
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+        
+        self.title = title
+        self.color = color
+    }
 
     override func awakeFromInsert() {
         super.awakeFromInsert()
@@ -57,5 +67,9 @@ class TLIList: NSManagedObject {
         }
         return 0
     }
-
+    
+    @objc
+    private override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    }
 }

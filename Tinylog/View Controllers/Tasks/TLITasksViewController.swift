@@ -254,10 +254,7 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
     override func updateViewConstraints() {
         
         if !didSetupContraints {
-        
-            //tableView?.autoMatchDimension(.Width, toDimension: .Width, ofView: self.view)
-            //tableView?.autoMatchDimension(.Height, toDimension: .Height, ofView: self.view, withOffset: -50.0)
-            
+                    
             noListSelected?.autoCenterInSuperview()
             noTasksLabel?.autoCenterInSuperview()
             
@@ -273,32 +270,25 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         
         topConstraint?.autoRemove()
         heightConstraint?.autoRemove()
-     
+        
+        var posY:CGFloat = 0.0
+        
         if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            
-            if (UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation) || UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
-                
-                let posY = 64.0 + TLIAddTaskView.height()
-                
-                topConstraint = addTransparentLayer?.autoPinEdgeToSuperviewEdge(.Top, withInset: posY)
-                heightConstraint = addTransparentLayer?.autoMatchDimension(.Height, toDimension: .Height, ofView: self.view, withOffset: -51.0 - posY)
+            if self.orientation == "portrait" {
+                posY = 64.0 + TLIAddTaskView.height()
+            } else {
+                posY = 64.0 + TLIAddTaskView.height()
             }
         } else {
-            
-            if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
-                
-                let posY = 64.0 + TLIAddTaskView.height()
-                
-                topConstraint = addTransparentLayer?.autoPinEdgeToSuperviewEdge(.Top, withInset: posY)
-                 heightConstraint = addTransparentLayer?.autoMatchDimension(.Height, toDimension: .Height, ofView: self.view, withOffset: -51.0 - posY)
+            if self.orientation == "portrait" {
+                posY = 64.0 + TLIAddTaskView.height()
             } else {
-                
-                let posY = 32.0 + TLIAddTaskView.height()
-                
-                topConstraint = addTransparentLayer?.autoPinEdgeToSuperviewEdge(.Top, withInset: posY)
-                 heightConstraint = addTransparentLayer?.autoMatchDimension(.Height, toDimension: .Height, ofView: self.view, withOffset: -51.0 - posY)
+                posY = 32.0 + TLIAddTaskView.height()
             }
         }
+        
+        topConstraint = addTransparentLayer?.autoPinEdgeToSuperviewEdge(.Top, withInset: posY)
+        heightConstraint = addTransparentLayer?.autoMatchDimension(.Height, toDimension: .Height, ofView: self.view, withOffset: -51.0 - posY)
 
         super.updateViewConstraints()
     }
@@ -355,6 +345,16 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
+            self.orientation = "landscape"
+        }
+        if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
+            self.orientation = "portrait"
+        }
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -496,8 +496,6 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         self.ignoreNextUpdates = true
         let task = self.taskAtIndexPath(sourceIndexPath)!
         updateTask(task, sourceIndexPath: sourceIndexPath, destinationIndexPath: destinationIndexPath)
-        //var taskSource:TLITask = self.frc?.objectAtIndexPath(sourceIndexPath) as! TLITask
-        //var taskDestination:TLITask = self.frc?.objectAtIndexPath(destinationIndexPath) as! TLITask
         
         let cdc:TLICDController = TLICDController.sharedInstance
         cdc.backgroundSaveContext()

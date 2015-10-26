@@ -11,7 +11,6 @@ import Foundation
 import XCTest
 @testable import Tinylog
 
-
 class UtilsTests: XCTestCase {
     
     func testDelayExample() {
