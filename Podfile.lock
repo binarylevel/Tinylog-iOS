@@ -1,16 +1,15 @@
 PODS:
-  - Crashlytics (3.3.4)
-  - Ensembles (1.4.1):
-    - Ensembles/Core (= 1.4.1)
-  - Ensembles/Core (1.4.1)
-  - Expecta (1.0.3)
-  - Fabric (1.5.5):
-    - Fabric/Base (= 1.5.5)
-  - Fabric/Base (1.5.5)
+  - Crashlytics (3.4.1):
+    - Fabric (~> 1.6.0)
+  - Ensembles (1.4.3):
+    - Ensembles/Core (= 1.4.3)
+  - Ensembles/Core (1.4.3)
+  - Expecta (1.0.5)
+  - Fabric (1.6.1)
   - LRMocky (0.9.1)
-  - Mixpanel (2.9.0):
-    - Mixpanel/Mixpanel (= 2.9.0)
-  - Mixpanel/Mixpanel (2.9.0)
+  - Mixpanel (2.9.1):
+    - Mixpanel/Mixpanel (= 2.9.1)
+  - Mixpanel/Mixpanel (2.9.1)
   - OCHamcrest (3.0.1)
   - OCMock (2.2.4)
   - OCMockito (1.2.0):
@@ -20,7 +19,7 @@ PODS:
   - SGBackgroundView (1.0)
   - SGReachability (1.0):
     - Reachability
-  - Specta (1.0.4)
+  - Specta (1.0.5)
   - SVProgressHUD (1.1.3)
   - TTTAttributedLabel (1.13.4)
 
@@ -43,12 +42,12 @@ DEPENDENCIES:
   - TTTAttributedLabel
 
 SPEC CHECKSUMS:
-  Crashlytics: 41c082440d2e14da444186fff65e79c0b4b35d4c
-  Ensembles: 90013c435ff874a7a9ccb7a334b74b93ac53dc12
-  Expecta: 9d1bff6c8b0eeee73a166a2ee898892478927a15
-  Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
+  Crashlytics: 41574a245bc6ae10c55d57f385ebd2004e5bee05
+  Ensembles: dec7c46616bbb1fb5611f19567b0e0725edab6af
+  Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
+  Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
   LRMocky: d7d375672d4cf279d3f0dd221ffe8b6d6c78a7b5
-  Mixpanel: 42ae6168effc48481d957f7883dd8514a398738d
+  Mixpanel: 5ca24b2a05f4c77fe9bcfe7671d681d0f3f8d76f
   OCHamcrest: e19857683e4eefab64b878668eac04c2f4567118
   OCMock: a6a7dc0e3997fb9f35d99f72528698ebf60d64f2
   OCMockito: af187ffa65b05e7f043e236b1f6491949be77734
@@ -56,7 +55,7 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SGBackgroundView: f759ed9d0587512f1ba22b54c970e6e6b07c88d4
   SGReachability: abf9b7c6695750939268fb0e7197ea2d69536f22
-  Specta: 69bb134672aae190a1379ff91df07dad8dd1f869
+  Specta: ac94d110b865115fe60ff2c6d7281053c6f8e8a2
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
 

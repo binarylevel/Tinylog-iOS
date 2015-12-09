@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E6C77C90E5E0D827527B06A2'
+               BlueprintIdentifier = 'AC52EDBAFFE6E451E77B43E6'
                BlueprintName = 'SGBackgroundView'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'SGBackgroundView.framework'>

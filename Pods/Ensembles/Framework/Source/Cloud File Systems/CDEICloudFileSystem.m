@@ -57,12 +57,21 @@ NSString * const CDEICloudFileSystemDidMakeDownloadProgressNotification = @"CDEI
         
         operationQueue = [[NSOperationQueue alloc] init];
         operationQueue.maxConcurrentOperationCount = 1;
+        if ([operationQueue respondsToSelector:@selector(setQualityOfService:)]) {
+            [operationQueue setQualityOfService:NSQualityOfServiceUtility];
+        }
         
         presenterQueue = [[NSOperationQueue alloc] init];
         presenterQueue.maxConcurrentOperationCount = 1;
+        if ([presenterQueue respondsToSelector:@selector(setQualityOfService:)]) {
+            [presenterQueue setQualityOfService:NSQualityOfServiceUtility];
+        }
         
         downloadTrackingQueue = [[NSOperationQueue alloc] init];
         downloadTrackingQueue.maxConcurrentOperationCount = 1;
+        if ([downloadTrackingQueue respondsToSelector:@selector(setQualityOfService:)]) {
+            [downloadTrackingQueue setQualityOfService:NSQualityOfServiceUtility];
+        }
         
         timeOutQueue = dispatch_queue_create("com.mentalfaculty.ensembles.queue.icloudtimeout", DISPATCH_QUEUE_SERIAL);
         initiatingDownloadsQueue = dispatch_queue_create("com.mentalfaculty.ensembles.queue.initiatedownloads", DISPATCH_QUEUE_SERIAL);
@@ -372,7 +381,10 @@ NSString * const CDEICloudFileSystemDidMakeDownloadProgressNotification = @"CDEI
 {
     [self removeUbiquityContainerNotificationObservers];
     
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wtautological-pointer-compare"
     if (&NSUbiquityIdentityDidChangeNotification != NULL) {
+#pragma clang diagnostic pop
         __weak typeof(self) weakSelf = self;
         ubiquityIdentityObserver = [[NSNotificationCenter defaultCenter] addObserverForName:NSUbiquityIdentityDidChangeNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
             __strong typeof(weakSelf) strongSelf = weakSelf;

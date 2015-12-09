@@ -883,7 +883,6 @@
 		0DB39DEFB44CC3391824ED388A6270B0 /* Ensembles-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Ensembles-prefix.pch"; sourceTree = "<group>"; };
 		0DF45FF56A92B26A7EEC106F4B15EE40 /* CDEAsynchronousOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CDEAsynchronousOperation.m; path = Framework/Source/General/CDEAsynchronousOperation.m; sourceTree = "<group>"; };
 		0E0DBD110B98017BB2F02DA24A51DDE8 /* CDEDefines.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CDEDefines.m; path = Framework/Source/General/CDEDefines.m; sourceTree = "<group>"; };
-		0E256DAC0B67C1CE05452D2AA73C4584 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		0F1CB1D19B3B8C79BF97B2FC9259AC12 /* MPObjectSerializerContext.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPObjectSerializerContext.m; path = Mixpanel/MPObjectSerializerContext.m; sourceTree = "<group>"; };
 		0FAC5A5E33B3136D633B5A62FBB34EFC /* SGReachabilityController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SGReachabilityController.m; path = Pod/Classes/SGReachabilityController.m; sourceTree = "<group>"; };
 		0FD7E3EAE0F6A576448DF335E717F620 /* UIColor+MPColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+MPColor.h"; path = "Mixpanel/UIColor+MPColor.h"; sourceTree = "<group>"; };
@@ -894,7 +893,6 @@
 		116F297F9B63C70E01C72F6B2E564A7A /* LRMockyStateMachine.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LRMockyStateMachine.m; path = Classes/LRMocky/LRMockyStateMachine.m; sourceTree = "<group>"; };
 		11730DC3B615BE9EE9AEBC80AC0BB2D7 /* EXPUnsupportedObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXPUnsupportedObject.h; path = Expecta/EXPUnsupportedObject.h; sourceTree = "<group>"; };
 		119F0AC4406D7544D5A5907E8CB11DE7 /* LRMockery.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LRMockery.m; path = Classes/LRMocky/LRMockery.m; sourceTree = "<group>"; };
-		119F9D928F7E7AAC184771A994C9E8AF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		11CFC94B6F0519B957C3B5B078E74F9E /* OCMock-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OCMock-prefix.pch"; sourceTree = "<group>"; };
 		11E5A752C998064F56F62F66E332E442 /* NSObject+OCMAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+OCMAdditions.m"; path = "Source/OCMock/NSObject+OCMAdditions.m"; sourceTree = "<group>"; };
 		124887B76113F78EBF98338B2821077D /* CDELocalCloudFileSystem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CDELocalCloudFileSystem.h; path = "Framework/Source/Cloud File Systems/CDELocalCloudFileSystem.h"; sourceTree = "<group>"; };
@@ -918,6 +916,7 @@
 		192838B84613A667E46E07A4AE905B70 /* OCMock-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OCMock-dummy.m"; sourceTree = "<group>"; };
 		1943A96BD417922F413CF0D8D7F7E00D /* OCObserverMockObject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCObserverMockObject.m; path = Source/OCMock/OCObserverMockObject.m; sourceTree = "<group>"; };
 		1967F6D896F3BFEBB418CA408476C613 /* Expecta.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Expecta.h; path = Expecta/Expecta.h; sourceTree = "<group>"; };
+		196ED277BB813C790C0156AE2C07E190 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = iOS/Crashlytics.framework; sourceTree = "<group>"; };
 		198D3A3FB99972745FCEB7102301D838 /* PureLayout-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PureLayout-umbrella.h"; sourceTree = "<group>"; };
 		19A5F0A86BCC0B473ACEFFD11F5304DF /* HCIsIn.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HCIsIn.m; path = Source/Library/Collection/HCIsIn.m; sourceTree = "<group>"; };
 		19E5CD583681EF5CE1C1F2442D9CDE5A /* LRMockySugar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LRMockySugar.h; path = Classes/LRMocky/LRMockySugar.h; sourceTree = "<group>"; };
@@ -1175,6 +1174,7 @@
 		65B72730646254134A5E7CC372F34A62 /* Ensembles.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Ensembles.modulemap; sourceTree = "<group>"; };
 		660F546EA7F09BD5578E303940BAF117 /* EXPMatchers+beKindOf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beKindOf.h"; path = "Expecta/Matchers/EXPMatchers+beKindOf.h"; sourceTree = "<group>"; };
 		667044E535C6CD123CE7306078C47B92 /* HCSubstringMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HCSubstringMatcher.h; path = Source/Library/Text/HCSubstringMatcher.h; sourceTree = "<group>"; };
+		669950D135163EEA3EF04DDB580C5B85 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = iOS/Fabric.framework; sourceTree = "<group>"; };
 		66D5583445B139EC36CFBC2578E16F15 /* MPObjectSelector.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MPObjectSelector.m; path = Mixpanel/MPObjectSelector.m; sourceTree = "<group>"; };
 		671C641CA239B25648393D70C9789DA5 /* MKTArgumentCaptor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MKTArgumentCaptor.h; path = Source/OCMockito/MKTArgumentCaptor.h; sourceTree = "<group>"; };
 		678569F2D7315187502F52561A2B96E8 /* MPABTestDesignerTweakRequestMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MPABTestDesignerTweakRequestMessage.h; path = Mixpanel/MPABTestDesignerTweakRequestMessage.h; sourceTree = "<group>"; };
@@ -1877,14 +1877,6 @@
 			path = Expecta;
 			sourceTree = "<group>";
 		};
-		12283322C60A288184F012EFEE230BD8 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0E256DAC0B67C1CE05452D2AA73C4584 /* Crashlytics.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		1440A6630E15F40CD976BE435343F249 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -2079,14 +2071,6 @@
 				90FC9524F3BD1D7D2212C89C3C44E901 /* Support Files */,
 			);
 			path = SGBackgroundView;
-			sourceTree = "<group>";
-		};
-		25D3F0EE0FE07EAE31A5B03555FFE3C2 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				D0FCA946C6F4B58587D5F11DBDA59C86 /* Frameworks */,
-			);
-			name = Base;
 			sourceTree = "<group>";
 		};
 		274193F6357D918EE731F3074F192A7F /* Ensembles */ = {
@@ -2295,13 +2279,21 @@
 			path = "../Target Support Files/Ensembles";
 			sourceTree = "<group>";
 		};
+		5CDFA5E69A1EB48DB6F33F0591C3C553 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				669950D135163EEA3EF04DDB580C5B85 /* Fabric.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6B1976438ABEF44DB5A79E2D3FEDEF58 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				B6E1DE4D025F8809666AC9906B0A6636 /* Crashlytics */,
 				274193F6357D918EE731F3074F192A7F /* Ensembles */,
 				0FE578BB02317E2209B388C289739038 /* Expecta */,
-				DAA58990ED47BE2F9ECE5072FABB4B87 /* Fabric */,
+				CBB6ED26EBE53D3FD38D194567075613 /* Fabric */,
 				C855C8A61E966811745F9F849FF2E288 /* LRMocky */,
 				DAE5E3D245BB27997FEF8D091DC5F364 /* Mixpanel */,
 				16FDFB83D767E6DC3C5C3223835FA5C0 /* OCHamcrest */,
@@ -2617,7 +2609,7 @@
 		B6E1DE4D025F8809666AC9906B0A6636 /* Crashlytics */ = {
 			isa = PBXGroup;
 			children = (
-				12283322C60A288184F012EFEE230BD8 /* Frameworks */,
+				B942DCFEC615D39D81D47C6404AD40F1 /* Frameworks */,
 			);
 			path = Crashlytics;
 			sourceTree = "<group>";
@@ -2630,6 +2622,14 @@
 				738B53A01ABF89C237ECC10C45009A9C /* Support Files */,
 			);
 			path = SGReachability;
+			sourceTree = "<group>";
+		};
+		B942DCFEC615D39D81D47C6404AD40F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				196ED277BB813C790C0156AE2C07E190 /* Crashlytics.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		BB4807C9200C62A25D3CFB8AF80358F8 /* Pods-Tinylog */ = {
@@ -2774,18 +2774,10 @@
 			path = LRMocky;
 			sourceTree = "<group>";
 		};
-		D0FCA946C6F4B58587D5F11DBDA59C86 /* Frameworks */ = {
+		CBB6ED26EBE53D3FD38D194567075613 /* Fabric */ = {
 			isa = PBXGroup;
 			children = (
-				119F9D928F7E7AAC184771A994C9E8AF /* Fabric.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DAA58990ED47BE2F9ECE5072FABB4B87 /* Fabric */ = {
-			isa = PBXGroup;
-			children = (
-				25D3F0EE0FE07EAE31A5B03555FFE3C2 /* Base */,
+				5CDFA5E69A1EB48DB6F33F0591C3C553 /* Frameworks */,
 			);
 			path = Fabric;
 			sourceTree = "<group>";

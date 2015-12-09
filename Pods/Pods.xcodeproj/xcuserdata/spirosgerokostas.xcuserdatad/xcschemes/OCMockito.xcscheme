@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'F596D9A9EE0BC58B2C49C9E6'
+               BlueprintIdentifier = '84235BAA15AC2D9A9A4A749B'
                BlueprintName = 'OCMockito'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'OCMockito.framework'>
