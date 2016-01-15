@@ -28,13 +28,15 @@ Requirements
 
 Tinylog requires Swift 2.1 and Xcode 7.2.
 
-## Author
+Author
+-----
 
 __Spiros Gerokostas__ 
 
 - [![](https://img.shields.io/badge/twitter-sger-brightgreen.svg)](https://twitter.com/sger) 
 - :email: spiros.gerokostas@gmail.com
 
-## License
+License
+-----
 
 Tinylog is available under the MIT license. See the LICENSE file for more info.
