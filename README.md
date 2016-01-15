@@ -23,7 +23,8 @@ Testing
 $ xctool test -workspace Tinylog.xcworkspace -scheme TinylogTests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
 ```
 
-## Requirements
+Requirements
+-----
 
 Tinylog requires Swift 2.1 and Xcode 7.2.
 
