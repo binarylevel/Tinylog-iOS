@@ -1,6 +1,6 @@
 //
 //  TLITextField.h
-//  Tiny Log
+//  Tinylog
 //
 //  Created by Spiros Gerokostas on 12/15/13.
 //  Copyright (c) 2013 Spiros Gerokostas. All rights reserved.

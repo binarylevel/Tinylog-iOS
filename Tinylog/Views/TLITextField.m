@@ -1,6 +1,6 @@
 //
 //  TLITextField.m
-//  Tiny Log
+//  Tinylog
 //
 //  Created by Spiros Gerokostas on 12/15/13.
 //  Copyright (c) 2013 Spiros Gerokostas. All rights reserved.
@@ -21,31 +21,17 @@
 @synthesize clearButtonEdgeInsets = _clearButtonEdgeInsets;
 @synthesize placeholderTextColor = _placeholderTextColor;
 
-/*- (void)setPlaceholderTextColor:(UIColor *)placeholderTextColor
-{
-    _placeholderTextColor = placeholderTextColor;
-    
-    if (!self && self.placeholder)
-    {
-        [self setNeedsDisplay];
-    }
-}*/
-
 #pragma mark - UIView
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    if ((self = [super initWithCoder:aDecoder]))
-    {
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if ((self = [super initWithCoder:aDecoder])) {
         [self _setup];
     }
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
-    if((self = [super initWithFrame:frame]))
-    {
+- (id)initWithFrame:(CGRect)frame {
+    if((self = [super initWithFrame:frame])) {
         [self _setup];
     }
     return self;
@@ -53,13 +39,11 @@
 
 #pragma mark - UITextField
 
-- (CGRect)textRectForBounds:(CGRect)bounds
-{
+- (CGRect)textRectForBounds:(CGRect)bounds {
     return UIEdgeInsetsInsetRect([super textRectForBounds:bounds], _textEdgeInsets);
 }
 
-- (CGRect)editingRectForBounds:(CGRect)bounds
-{
+- (CGRect)editingRectForBounds:(CGRect)bounds {
     return [self textRectForBounds:bounds];
 }
 
@@ -70,28 +54,10 @@
     return CGRectSetX(rect, rect.origin.x + _clearButtonEdgeInsets.right);
 }
 
-/*
-- (void)drawPlaceholderInRect:(CGRect)rect
-{
-    if (!_placeholderTextColor)
-    {
-        [super drawPlaceholderInRect:rect];
-        return;
-    }
-    
-    [_placeholderTextColor setFill];
-    
-    NSMutableParagraphStyle* style = [[NSMutableParagraphStyle alloc] init];
-    [style setAlignment:self.textAlignment];
-    [style setLineBreakMode:NSLineBreakByTruncatingTail];
-    
-    [self.placeholder drawInRect:rect withAttributes:@{NSFontAttributeName:self.font, NSParagraphStyleAttributeName:style}];
-}*/
 
 #pragma mark - Private
 
-- (void)_setup
-{
+- (void)_setup {
     _textEdgeInsets = UIEdgeInsetsZero;
     _clearButtonEdgeInsets = UIEdgeInsetsZero;
 }
