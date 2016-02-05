@@ -233,12 +233,9 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    func applicationWillResignActive(application: UIApplication) {
-    }
+    func applicationWillResignActive(application: UIApplication) {}
 
     func applicationDidEnterBackground(application: UIApplication) {
-        
-        
         var identifier:UIBackgroundTaskIdentifier = 0
         identifier = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({ () -> Void in
         })
@@ -247,16 +244,13 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
             TLISyncManager.sharedSyncManager().synchronizeWithCompletion({ (error) -> Void in
                 UIApplication.sharedApplication().endBackgroundTask(identifier)
             })
-            
         }
 
         UIApplication.sharedApplication().applicationIconBadgeNumber =  0
         Mixpanel.sharedInstance().flush()
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
-
-    }
+    func applicationWillEnterForeground(application: UIApplication) {}
 
     func applicationDidBecomeActive(application: UIApplication) {
         TLISyncManager.sharedSyncManager().synchronizeWithCompletion(nil)
@@ -314,9 +308,8 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
                             task.updatedAt = NSDate()
                             cdc.backgroundSaveContext()
                         } catch let error as NSError {
-                            print("\(error.localizedDescription)")
+                            //print("\(error.localizedDescription)")
                         }
-
                     }
                 }
             }
@@ -344,7 +337,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
             cdc.backgroundSaveContext()
             
         } catch let error as NSError {
-            print("clearPassedNotifications with error \(error.localizedDescription)")
+            //print("clearPassedNotifications with error \(error.localizedDescription)")
         }
     }
     
@@ -385,13 +378,12 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
     private func selectTabBarItemForIdentifier(identifier: ShortcutIdentifier) -> Bool {
     
         switch (identifier) {
-        case .CreateNewList:
-            print("create new list")
-            if let navigationController = window?.rootViewController as? UINavigationController {
-                if let vc = navigationController.viewControllers[0] as? TLIListsViewController {
-                    vc.addNewList(nil)
+            case .CreateNewList:
+                if let navigationController = window?.rootViewController as? UINavigationController {
+                    if let vc = navigationController.viewControllers[0] as? TLIListsViewController {
+                        vc.addNewList(nil)
+                    }
                 }
-            }
 
             return true
         }
