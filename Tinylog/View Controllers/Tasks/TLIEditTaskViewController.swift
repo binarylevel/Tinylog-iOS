@@ -34,8 +34,6 @@ class TLIEditTaskViewController: UIViewController {
         
         self.navigationItem.rightBarButtonItems = [saveBarButtonItem, reminderBarButtonItem]
         
-        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "save:")
-        
         textView = UITextView(frame: CGRectZero)
         textView?.autocorrectionType = UITextAutocorrectionType.Yes
         textView?.bounces = true

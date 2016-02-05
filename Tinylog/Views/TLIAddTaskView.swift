@@ -6,14 +6,6 @@
 //  Copyright © 2015 Spiros Gerokostas. All rights reserved.
 //
 
-//
-//  TLIAddTaskView.swift
-//  Tinylog
-//
-//  Created by Spiros Gerokostas on 10/8/14.
-//  Copyright (c) 2014 Spiros Gerokostas. All rights reserved.
-//
-
 import UIKit
 
 class TLIAddTaskView: UIView, UITextFieldDelegate {
