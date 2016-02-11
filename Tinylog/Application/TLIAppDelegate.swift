@@ -13,12 +13,18 @@ import Mixpanel
 import Fabric
 import Crashlytics
 
+/// TLIAppDelegate Application Logic.
 @UIApplicationMain
 class TLIAppDelegate: UIResponder, UIApplicationDelegate {
     
+    /**
+     Identifier for 3d Touch.
+     
+     - CreateNewList: Create a new list.
+     */
     enum ShortcutIdentifier: String {
-        case CreateNewList
         
+        case CreateNewList
         init?(fullIdentifier: String) {
             guard let shortIdentifier = fullIdentifier.componentsSeparatedByString(".").last else {
                 return nil
@@ -27,9 +33,17 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    /// The instance of the UIWindow.
     var window: UIWindow?
+    
+    /// Access globally network status.
     var networkMode:String?
     
+    /**
+        Singleton of TLIAppDelegate
+     
+     - Returns: TLIAppDelegate instance.
+     */
     class func sharedAppDelegate()->TLIAppDelegate {
         return UIApplication.sharedApplication().delegate as! TLIAppDelegate
     }
@@ -38,14 +52,13 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem,
         completionHandler: (Bool) -> Void) {
             
-            completionHandler(handleShortcut(shortcutItem))
+        completionHandler(handleShortcut(shortcutItem))
     }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         if #available(iOS 9.0, *) {
             if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem {
-                print(shortcutItem)
                 handleShortcut(shortcutItem)
                 return false
             }
@@ -53,7 +66,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
             //print("quick actions not supported")
         }
         
-        //Register defaults
+        // Register defaults
         
         if #available(iOS 9, *) {
             let standardDefaults = NSUserDefaults.standardUserDefaults()
@@ -74,9 +87,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         do {
-           
             try NSFileManager.defaultManager().createDirectoryAtURL(TLICDController.sharedInstance.storeDirectoryURL!, withIntermediateDirectories: true, attributes: nil)
-          
         } catch { 
             fatalError("Cannot create directory \(error)")
         }
