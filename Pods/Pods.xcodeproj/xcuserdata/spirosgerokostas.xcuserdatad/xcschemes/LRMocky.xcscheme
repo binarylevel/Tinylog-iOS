@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '069CF0BA65B3DAF733831033'
+               BlueprintIdentifier = '4564A0D8B7C69211C124D449'
                BlueprintName = 'LRMocky'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'LRMocky.framework'>

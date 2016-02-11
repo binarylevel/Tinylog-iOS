@@ -1,15 +1,15 @@
 PODS:
-  - Crashlytics (3.4.1):
-    - Fabric (~> 1.6.0)
-  - Ensembles (1.4.3):
-    - Ensembles/Core (= 1.4.3)
-  - Ensembles/Core (1.4.3)
+  - Crashlytics (3.6.0):
+    - Fabric (~> 1.6.3)
+  - Ensembles (1.5):
+    - Ensembles/Core (= 1.5)
+  - Ensembles/Core (1.5)
   - Expecta (1.0.5)
-  - Fabric (1.6.1)
+  - Fabric (1.6.5)
   - LRMocky (0.9.1)
-  - Mixpanel (2.9.1):
-    - Mixpanel/Mixpanel (= 2.9.1)
-  - Mixpanel/Mixpanel (2.9.1)
+  - Mixpanel (2.9.3):
+    - Mixpanel/Mixpanel (= 2.9.3)
+  - Mixpanel/Mixpanel (2.9.3)
   - OCHamcrest (3.0.1)
   - OCMock (2.2.4)
   - OCMockito (1.2.0):
@@ -42,12 +42,12 @@ DEPENDENCIES:
   - TTTAttributedLabel
 
 SPEC CHECKSUMS:
-  Crashlytics: 41574a245bc6ae10c55d57f385ebd2004e5bee05
-  Ensembles: dec7c46616bbb1fb5611f19567b0e0725edab6af
+  Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
+  Ensembles: 33c81244812b7d568a7fa76255708327efc66a4a
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
-  Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
+  Fabric: 338ffd3c2afcab120638907b4251189de9ad17b3
   LRMocky: d7d375672d4cf279d3f0dd221ffe8b6d6c78a7b5
-  Mixpanel: 5ca24b2a05f4c77fe9bcfe7671d681d0f3f8d76f
+  Mixpanel: b9ff1c5d41fc07037d4b813bf2799c050ee3e49b
   OCHamcrest: e19857683e4eefab64b878668eac04c2f4567118
   OCMock: a6a7dc0e3997fb9f35d99f72528698ebf60d64f2
   OCMockito: af187ffa65b05e7f043e236b1f6491949be77734

@@ -17,9 +17,11 @@
 #import "Mixpanel.h"
 #import "MPLogger.h"
 #import "NSData+MPBase64.h"
+#import "MPFoundation.h"
 
 #if !defined(MIXPANEL_APP_EXTENSION)
 
+#import "MixpanelExceptionHandler.h"
 #import "MPABTestDesignerConnection.h"
 #import "UIView+MPHelpers.h"
 #import "MPDesignerEventBindingMessage.h"
@@ -35,7 +37,7 @@
 #endif
 
 
-#define VERSION @"2.9.1"
+#define VERSION @"2.9.3"
 
 #if !defined(MIXPANEL_APP_EXTENSION)
 @interface Mixpanel () <UIAlertViewDelegate, MPSurveyNavigationControllerDelegate, MPNotificationViewControllerDelegate>
@@ -59,7 +61,7 @@
 @property (nonatomic, strong) NSMutableArray *eventsQueue;
 @property (nonatomic, strong) NSMutableArray *peopleQueue;
 @property (nonatomic, assign) UIBackgroundTaskIdentifier taskId;
-@property (nonatomic, strong) dispatch_queue_t serialQueue;
+@property (nonatomic) dispatch_queue_t serialQueue;
 @property (nonatomic, assign) SCNetworkReachabilityRef reachability;
 @property (nonatomic, strong) CTTelephonyNetworkInfo *telephonyInfo;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
@@ -140,11 +142,17 @@ static Mixpanel *sharedInstance = nil;
         MixpanelDebug(@"%@ warning empty api token", self);
     }
     if (self = [self init]) {
+#if !defined(MIXPANEL_APP_EXTENSION)
+        // Install uncaught exception handlers first
+        [[MixpanelExceptionHandler sharedHandler] addMixpanelInstance:self];
+#endif
+        
         self.people = [[MixpanelPeople alloc] initWithMixpanel:self];
         self.apiToken = apiToken;
         _flushInterval = flushInterval;
         self.flushOnBackground = YES;
         self.showNetworkActivityIndicator = YES;
+        self.useIPAddressForGeoLocation = YES;
 
         self.serverURL = @"https://api.mixpanel.com";
         self.decideURL = @"https://decide.mixpanel.com";
@@ -218,7 +226,7 @@ static Mixpanel *sharedInstance = nil;
         }
         CFRelease(_reachability);
         _reachability = NULL;
-        MixpanelDebug(@"realeased reachability");
+        MixpanelDebug(@"released reachability");
     }
 }
 
@@ -226,7 +234,7 @@ static Mixpanel *sharedInstance = nil;
 
 static __unused NSString *MPURLEncode(NSString *s)
 {
-    return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)s, NULL, CFSTR("!*'();:@&=+$,/?%#[]"), kCFStringEncodingUTF8));
+    return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)s, NULL, CFSTR("!*'();:@&=+$,/?%#[]"), kCFStringEncodingUTF8));
 }
 
 - (NSData *)JSONSerializeObject:(id)obj
@@ -235,7 +243,7 @@ static __unused NSString *MPURLEncode(NSString *s)
     NSError *error = nil;
     NSData *data = nil;
     @try {
-        data = [NSJSONSerialization dataWithJSONObject:coercedObj options:0 error:&error];
+        data = [NSJSONSerialization dataWithJSONObject:coercedObj options:(NSJSONWritingOptions)0 error:&error];
     }
     @catch (NSException *exception) {
         MixpanelError(@"%@ exception encoding api data: %@", self, exception);
@@ -295,8 +303,8 @@ static __unused NSString *MPURLEncode(NSString *s)
     NSData *data = [self JSONSerializeObject:array];
     if (data) {
         b64String = [data mp_base64EncodedString];
-        b64String = (id)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                (CFStringRef)b64String,
+        b64String = CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                (__bridge CFStringRef)b64String,
                                                                 NULL,
                                                                 CFSTR("!*'();:@&=+$,/?%#[]"),
                                                                 kCFStringEncodingUTF8));
@@ -373,7 +381,8 @@ static __unused NSString *MPURLEncode(NSString *s)
         MixpanelError(@"%@ create alias called with empty distinct id: %@", self, distinctID);
         return;
     }
-    [self track:@"$create_alias" properties:@{@"distinct_id": distinctID, @"alias": alias}];
+    [self track:@"$create_alias" properties:@{ @"distinct_id": distinctID, @"alias": alias }];
+    [self flush];
 }
 
 - (void)track:(NSString *)event
@@ -519,12 +528,14 @@ static __unused NSString *MPURLEncode(NSString *s)
 
 - (void)timeEvent:(NSString *)event
 {
+    NSNumber *startTime = @([[NSDate date] timeIntervalSince1970]);
+    
     if (event == nil || [event length] == 0) {
         MixpanelError(@"Mixpanel cannot time an empty event");
         return;
     }
     dispatch_async(self.serialQueue, ^{
-        self.timedEvents[event] = @([[NSDate date] timeIntervalSince1970]);
+        self.timedEvents[event] = startTime;
     });
 }
 
@@ -548,6 +559,8 @@ static __unused NSString *MPURLEncode(NSString *s)
         self.shownSurveyCollections = [NSMutableSet set];
         self.shownNotifications = [NSMutableSet set];
         self.decideResponseCached = NO;
+        self.variants = [NSSet set];
+        self.eventBindings = [NSSet set];
         [self archive];
     });
 }
@@ -566,6 +579,7 @@ static __unused NSString *MPURLEncode(NSString *s)
     @synchronized(self) {
         _flushInterval = interval;
     }
+    [self flush];
     [self startFlushTimer];
 }
 
@@ -642,7 +656,7 @@ static __unused NSString *MPURLEncode(NSString *s)
         NSArray *batch = [queue subarrayWithRange:NSMakeRange(0, batchSize)];
 
         NSString *requestData = [self encodeAPIData:batch];
-        NSString *postBody = [NSString stringWithFormat:@"ip=1&data=%@", requestData];
+        NSString *postBody = [NSString stringWithFormat:@"ip=%d&data=%@", self.useIPAddressForGeoLocation, requestData];
         MixpanelDebug(@"%@ flushing %lu of %lu to %@: %@", self, (unsigned long)[batch count], (unsigned long)[queue count], endpoint, queue);
         NSURLRequest *request = [self apiRequestWithEndpoint:endpoint andBody:postBody];
         NSError *error = nil;
@@ -720,7 +734,6 @@ static __unused NSString *MPURLEncode(NSString *s)
     [self archiveProperties];
     [self archiveVariants];
     [self archiveEventBindings];
-
 }
 
 - (void)archiveEvents
@@ -835,7 +848,7 @@ static __unused NSString *MPURLEncode(NSString *s)
         self.shownSurveyCollections = properties[@"shownSurveyCollections"] ? properties[@"shownSurveyCollections"] : [NSMutableSet set];
         self.shownNotifications = properties[@"shownNotifications"] ? properties[@"shownNotifications"] : [NSMutableSet set];
         self.variants = properties[@"variants"] ? properties[@"variants"] : [NSSet set];
-        self.eventBindings = properties[@"event_bindings"] ? properties[@"event_bindings"] : [NSArray array];
+        self.eventBindings = properties[@"event_bindings"] ? properties[@"event_bindings"] : [NSSet set];
         self.timedEvents = properties[@"timedEvents"] ? properties[@"timedEvents"] : [NSMutableDictionary dictionary];
     }
 }
@@ -851,7 +864,7 @@ static __unused NSString *MPURLEncode(NSString *s)
 - (void)unarchiveEventBindings
 {
     self.eventBindings = (NSSet *)[self unarchiveFromFile:[self eventBindingsFilePath]];
-    if (!self.eventBindings) {
+    if (!self.eventBindings || ![self.eventBindings isKindOfClass:[NSSet class]]) {
         self.eventBindings = [NSSet set];
     }
 }
@@ -887,12 +900,10 @@ static __unused NSString *MPURLEncode(NSString *s)
             [screenBoundsInvocation invokeWithTarget:device];
             CGRect screenBounds;
             [screenBoundsInvocation getReturnValue:(void *)&screenBounds];
-             if(screenBounds.size.width == 136.0f){
+            if (screenBounds.size.width == 136.0f){
                 model = @"Apple Watch 38mm";
-            } else if(screenBounds.size.width == 156.0f) {
+            } else if (screenBounds.size.width == 156.0f) {
                 model = @"Apple Watch 42mm";
-            } else {
-                model = @"Apple Watch";
             }
         }
     }
@@ -920,8 +931,10 @@ static __unused NSString *MPURLEncode(NSString *s)
 {
     dispatch_async(self.serialQueue, ^(){
         NSMutableDictionary *properties = [self.automaticProperties mutableCopy];
-        properties[@"$radio"] = [self currentRadio];
-        self.automaticProperties = [properties copy];
+        if (properties) {
+            properties[@"$radio"] = [self currentRadio];
+            self.automaticProperties = [properties copy];
+        }
     });
 }
 
@@ -939,8 +952,14 @@ static __unused NSString *MPURLEncode(NSString *s)
 
 - (NSString *)libVersion
 {
+    return [Mixpanel libVersion];
+}
+
++ (NSString *)libVersion
+{
     return VERSION;
 }
+
 
 - (NSDictionary *)collectAutomaticProperties
 {
@@ -953,6 +972,8 @@ static __unused NSString *MPURLEncode(NSString *s)
     // Use setValue semantics to avoid adding keys where value can be nil.
     [p setValue:[[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"] forKey:@"$app_version"];
     [p setValue:[[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"] forKey:@"$app_release"];
+    [p setValue:[[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"] forKey:@"$app_build_number"];
+    [p setValue:[[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"] forKey:@"$app_version_string"];
     [p setValue:[self IFA] forKey:@"$ios_ifa"];
     [p setValue:carrier.carrierName forKey:@"$carrier"];
     [p setValue:[self watchModel] forKey:@"$watch_model"];
@@ -1017,7 +1038,7 @@ static __unused NSString *MPURLEncode(NSString *s)
 
     // cellular info
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+    if (NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_7_0) {
         [self setCurrentRadio];
         [notificationCenter addObserver:self
                                selector:@selector(setCurrentRadio)
@@ -1086,9 +1107,11 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
     // set to run on the serial queue. see SCNetworkReachabilitySetDispatchQueue in init
     BOOL wifi = (flags & kSCNetworkReachabilityFlagsReachable) && !(flags & kSCNetworkReachabilityFlagsIsWWAN);
     NSMutableDictionary *properties = [self.automaticProperties mutableCopy];
-    properties[@"$wifi"] = wifi ? @YES : @NO;
-    self.automaticProperties = [properties copy];
-    MixpanelDebug(@"%@ reachability changed, wifi=%d", self, wifi);
+    if (properties) {
+        properties[@"$wifi"] = wifi ? @YES : @NO;
+        self.automaticProperties = [properties copy];
+        MixpanelDebug(@"%@ reachability changed, wifi=%d", self, wifi);
+    }
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
@@ -1133,11 +1156,12 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
 {
     MixpanelDebug(@"%@ did enter background", self);
 
-    self.taskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        MixpanelDebug(@"%@ flush %lu cut short", self, (unsigned long)self.taskId);
-        [[UIApplication sharedApplication] endBackgroundTask:self.taskId];
+    __block UIBackgroundTaskIdentifier backgroundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        MixpanelDebug(@"%@ flush %lu cut short", self, (unsigned long) backgroundTask);
+        [[UIApplication sharedApplication] endBackgroundTask:backgroundTask];
         self.taskId = UIBackgroundTaskInvalid;
     }];
+    self.taskId = backgroundTask;
     MixpanelDebug(@"%@ starting background cleanup task %lu", self, (unsigned long)self.taskId);
 
     if (self.flushOnBackground) {
@@ -1230,7 +1254,7 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
         if (!useCache || !self.decideResponseCached) {
             MixpanelDebug(@"%@ decide cache not found, starting network request", self);
             NSString *distinctId = self.people.distinctId ? self.people.distinctId : self.distinctId;
-            NSData *peoplePropertiesJSON = [NSJSONSerialization dataWithJSONObject:self.people.automaticPeopleProperties options:0 error:nil];
+            NSData *peoplePropertiesJSON = [NSJSONSerialization dataWithJSONObject:self.people.automaticPeopleProperties options:(NSJSONWritingOptions)0 error:nil];
             NSString *params = [NSString stringWithFormat:@"version=1&lib=iphone&token=%@&properties=%@%@",
                                 self.apiToken,
                                 MPURLEncode([[NSString alloc] initWithData:peoplePropertiesJSON encoding:NSUTF8StringEncoding]),
@@ -1246,7 +1270,7 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
                 MixpanelError(@"%@ decide check http error: %@", self, error);
                 return;
             }
-            NSDictionary *object = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+            NSDictionary *object = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingOptions)0 error:&error];
             if (error) {
                 MixpanelError(@"%@ decide check json error: %@, data: %@", self, error, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                 return;
@@ -1380,7 +1404,7 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
         if (completion) {
             completion(surveys);
         }
-    }];
+    } useCache:NO];
 }
 
 - (void)checkForNotificationsWithCompletion:(void (^)(NSArray *notifications))completion
@@ -1389,7 +1413,7 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
         if (completion) {
             completion(notifications);
         }
-    }];
+    } useCache:NO];
 }
 
 - (void)checkForVariantsWithCompletion:(void (^)(NSSet *variants))completion
@@ -1429,7 +1453,7 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
                 self.currentlyShowingSurvey = survey;
                 if (showAlert) {
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-                    if ([[[UIDevice currentDevice] systemVersion] compare:@"8.0" options:NSNumericSearch] != NSOrderedAscending) {
+                    if (NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_8_0) {
                         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"We'd love your feedback!" message:@"Mind taking a quick survey?" preferredStyle:UIAlertControllerStyleAlert];
                         [alert addAction:[UIAlertAction actionWithTitle:@"No, Thanks" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
                             if (self.currentlyShowingSurvey) {
@@ -1443,7 +1467,9 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
                             }
                         }]];
                         [[Mixpanel topPresentedViewController] presentViewController:alert animated:YES completion:nil];
-                    } else {
+                    } else
+#endif
+                    {
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"We'd love your feedback!"
                                                                         message:@"Mind taking a quick survey?"
                                                                        delegate:self
@@ -1451,14 +1477,6 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
                                                               otherButtonTitles:@"Sure", nil];
                         [alert show];
                     }
-#else
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"We'd love your feedback!"
-                                                                    message:@"Mind taking a quick survey?"
-                                                                   delegate:self
-                                                          cancelButtonTitle:@"No, Thanks"
-                                                          otherButtonTitles:@"Sure", nil];
-                    [alert show];
-#endif
                 } else {
                     [self presentSurveyWithRootViewController:survey];
                 }
@@ -1600,7 +1618,7 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
             MixpanelError(@"%@ already showing survey: %@", self, self.currentlyShowingSurvey);
         } else {
             self.currentlyShowingNotification = notification;
-            BOOL shown = false;
+            BOOL shown;
             if ([notification.type isEqualToString:MPNotificationTypeMini]) {
                 shown = [self showMiniNotificationWithObject:notification];
             } else {
@@ -1631,7 +1649,7 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
         controller.delegate = self;
         self.notificationViewController = controller;
 
-        [presentingViewController presentViewController:controller animated:NO completion:nil];
+        [presentingViewController presentViewController:controller animated:YES completion:nil];
         return YES;
     } else {
         return NO;
@@ -1846,8 +1864,41 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
 
 @end
 
-#pragma mark - People
+#if defined(MIXPANEL_WATCH_EXTENSION)
+#pragma mark - WatchExtensions
+@implementation Mixpanel (WatchExtensions)
 
+/** Called on the delegate of the receiver. Will be called on startup if the incoming message caused the receiver to launch. */
+- (void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *, id> *)message {
+    NSString *messageType = [Mixpanel messageTypeForWatchSessionMessage:message];
+    if (messageType) {
+        if ([messageType isEqualToString:@"track"]) {
+            [[Mixpanel sharedInstance] track:message[@"event"] properties:message[@"properties"]];
+        }
+    }
+}
+
+/** Called on the delegate of the receiver when the sender sends a message that expects a reply. Will be called on startup if the incoming message caused the receiver to launch. */
+- (void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *, id> *)message replyHandler:(void(^)(NSDictionary<NSString *, id> *replyMessage))replyHandler {
+    NSString *messageType = [Mixpanel messageTypeForWatchSessionMessage:message];
+    if (messageType) {
+        if ([messageType isEqualToString:@"track"]) {
+            [[Mixpanel sharedInstance] track:message[@"event"] properties:message[@"properties"]];
+        }
+        replyHandler(@{ @"success": @YES });
+    } else {
+        replyHandler(@{ @"success": @NO, @"message": @"Message is not a mixpanel message" });
+    }
+}
+
++ (NSString *)messageTypeForWatchSessionMessage:(NSDictionary<NSString *, id> *)message {
+    return [message objectForKey:@"$mp_message_type"];
+}
+
+@end
+#endif
+
+#pragma mark - People
 @implementation MixpanelPeople
 
 - (instancetype)initWithMixpanel:(Mixpanel *)mixpanel
@@ -1882,10 +1933,12 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
 
 - (void)addPeopleRecordToQueueWithAction:(NSString *)action andProperties:(NSDictionary *)properties
 {
-    properties = [properties copy];
     NSNumber *epochMilliseconds = @(round([[NSDate date] timeIntervalSince1970] * 1000));
     __strong Mixpanel *strongMixpanel = _mixpanel;
     if (strongMixpanel) {
+        properties = [properties copy];
+        BOOL ignore_time = self.ignoreTime;
+
         dispatch_async(strongMixpanel.serialQueue, ^{
             NSMutableDictionary *r = [NSMutableDictionary dictionary];
             NSMutableDictionary *p = [NSMutableDictionary dictionary];
@@ -1894,11 +1947,22 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
                 // milliseconds unix timestamp
                 r[@"$time"] = epochMilliseconds;
             }
-            if ([action isEqualToString:@"$set"] || [action isEqualToString:@"$set_once"]) {
-                [p addEntriesFromDictionary:self.automaticPeopleProperties];
+            if (ignore_time) {
+                r[@"$ignore_time"] = @YES;
             }
-            [p addEntriesFromDictionary:properties];
-            r[action] = [NSDictionary dictionaryWithDictionary:p];
+
+            if ([action isEqualToString:@"$unset"]) {
+                // $unset takes an array of property names which is supplied to this method
+                // in the properties parameter under the key "$properties"
+                r[action] = properties[@"$properties"];
+            } else {
+                if ([action isEqualToString:@"$set"] || [action isEqualToString:@"$set_once"]) {
+                    [p addEntriesFromDictionary:self.automaticPeopleProperties];
+                }
+                [p addEntriesFromDictionary:properties];
+                r[action] = [NSDictionary dictionaryWithDictionary:p];
+            }
+            
             if (self.distinctId) {
                 r[@"$distinct_id"] = self.distinctId;
                 MixpanelDebug(@"%@ queueing people record: %@", self.mixpanel, r);
@@ -1940,6 +2004,12 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
     [self addPeopleRecordToQueueWithAction:@"$union" andProperties:properties];
 }
 
+- (void)removePushDeviceToken
+{
+    NSDictionary *properties = @{ @"$properties": @[@"$ios_devices"] };
+    [self addPeopleRecordToQueueWithAction:@"$unset" andProperties:properties];
+}
+
 - (void)set:(NSDictionary *)properties
 {
     NSAssert(properties != nil, @"properties must not be nil");
@@ -1962,6 +2032,18 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
     NSAssert(properties != nil, @"properties must not be nil");
     [Mixpanel assertPropertyTypes:properties];
     [self addPeopleRecordToQueueWithAction:@"$set_once" andProperties:properties];
+}
+
+- (void)unset:(NSArray *)properties
+{
+    NSAssert(properties != nil, @"properties must not be nil");
+    for (id __unused v in properties) {
+        NSAssert([v isKindOfClass:[NSString class]],
+                 @"%@ unset property names should be NSString. found: %@", self, v);
+    }
+    // $unset takes an array but addPeopleRecordToQueueWithAction:andProperties takes an NSDictionary
+    // so the array is stored under the key "$properties" which the above method expects when action is $unset
+    [self addPeopleRecordToQueueWithAction:@"$unset" andProperties:@{@"$properties":properties}];
 }
 
 - (void)increment:(NSDictionary *)properties

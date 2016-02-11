@@ -2,6 +2,7 @@
 
 #import "_MPTweakBindObserver.h"
 #import "Mixpanel.h"
+#import "MixpanelExceptionHandler.h"
 #import "MPAbstractABTestDesignerMessage.h"
 #import "MPABTestDesignerChangeRequestMessage.h"
 #import "MPABTestDesignerChangeResponseMessage.h"
@@ -22,6 +23,7 @@
 #import "MPDesignerSessionCollection.h"
 #import "MPEnumDescription.h"
 #import "MPEventBinding.h"
+#import "MPFoundation.h"
 #import "MPLogger.h"
 #import "MPNotification.h"
 #import "MPNotificationViewController.h"

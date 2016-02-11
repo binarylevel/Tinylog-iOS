@@ -5,6 +5,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "MPLogger.h"
 #import "MPSurveyQuestionViewController.h"
+#import "MPFoundation.h"
 
 @interface MPSurveyQuestionViewController ()
 
@@ -85,7 +86,7 @@ typedef NS_ENUM(NSInteger, MPSurveyTableViewCellPosition) {
 
         // Use boundingRectWithSize for iOS 7 and above, sizeWithFont otherwise.
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-        if ([[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending) {
+        if (NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_7_0) {
             sizeToFit = [_prompt.text boundingRectWithSize:constraintSize
                                                        options:NSStringDrawingUsesLineFragmentOrigin
                                                     attributes:@{NSFontAttributeName: font}
@@ -135,7 +136,7 @@ typedef NS_ENUM(NSInteger, MPSurveyTableViewCellPosition) {
     if (_position == MPSurveyTableViewCellPositionTop) {
         corners = UIRectCornerTopLeft | UIRectCornerTopRight;
     } else if (_position == MPSurveyTableViewCellPositionMiddle) {
-        corners = 0;
+        corners = (UIRectCorner)0;
     } else if (_position == MPSurveyTableViewCellPositionBottom) {
         corners = UIRectCornerBottomLeft | UIRectCornerBottomRight;
     } else {
@@ -252,7 +253,7 @@ typedef NS_ENUM(NSInteger, MPSurveyTableViewCellPosition) {
         label = value;
     } else if ([value isKindOfClass:[NSNumber class]]) {
         int i = [value intValue];
-        if (CFNumberGetType((CFNumberRef)value) == kCFNumberCharType && (i == 0 || i == 1)) {
+        if (CFNumberGetType((__bridge CFNumberRef)value) == kCFNumberCharType && (i == 0 || i == 1)) {
             label = i ? @"Yes" : @"No";
         } else {
             NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
