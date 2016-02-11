@@ -122,7 +122,7 @@ NSString * const IDMICloudContainerIdentifier = @"iCloud.com.spirosgerokostas.Ti
         [ensemble leechPersistentStoreWithCompletion:^(NSError *error) {
             [self decrementMergeCount];
             if (error && !ensemble.isLeeched) {
-                NSLog(@"Could not leech to ensemble: %@", error);
+                //NSLog(@"Could not leech to ensemble: %@", error);
                 [self disconnectFromSyncServiceWithCompletion:^{
                     if (completion) completion(error);
                 }];
@@ -169,7 +169,7 @@ NSString * const IDMICloudContainerIdentifier = @"iCloud.com.spirosgerokostas.Ti
 }
 
 - (void)persistentStoreEnsemble:(CDEPersistentStoreEnsemble *)ensemble didDeleechWithError:(NSError *)error {
-    NSLog(@"Store did deleech with error: %@", error);
+    //NSLog(@"Store did deleech with error: %@", error);
     [self reset];
 }
 

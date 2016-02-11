@@ -68,10 +68,10 @@ class TLICDController: NSObject {
             do {
                 try context?.save()
             } catch {
-                print("falied to save context")
+                //print("falied to save context")
             }
         } else {
-            print("skipped context save there are no changes")
+            //print("skipped context save there are no changes")
         }
     }
     
@@ -81,20 +81,18 @@ class TLICDController: NSObject {
         
         parentContext?.performBlock({ () -> Void in
             if (self.parentContext?.hasChanges != nil) {
-                
                 do {
                     try self.parentContext?.save()
                 } catch {
-                    print("falied to save parentContext")
+                    //print("falied to save parentContext")
                 }
             } else {
-                print("skipped parentContext save there are no changes")
+                //print("skipped parentContext save there are no changes")
             }
         })
     }
     
     lazy var storeDirectoryURL:NSURL? = {
-    
         do {
             let directoryURL = try NSFileManager.defaultManager().URLForDirectory(NSSearchPathDirectory.ApplicationSupportDirectory, inDomain: NSSearchPathDomainMask.UserDomainMask, appropriateForURL: nil, create: true)
             let pathComponent = NSBundle.mainBundle().bundleIdentifier
