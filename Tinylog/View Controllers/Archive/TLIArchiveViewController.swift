@@ -327,44 +327,29 @@ class TLIArchiveViewController: TLICoreDataTableViewController, UITextFieldDeleg
     }
     
     func updateList(list:TLIList, sourceIndexPath:NSIndexPath, destinationIndexPath:NSIndexPath) {
+        
         var fetchedLists:[AnyObject] = self.frc?.fetchedObjects as [AnyObject]!
         
-        //println(fetchedLists)
         fetchedLists = fetchedLists.filter() { $0 as! TLIList != list }
-        //println(fetchedLists)
         
         let index = destinationIndexPath.row
         fetchedLists.insert(list, atIndex: index)
         
-        //println(fetchedLists)
-        
-        for (_, _) in fetchedLists.enumerate() {
-            //let t = list as! TLIList
-            //println("before \(t.title): \(t.position)")
-        }
-        
-        
-        //        var i:NSInteger = 1
-        //        for (index, list) in enumerate(fetchedLists) {
-        //            let t = list as TLIList
-        //            t.position = NSNumber(integer: i++)
-        //            println("Item \(index): \(t.position)")
-        //        }
+        /*for (_, _) in fetchedLists.enumerate() {
+            let t = list as! TLIList
+            println("before \(t.title): \(t.position)")
+        }*/
         
         var i:NSInteger = fetchedLists.count
+        
         for (_, list) in fetchedLists.enumerate() {
             let t = list as! TLIList
             t.position = NSNumber(integer: i--)
-            //println("Item \(index): \(t.position)")
         }
         
         for (_, list) in fetchedLists.enumerate() {
             _ = list as! TLIList
-            //println("after \(t.title): \(t.position)")
         }
-        
-        //reverse
-        
     }
     
     func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
@@ -374,16 +359,10 @@ class TLIArchiveViewController: TLICoreDataTableViewController, UITextFieldDeleg
         
         //Disable fetched results controller
         self.ignoreNextUpdates = true
+        
         let list = self.listAtIndexPath(sourceIndexPath)!
-        //println("list \(list.title)")
+        
         updateList(list, sourceIndexPath: sourceIndexPath, destinationIndexPath: destinationIndexPath)
-        
-        
-        //var listSource:TLIList = self.frc?.objectAtIndexPath(sourceIndexPath) as! TLIList
-        //println("source \(listSource.position)")
-        
-        //var listDestination:TLIList = self.frc?.objectAtIndexPath(destinationIndexPath) as! TLIList
-        //println("destination \(listDestination.position)")
         
         let cdc:TLICDController = TLICDController.sharedInstance
         cdc.backgroundSaveContext()
@@ -391,7 +370,6 @@ class TLIArchiveViewController: TLICoreDataTableViewController, UITextFieldDeleg
     
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        //52.0
         return floor(getEstimatedCellHeightFromCache(indexPath, defaultHeight: 61)!)
     }
     
