@@ -158,22 +158,6 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController, TTTAttribut
             self.orientation = "portrait"
         }
         
-//        var posY:CGFloat = 0.0
-//        
-//        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-//            if self.orientation == "portrait" {
-//                posY = 64.0 + TLIAddTaskView.height()
-//            } else {
-//                posY = 64.0 + TLIAddTaskView.height()
-//            }
-//        } else {
-//            if self.orientation == "portrait" {
-//                posY = 64.0 + TLIAddTaskView.height()
-//            } else {
-//                posY = 32.0 + TLIAddTaskView.height()
-//            }
-//        }
-        
         self.noTasksLabel!.frame = CGRectMake(self.view.frame.size.width / 2.0 - self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0 - 44.0 / 2.0, self.view.frame.size.width, 44.0)
     }
     
@@ -209,6 +193,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController, TTTAttribut
     }
     
     // MARK: Close
+    
     func close(button:UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -227,25 +212,10 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController, TTTAttribut
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         tasksFooterView?.frame = CGRectMake(0.0, self.view.frame.size.height - 51.0, self.view.frame.size.width, 51.0)
         
-//        var posY:CGFloat = 0.0
-//        
-//        if UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-//            if self.orientation == "portrait" {
-//                posY = 64.0 + TLIAddTaskView.height()
-//            } else {
-//                posY = 64.0 + TLIAddTaskView.height()
-//            }
-//        } else {
-//            if self.orientation == "portrait" {
-//                posY = 64.0 + TLIAddTaskView.height()
-//            } else {
-//                posY = 32.0 + TLIAddTaskView.height()
-//            }
-//        }
-        
-        self.noTasksLabel!.frame = CGRectMake(self.view.frame.size.width / 2.0 - self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0 - 44.0 / 2.0, self.view.frame.size.width, 44.0)
+        noTasksLabel!.frame = CGRectMake(self.view.frame.size.width / 2.0 - self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0 - 44.0 / 2.0, self.view.frame.size.width, 44.0)
     }
     
     override func setEditing(editing: Bool, animated: Bool) {
@@ -266,6 +236,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController, TTTAttribut
         let deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
             let cdc:TLICDController = TLICDController.sharedInstance
             let task:TLITask = self.frc?.objectAtIndexPath(indexpath) as! TLITask
+            
             //Delete the core date entity
             cdc.context?.deleteObject(task)
             cdc.backgroundSaveContext()
@@ -326,36 +297,20 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController, TTTAttribut
     }
     
     func updateTask(task:TLITask, sourceIndexPath:NSIndexPath, destinationIndexPath:NSIndexPath) {
+        
         var fetchedTasks:[AnyObject] = self.frc?.fetchedObjects as [AnyObject]!
+        
         fetchedTasks = fetchedTasks.filter() { $0 as! TLITask != task }
+        
         let index = destinationIndexPath.row
+        
         fetchedTasks.insert(task, atIndex: index)
-        
-        //for (index, task) in enumerate(fetchedTasks) {
-        // let t = task as! TLITask
-        //println("before \(t.displayLongText): \(t.position)")
-        //}
-        
-        
-        //        var i:NSInteger = 1
-        //        for (index, list) in enumerate(fetchedLists) {
-        //            let t = list as TLIList
-        //            t.position = NSNumber(integer: i++)
-        //            println("Item \(index): \(t.position)")
-        //        }
         
         var i:NSInteger = fetchedTasks.count
         for (_, task) in fetchedTasks.enumerate() {
             let t = task as! TLITask
             t.position = NSNumber(integer: i--)
         }
-        
-        //for (index, task) in enumerate(fetchedTasks) {
-        //let t = task as! TLITask
-        //println("after \(t.displayLongText): \(t.position)")
-        //}
-        
-        //reverse
     }
     
     func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
@@ -367,10 +322,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController, TTTAttribut
         self.ignoreNextUpdates = true
         let task = self.taskAtIndexPath(sourceIndexPath)!
         updateTask(task, sourceIndexPath: sourceIndexPath, destinationIndexPath: destinationIndexPath)
-        
-        //var taskSource:TLITask = self.frc?.objectAtIndexPath(sourceIndexPath) as! TLITask
-        //var taskDestination:TLITask = self.frc?.objectAtIndexPath(destinationIndexPath) as! TLITask
-        
+                
         let cdc:TLICDController = TLICDController.sharedInstance
         cdc.backgroundSaveContext()
     }

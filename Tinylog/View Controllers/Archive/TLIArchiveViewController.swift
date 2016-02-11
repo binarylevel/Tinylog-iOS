@@ -496,16 +496,13 @@ class TLIArchiveViewController: TLICoreDataTableViewController, UITextFieldDeleg
         TLIAppDelegate.sharedAppDelegate().window?.rootViewController?.view.addSubview(topBarView!)
     }
     
-    func didPresentSearchController(searchController: UISearchController) {
-        //NSLog(__FUNCTION__)
-    }
+    func didPresentSearchController(searchController: UISearchController) {}
     
     func willDismissSearchController(searchController: UISearchController) {
         topBarView?.removeFromSuperview()
     }
     
     func didDismissSearchController(searchController: UISearchController) {
-        //NSLog(__FUNCTION__)
         let resultsController = searchController.searchResultsController as! TLIResultsTableViewController
         resultsController.frc?.delegate = nil;
         resultsController.frc = nil
