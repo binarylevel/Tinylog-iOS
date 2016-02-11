@@ -22,7 +22,6 @@ class TLIAnalyticsTracker: NSObject {
     }
     
     class func trackMixpanelEvent(event:String!, properties:[String: String]! ) {
-        //var tmpProperties: Dictionary <String, String> = [String: String]()
         let mixpanel:Mixpanel = Mixpanel.sharedInstance()
         mixpanel.track(event, properties: properties)
     }

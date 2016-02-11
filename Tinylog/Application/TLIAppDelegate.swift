@@ -50,7 +50,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
                 return false
             }
         } else {
-            print("quick actions not supported")
+            //print("quick actions not supported")
         }
         
         //Register defaults
@@ -207,8 +207,8 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
                     createLocalNotification(notification)
                 }
             }
-        } catch let error as NSError {
-            print("\(error)")
+        } catch _ as NSError {
+            //print("\(error)")
         }
     }
     
@@ -307,7 +307,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
                             
                             task.updatedAt = NSDate()
                             cdc.backgroundSaveContext()
-                        } catch let error as NSError {
+                        } catch _ as NSError {
                             //print("\(error.localizedDescription)")
                         }
                     }
@@ -336,8 +336,8 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
             
             cdc.backgroundSaveContext()
             
-        } catch let error as NSError {
-            //print("clearPassedNotifications with error \(error.localizedDescription)")
+        } catch _ as NSError {
+            //print("\(error.localizedDescription)")
         }
     }
     
@@ -367,16 +367,13 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
     @available(iOS 9.0, *)
     func handleShortcut(shortcutItem:UIApplicationShortcutItem)->Bool {
         let shortcutType = shortcutItem.type
-        print(shortcutType)
         guard let shortcutIdentifier = ShortcutIdentifier(fullIdentifier: shortcutType) else {
             return false
         }
-        
         return selectTabBarItemForIdentifier(shortcutIdentifier)
     }
     
     private func selectTabBarItemForIdentifier(identifier: ShortcutIdentifier) -> Bool {
-    
         switch (identifier) {
             case .CreateNewList:
                 if let navigationController = window?.rootViewController as? UINavigationController {
@@ -384,7 +381,6 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
                         vc.addNewList(nil)
                     }
                 }
-
             return true
         }
     }
