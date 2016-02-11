@@ -60,7 +60,7 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         noListSelected.hidden = true
         return noListSelected
     }()
-    
+
     lazy var addTaskView:TLIAddTaskView? = {
         let header:TLIAddTaskView = TLIAddTaskView(frame: CGRectMake(0.0, 0.0, self.tableView!.bounds.size.width, TLIAddTaskView.height()))
         header.closeButton?.addTarget(self, action: "transparentLayerTapped:", forControlEvents: UIControlEvents.TouchDown)

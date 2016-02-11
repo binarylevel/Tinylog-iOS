@@ -80,7 +80,6 @@ class TLIMenuColorsView: UIView {
             deselectButton(fromButton)
         }
         
-        //let oldSelectedIndex:Int = selectedIndex!
         selectedIndex = newSelectedIndex
         
         var toButton:UIButton

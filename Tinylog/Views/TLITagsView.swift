@@ -90,15 +90,12 @@ class TLITagsView: UIView, UITextFieldDelegate {
         
         scrollView?.contentSize = CGSizeMake(xOffset, 44.0)
         scrollView?.setNeedsDisplay()
-        
-        
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
         if textField.tag == 1000 {
             let txt = textField as! TLITextField
             txt.textEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0)
-            //textField.text = ""
         }
     }
     

@@ -102,12 +102,7 @@ class TLITaskTableViewCell: TLITableViewCell {
     
     override func updateConstraints() {
         if !didSetupConstraints {
-            
-//            UIView.autoSetPriority(1000) {
-//                self.checkBoxButton.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
-//                self.taskLabel.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
-//            }
-            
+                        
             taskLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: 20.0)
             taskLabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: 16.0)
             taskLabel.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 50.0)

@@ -114,9 +114,6 @@ class TLITableViewCell: UITableViewCell {
     func updateFonts() {
         textField?.font = self.textLabel!.font
         self.textLabel!.font = UIFont.tinylogFontOfSize(18.0)
-        //var font:UIFont = UIFont.preferredHelveticaNeueFontForTextStyle(UIFontTextStyleBody)!
-        //textField?.font = self.textLabel?.font
-        //self.textLabel!.font = font
     }
     
     override func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
@@ -127,6 +124,5 @@ class TLITableViewCell: UITableViewCell {
         editingTapGestureRecognizer?.addTarget(target, action: editAction)
         editingLongPressGestureRecognizer?.addTarget(target, action: editAction)
     }
-    
 }
 

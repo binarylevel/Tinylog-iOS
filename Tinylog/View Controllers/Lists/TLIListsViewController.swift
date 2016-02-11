@@ -412,7 +412,7 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         
         let editRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Edit", handler:{action, indexpath in
-            //let cdc:TLICDController = TLICDController.sharedInstance
+
             let list:TLIList = self.frc?.objectAtIndexPath(indexpath) as! TLIList
             
             let addListViewController:TLIAddListViewController = TLIAddListViewController()
