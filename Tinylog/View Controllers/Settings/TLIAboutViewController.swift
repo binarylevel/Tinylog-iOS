@@ -145,7 +145,7 @@ class TLIAboutViewController: TLIGroupedTableViewController, UIGestureRecognizer
             }
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
-                let path: NSURL = NSURL(string: "http://www.spirosgerokostas.com/tinylog/")!
+                let path: NSURL = NSURL(string: "http://binarylevel.github.io/tinylog/")!
                 UIApplication.sharedApplication().openURL(path)
             } else if indexPath.row == 1 {
                 if MFMailComposeViewController.canSendMail() {
