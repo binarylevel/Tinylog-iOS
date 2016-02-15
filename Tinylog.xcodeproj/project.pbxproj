@@ -42,7 +42,6 @@
 		564CE8A71BD0E39C008C055C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 564CE8A61BD0E39C008C055C /* Assets.xcassets */; };
 		564CE8B51BD0E39C008C055C /* TinylogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CE8B41BD0E39C008C055C /* TinylogTests.swift */; };
 		5680FBA01BDE626E002F7F03 /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5680FB9F1BDE626E002F7F03 /* ListTests.swift */; };
-		568476B51BD92D3300B7D1F8 /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568476B41BD92D3300B7D1F8 /* UtilsTests.swift */; };
 		568476B81BD92E0B00B7D1F8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568476B71BD92E0B00B7D1F8 /* Utils.swift */; };
 		568B369E1BD22A240011A745 /* TLIList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B369C1BD22A240011A745 /* TLIList+CoreDataProperties.swift */; };
 		568B369F1BD22A240011A745 /* TLIList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568B369D1BD22A240011A745 /* TLIList.swift */; };
@@ -144,7 +143,6 @@
 		564CE8B41BD0E39C008C055C /* TinylogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinylogTests.swift; sourceTree = "<group>"; };
 		564CE8B61BD0E39C008C055C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5680FB9F1BDE626E002F7F03 /* ListTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
-		568476B41BD92D3300B7D1F8 /* UtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
 		568476B71BD92E0B00B7D1F8 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		568B369B1BD229860011A745 /* Tinylog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tinylog.entitlements; sourceTree = "<group>"; };
 		568B369C1BD22A240011A745 /* TLIList+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TLIList+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -370,7 +368,6 @@
 			children = (
 				564CE8B41BD0E39C008C055C /* TinylogTests.swift */,
 				564CE8B61BD0E39C008C055C /* Info.plist */,
-				568476B41BD92D3300B7D1F8 /* UtilsTests.swift */,
 				5680FB9F1BDE626E002F7F03 /* ListTests.swift */,
 			);
 			path = TinylogTests;
@@ -900,7 +897,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				564CE8B51BD0E39C008C055C /* TinylogTests.swift in Sources */,
-				568476B51BD92D3300B7D1F8 /* UtilsTests.swift in Sources */,
 				5680FBA01BDE626E002F7F03 /* ListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
