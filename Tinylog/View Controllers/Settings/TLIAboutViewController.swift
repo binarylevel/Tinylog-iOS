@@ -76,7 +76,7 @@ class TLIAboutViewController: TLIGroupedTableViewController, UIGestureRecognizer
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
                 cell.textLabel?.text = "Web"
-                cell.detailTextLabel?.text = "www.spirosgerokostas.com/tinylog"
+                cell.detailTextLabel?.text = "http://binarylevel.github.io/tinylog/"
             } else if indexPath.row == 1 {
                 cell.textLabel?.text = "Email"
                 cell.detailTextLabel?.text = "spiros.gerokostas@gmail.com"
