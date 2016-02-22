@@ -15,4 +15,4 @@ struct TLIUserDefaults {
     static var kTLISyncMode: NSString = "TLISyncMode"
 }
 
-let kMixpanelToken:String = "efdfc9520e72f9b5565f772d6f8f231a"
+let kMixpanelToken:String = ""

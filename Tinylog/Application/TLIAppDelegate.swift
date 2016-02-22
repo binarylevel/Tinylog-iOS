@@ -101,7 +101,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
             syncManager.synchronizeWithCompletion(nil)
         }
         
-        Crashlytics.startWithAPIKey("88300c2a59d5352c19153a01c6671ab3339d663e")
+        Crashlytics.startWithAPIKey("")
         Mixpanel.sharedInstanceWithToken(kMixpanelToken)
         SGReachabilityController.sharedController()
         
