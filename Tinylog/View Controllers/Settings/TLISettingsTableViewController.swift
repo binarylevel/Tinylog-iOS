@@ -31,7 +31,7 @@ class TLISettingsTableViewController: UITableViewController, MFMailComposeViewCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "close:")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TLISettingsTableViewController.close(_:)))
         self.view.backgroundColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
         self.tableView?.backgroundColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
         
@@ -40,7 +40,7 @@ class TLISettingsTableViewController: UITableViewController, MFMailComposeViewCo
         self.navigationController?.interactivePopGestureRecognizer!.enabled = true
         self.navigationController?.interactivePopGestureRecognizer!.delegate = self
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFonts", name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLISettingsTableViewController.updateFonts), name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
     }
     
     func updateFonts() {
@@ -71,7 +71,7 @@ class TLISettingsTableViewController: UITableViewController, MFMailComposeViewCo
                 cell.textLabel?.text = "iCloud"
                 cell.imageView?.image = UIImage(named: "706-cloud")
                 let switchMode:UISwitch = UISwitch(frame: CGRectMake(0, 0, self.view.frame.size.width, 20.0))
-                switchMode.addTarget(self, action: "toggleSyncSettings:", forControlEvents: UIControlEvents.ValueChanged)
+                switchMode.addTarget(self, action: #selector(TLISettingsTableViewController.toggleSyncSettings(_:)), forControlEvents: UIControlEvents.ValueChanged)
                 switchMode.onTintColor = UIColor.tinylogMainColor()
                 cell.accessoryView = switchMode
                 cell.accessoryType = UITableViewCellAccessoryType.None

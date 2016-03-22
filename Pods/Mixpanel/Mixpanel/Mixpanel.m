@@ -8,18 +8,18 @@
 #include <sys/socket.h>
 #include <sys/sysctl.h>
 
-#import <CommonCrypto/CommonDigest.h>
-#import <CoreTelephony/CTCarrier.h>
-#import <CoreTelephony/CTTelephonyNetworkInfo.h>
-#import <SystemConfiguration/SystemConfiguration.h>
-#import <UIKit/UIDevice.h>
-
 #import "Mixpanel.h"
 #import "MPLogger.h"
 #import "NSData+MPBase64.h"
 #import "MPFoundation.h"
 
 #if !defined(MIXPANEL_APP_EXTENSION)
+
+#import <CommonCrypto/CommonDigest.h>
+#import <CoreTelephony/CTCarrier.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <SystemConfiguration/SystemConfiguration.h>
+#import <UIKit/UIDevice.h>
 
 #import "MixpanelExceptionHandler.h"
 #import "MPABTestDesignerConnection.h"
@@ -37,7 +37,7 @@
 #endif
 
 
-#define VERSION @"2.9.3"
+#define VERSION @"2.9.4"
 
 #if !defined(MIXPANEL_APP_EXTENSION)
 @interface Mixpanel () <UIAlertViewDelegate, MPSurveyNavigationControllerDelegate, MPNotificationViewControllerDelegate>
@@ -49,6 +49,11 @@
 {
     NSUInteger _flushInterval;
 }
+
+#if !defined(MIXPANEL_APP_EXTENSION)
+@property (nonatomic, assign) SCNetworkReachabilityRef reachability;
+@property (nonatomic, strong) CTTelephonyNetworkInfo *telephonyInfo;
+#endif
 
 // re-declare internally as readwrite
 @property (atomic, strong) MixpanelPeople *people;
@@ -62,8 +67,6 @@
 @property (nonatomic, strong) NSMutableArray *peopleQueue;
 @property (nonatomic, assign) UIBackgroundTaskIdentifier taskId;
 @property (nonatomic) dispatch_queue_t serialQueue;
-@property (nonatomic, assign) SCNetworkReachabilityRef reachability;
-@property (nonatomic, strong) CTTelephonyNetworkInfo *telephonyInfo;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) NSMutableDictionary *timedEvents;
 
@@ -84,6 +87,8 @@
 
 @property (atomic, copy) NSString *decideURL;
 @property (atomic, copy) NSString *switchboardURL;
+@property (nonatomic) NSTimeInterval networkRequestsAllowedAfterTime;
+@property (nonatomic) NSUInteger networkConsecutiveFailures;
 
 @end
 
@@ -145,8 +150,10 @@ static Mixpanel *sharedInstance = nil;
 #if !defined(MIXPANEL_APP_EXTENSION)
         // Install uncaught exception handlers first
         [[MixpanelExceptionHandler sharedHandler] addMixpanelInstance:self];
+        self.telephonyInfo = [[CTTelephonyNetworkInfo alloc] init];
 #endif
         
+        self.networkRequestsAllowedAfterTime = 0;
         self.people = [[MixpanelPeople alloc] initWithMixpanel:self];
         self.apiToken = apiToken;
         _flushInterval = flushInterval;
@@ -167,7 +174,6 @@ static Mixpanel *sharedInstance = nil;
 
         self.distinctId = [self defaultDistinctId];
         self.superProperties = [NSMutableDictionary dictionary];
-        self.telephonyInfo = [[CTTelephonyNetworkInfo alloc] init];
         self.automaticProperties = [self collectAutomaticProperties];
         self.eventsQueue = [NSMutableArray array];
         self.peopleQueue = [NSMutableArray array];
@@ -217,6 +223,8 @@ static Mixpanel *sharedInstance = nil;
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+#if !defined(MIXPANEL_APP_EXTENSION)
     if (_reachability != NULL) {
         if (!SCNetworkReachabilitySetCallback(_reachability, NULL, NULL)) {
             MixpanelError(@"%@ error unsetting reachability callback", self);
@@ -228,6 +236,7 @@ static Mixpanel *sharedInstance = nil;
         _reachability = NULL;
         MixpanelDebug(@"released reachability");
     }
+#endif
 }
 
 #pragma mark - Encoding/decoding utilities
@@ -354,6 +363,7 @@ static __unused NSString *MPURLEncode(NSString *s)
         MixpanelDebug(@"%@ cannot identify blank distinct id: %@", self, distinctId);
         return;
     }
+    
     dispatch_async(self.serialQueue, ^{
         self.distinctId = distinctId;
         self.people.distinctId = distinctId;
@@ -399,7 +409,7 @@ static __unused NSString *MPURLEncode(NSString *s)
     properties = [properties copy];
     [Mixpanel assertPropertyTypes:properties];
 
-    double epochInterval = [[NSDate date] timeIntervalSince1970];
+    NSTimeInterval epochInterval = [[NSDate date] timeIntervalSince1970];
     NSNumber *epochSeconds = @(round(epochInterval));
     dispatch_async(self.serialQueue, ^{
         NSNumber *eventStartTime = self.timedEvents[event];
@@ -424,7 +434,7 @@ static __unused NSString *MPURLEncode(NSString *s)
         NSDictionary *e = @{@"event": event, @"properties": [NSDictionary dictionaryWithDictionary:p]};
         MixpanelDebug(@"%@ queueing event: %@", self, e);
         [self.eventsQueue addObject:e];
-        if ([self.eventsQueue count] > 500) {
+        if ([self.eventsQueue count] > 5000) {
             [self.eventsQueue removeObjectAtIndex:0];
         }
         if ([Mixpanel inBackground]) {
@@ -651,6 +661,11 @@ static __unused NSString *MPURLEncode(NSString *s)
 
 - (void)flushQueue:(NSMutableArray *)queue endpoint:(NSString *)endpoint
 {
+    if ([[NSDate date] timeIntervalSince1970] < self.networkRequestsAllowedAfterTime) {
+        MixpanelDebug(@"Attempted to flush to %@, when we still have a timeout. Ignoring flush.", endpoint);
+        return;
+    }
+    
     while ([queue count] > 0) {
         NSUInteger batchSize = ([queue count] > 50) ? 50 : [queue count];
         NSArray *batch = [queue subarrayWithRange:NSMakeRange(0, batchSize)];
@@ -662,13 +677,14 @@ static __unused NSString *MPURLEncode(NSString *s)
         NSError *error = nil;
 
         [self updateNetworkActivityIndicator:YES];
-
-        NSURLResponse *urlResponse = nil;
+        
+        NSHTTPURLResponse *urlResponse = nil;
         NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
 
         [self updateNetworkActivityIndicator:NO];
-
-        if (error) {
+        
+        BOOL success = [self handleNetworkResponse:urlResponse withError:error];
+        if (error || !success) {
             MixpanelError(@"%@ network failure: %@", self, error);
             break;
         }
@@ -691,6 +707,43 @@ static __unused NSString *MPURLEncode(NSString *s)
     [request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
     MixpanelDebug(@"%@ http request: %@?%@", self, URL, body);
     return request;
+}
+
+- (BOOL)handleNetworkResponse:(NSHTTPURLResponse *)response withError:(NSError *)error
+{
+    BOOL success = NO;
+    NSTimeInterval retryTime = [response.allHeaderFields[@"Retry-After"] doubleValue];
+    
+    MixpanelDebug(@"HTTP Response: %@", response.allHeaderFields);
+    MixpanelDebug(@"HTTP Error: %@", error.localizedDescription);
+    
+    BOOL was5XX = (500 <= response.statusCode && response.statusCode <= 599) || (error != nil);
+    if (was5XX) {
+        self.networkConsecutiveFailures++;
+    } else {
+        success = YES;
+        self.networkConsecutiveFailures = 0;
+    }
+    
+    MixpanelDebug(@"Consecutive network failures: %lu", self.networkConsecutiveFailures);
+    
+    if (self.networkConsecutiveFailures > 1) {
+        // Exponential backoff
+        retryTime = MAX(retryTime, [self retryBackOffTimeWithConsecutiveFailures:self.networkConsecutiveFailures]);
+    }
+    
+    NSDate *retryDate = [NSDate dateWithTimeIntervalSinceNow:retryTime];
+    self.networkRequestsAllowedAfterTime = [retryDate timeIntervalSince1970];
+    
+    MixpanelDebug(@"Retry backoff time: %.2f - %@", retryTime, retryDate);
+    
+    return success;
+}
+
+- (NSTimeInterval)retryBackOffTimeWithConsecutiveFailures:(NSUInteger)failureCount
+{
+    NSTimeInterval time = pow(2.0, failureCount - 1) * 60 + arc4random_uniform(30);
+    return MIN(MAX(60, time), 600);
 }
 
 #pragma mark - Persistence
@@ -940,6 +993,7 @@ static __unused NSString *MPURLEncode(NSString *s)
 
 - (NSString *)currentRadio
 {
+#if !defined(MIXPANEL_APP_EXTENSION)
     NSString *radio = _telephonyInfo.currentRadioAccessTechnology;
     if (!radio) {
         radio = @"None";
@@ -947,6 +1001,9 @@ static __unused NSString *MPURLEncode(NSString *s)
         radio = [radio substringFromIndex:23];
     }
     return radio;
+#else 
+    return @"";
+#endif
 }
 #endif
 
@@ -960,14 +1017,12 @@ static __unused NSString *MPURLEncode(NSString *s)
     return VERSION;
 }
 
-
 - (NSDictionary *)collectAutomaticProperties
 {
     NSMutableDictionary *p = [NSMutableDictionary dictionary];
     UIDevice *device = [UIDevice currentDevice];
     NSString *deviceModel = [self deviceModel];
     CGSize size = [UIScreen mainScreen].bounds.size;
-    CTCarrier *carrier = [self.telephonyInfo subscriberCellularProvider];
 
     // Use setValue semantics to avoid adding keys where value can be nil.
     [p setValue:[[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"] forKey:@"$app_version"];
@@ -975,7 +1030,12 @@ static __unused NSString *MPURLEncode(NSString *s)
     [p setValue:[[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"] forKey:@"$app_build_number"];
     [p setValue:[[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"] forKey:@"$app_version_string"];
     [p setValue:[self IFA] forKey:@"$ios_ifa"];
+    
+#if !defined(MIXPANEL_APP_EXTENSION)
+    CTCarrier *carrier = [self.telephonyInfo subscriberCellularProvider];
     [p setValue:carrier.carrierName forKey:@"$carrier"];
+#endif
+    
     [p setValue:[self watchModel] forKey:@"$watch_model"];
 
     [p addEntriesFromDictionary:@{
@@ -1426,6 +1486,9 @@ static void MixpanelReachabilityCallback(SCNetworkReachabilityRef target, SCNetw
 }
 
 #pragma mark - Surveys
+- (BOOL)isSurveyAvailable {
+    return (self.surveys.count > 0);
+}
 
 - (void)presentSurveyWithRootViewController:(MPSurvey *)survey
 {

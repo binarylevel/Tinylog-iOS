@@ -106,11 +106,11 @@ class TLISettingsFontPickerViewController: TLIGroupedTableViewController {
         
         if #available(iOS 9, *) {
             let arr = NSArray(objects: FontKeys.kTLIFontSFDefaultsKey, FontKeys.kTLIFontHelveticaNeueDefaultsKey, FontKeys.kTLIFontAvenirDefaultsKey, FontKeys.kTLIFontHoeflerDefaultsKey, FontKeys.kTLIFontCourierDefaultsKey, FontKeys.kTLIFontGeorgiaDefaultsKey, FontKeys.kTLIFontMenloDefaultsKey, FontKeys.kTLIFontTimesNewRomanDefaultsKey, FontKeys.kTLIFontPalatinoDefaultsKey, FontKeys.kTLIFontIowanDefaultsKey)
-            let sortedArray = arr.sortedArrayUsingSelector("localizedCaseInsensitiveCompare:")
+            let sortedArray = arr.sortedArrayUsingSelector(#selector(NSString.localizedCaseInsensitiveCompare(_:)))
             return sortedArray
         } else {
             let arr = NSArray(objects: FontKeys.kTLIFontHelveticaNeueDefaultsKey, FontKeys.kTLIFontAvenirDefaultsKey, FontKeys.kTLIFontHoeflerDefaultsKey, FontKeys.kTLIFontCourierDefaultsKey, FontKeys.kTLIFontGeorgiaDefaultsKey, FontKeys.kTLIFontMenloDefaultsKey, FontKeys.kTLIFontTimesNewRomanDefaultsKey, FontKeys.kTLIFontPalatinoDefaultsKey, FontKeys.kTLIFontIowanDefaultsKey)
-            let sortedArray = arr.sortedArrayUsingSelector("localizedCaseInsensitiveCompare:")
+            let sortedArray = arr.sortedArrayUsingSelector(#selector(NSString.localizedCaseInsensitiveCompare(_:)))
             return sortedArray
         }
     }

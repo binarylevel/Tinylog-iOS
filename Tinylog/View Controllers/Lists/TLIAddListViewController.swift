@@ -33,8 +33,8 @@ class TLIAddListViewController: UITableViewController, UITextFieldDelegate {
         self.view.backgroundColor = UIColor.tinylogBackgroundColor()
         self.tableView.separatorColor = UIColor.tinylogTableViewLineColor()
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancel:")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "save:")
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TLIAddListViewController.cancel(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TLIAddListViewController.save(_:)))
         
         menuColorsView = TLIMenuColorsView(frame: CGRectMake(12.0, 200.0, self.view.frame.width, 51.0))
         self.tableView.tableFooterView = menuColorsView

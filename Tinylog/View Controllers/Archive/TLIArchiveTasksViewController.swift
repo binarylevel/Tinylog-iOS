@@ -93,7 +93,7 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController, TTTAttribut
         
         self.title = "Archive"
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "close:")
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TLIArchiveTasksViewController.close(_:)))
         
         self.view.backgroundColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
         self.tableView?.backgroundColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
@@ -109,17 +109,17 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController, TTTAttribut
         
         setEditing(false, animated: false)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onChangeSize:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIArchiveTasksViewController.onChangeSize(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "deviceOrientationChanged", name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIArchiveTasksViewController.deviceOrientationChanged), name: UIDeviceOrientationDidChangeNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidEndNotification:", name: IDMSyncActivityDidEndNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIArchiveTasksViewController.syncActivityDidEndNotification(_:)), name: IDMSyncActivityDidEndNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidBeginNotification:", name: IDMSyncActivityDidBeginNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIArchiveTasksViewController.syncActivityDidBeginNotification(_:)), name: IDMSyncActivityDidBeginNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "appBecomeActive", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIArchiveTasksViewController.appBecomeActive), name: UIApplicationDidBecomeActiveNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFonts", name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIArchiveTasksViewController.updateFonts), name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
     }
     
     func updateFonts() {
@@ -221,9 +221,9 @@ class TLIArchiveTasksViewController: TLICoreDataTableViewController, TTTAttribut
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         if editing {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "toggleEditMode:")
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TLIArchiveTasksViewController.toggleEditMode(_:)))
         } else {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: "toggleEditMode:")
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TLIArchiveTasksViewController.toggleEditMode(_:)))
         }
     }
     

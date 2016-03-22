@@ -26,13 +26,13 @@ class TLIKeyboardBar: UIView, UIInputViewAudioFeedback {
         buttonHashTag.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 20.0)
         buttonHashTag.setTitleColor(UIColor.tinylogMainColor(), forState: UIControlState.Normal)
         buttonHashTag.setTitle("#", forState: UIControlState.Normal)
-        buttonHashTag.addTarget(self, action: "buttonHashTagPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        buttonHashTag.addTarget(self, action: #selector(TLIKeyboardBar.buttonHashTagPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(buttonHashTag)
         
         buttonMention.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 20.0)
         buttonMention.setTitleColor(UIColor.tinylogMainColor(), forState: UIControlState.Normal)
         buttonMention.setTitle("@", forState: UIControlState.Normal)
-        buttonMention.addTarget(self, action: "buttonMentionPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        buttonMention.addTarget(self, action: #selector(TLIKeyboardBar.buttonMentionPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(buttonMention)
     }
     

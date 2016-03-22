@@ -20,7 +20,7 @@ class TLIReminderViewController: UIViewController {
         datePicker.backgroundColor = UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
         datePicker.calendar = NSCalendar.currentCalendar()
         datePicker.minuteInterval = 15
-        datePicker.addTarget(self, action: "changeDate:", forControlEvents: UIControlEvents.ValueChanged)
+        datePicker.addTarget(self, action: #selector(TLIReminderViewController.changeDate(_:)), forControlEvents: UIControlEvents.ValueChanged)
         return datePicker
     }()
     
@@ -28,14 +28,14 @@ class TLIReminderViewController: UIViewController {
         let removeReminderButton = TLIRoundedButton.newAutoLayoutView()
         removeReminderButton.setTitle("Remove", forState: UIControlState.Normal)
         removeReminderButton.backgroundColor = UIColor.tinylogTextColor()
-        removeReminderButton.addTarget(self, action: "removeReminder:", forControlEvents: UIControlEvents.TouchDown)
+        removeReminderButton.addTarget(self, action: #selector(TLIReminderViewController.removeReminder(_:)), forControlEvents: UIControlEvents.TouchDown)
         return removeReminderButton
     }()
     
     lazy var addReminderButton:TLIRoundedButton = {
         let addReminderButton = TLIRoundedButton.newAutoLayoutView()
         addReminderButton.setTitle("Done", forState: UIControlState.Normal)
-        addReminderButton.addTarget(self, action: "addReminder:", forControlEvents: UIControlEvents.TouchDown)
+        addReminderButton.addTarget(self, action: #selector(TLIReminderViewController.addReminder(_:)), forControlEvents: UIControlEvents.TouchDown)
         addReminderButton.backgroundColor = UIColor.tinylogMainColor()
         return addReminderButton
     }()

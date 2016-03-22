@@ -54,15 +54,15 @@ class TLITagsViewController: TLICoreDataTableViewController, TTTAttributedLabelD
         
         setEditing(false, animated: false)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onChangeSize:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLITagsViewController.onChangeSize(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidEndNotification:", name: IDMSyncActivityDidEndNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLITagsViewController.syncActivityDidEndNotification(_:)), name: IDMSyncActivityDidEndNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidBeginNotification:", name: IDMSyncActivityDidBeginNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLITagsViewController.syncActivityDidBeginNotification(_:)), name: IDMSyncActivityDidBeginNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFonts", name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLITagsViewController.updateFonts), name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "appBecomeActive", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLITagsViewController.appBecomeActive), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
     
     func appBecomeActive() {
@@ -130,7 +130,7 @@ class TLITagsViewController: TLICoreDataTableViewController, TTTAttributedLabelD
         if task.reminder != nil {
             let cell:TLIReminderTaskTableViewCell = tableView.dequeueReusableCellWithIdentifier(kReminderCellIdentifier) as! TLIReminderTaskTableViewCell!
             cell.selectionStyle = UITableViewCellSelectionStyle.None
-            cell.checkBoxButton.addTarget(self, action: "toggleComplete:", forControlEvents: UIControlEvents.TouchUpInside)
+            cell.checkBoxButton.addTarget(self, action: #selector(TLITagsViewController.toggleComplete(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             cell.taskLabel.delegate = self
             configureCell(cell, atIndexPath: indexPath)
             
@@ -144,7 +144,7 @@ class TLITagsViewController: TLICoreDataTableViewController, TTTAttributedLabelD
         } else {
             let cell:TLITaskTableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as! TLITaskTableViewCell!
             cell.selectionStyle = UITableViewCellSelectionStyle.None
-            cell.checkBoxButton.addTarget(self, action: "toggleComplete:", forControlEvents: UIControlEvents.TouchUpInside)
+            cell.checkBoxButton.addTarget(self, action: #selector(TLITagsViewController.toggleComplete(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             cell.taskLabel.delegate = self
             configureCell(cell, atIndexPath: indexPath)
             

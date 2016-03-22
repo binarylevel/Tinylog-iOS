@@ -67,7 +67,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
                 cell.textLabel?.textColor = UIColor.tinylogTextColor()
                 
                 let switchMode:UISwitch = UISwitch(frame: CGRectMake(0, 0, self.view.frame.size.width, 20.0))
-                switchMode.addTarget(self, action: "toggleSystemFontSize:", forControlEvents: UIControlEvents.ValueChanged)
+                switchMode.addTarget(self, action: #selector(TLITextSizeViewController.toggleSystemFontSize(_:)), forControlEvents: UIControlEvents.ValueChanged)
                 switchMode.onTintColor = UIColor.tinylogMainColor()
                 cell.accessoryView = switchMode
                 cell.accessoryType = UITableViewCellAccessoryType.None
@@ -100,7 +100,7 @@ class TLITextSizeViewController: TLIGroupedTableViewController, UIGestureRecogni
                 stepSlider.maximumValue = Float(numbers.count - 1)
                 stepSlider.value = Float(defaultValue)
                 stepSlider.continuous = true
-                stepSlider.addTarget(self, action: "sliderValue:", forControlEvents: UIControlEvents.ValueChanged)
+                stepSlider.addTarget(self, action: #selector(TLITextSizeViewController.sliderValue(_:)), forControlEvents: UIControlEvents.ValueChanged)
                 cell.contentView.addSubview(stepSlider)
                 
                 let useSystemFontSize:String = userDefaults.objectForKey("kSystemFontSize") as! String

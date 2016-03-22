@@ -57,9 +57,9 @@ class TLIMenuColorsView: UIView {
             let button:TLICircleButton = TLICircleButton(frame: CGRectMake(0.0, 0.0, radius, radius))
             button.tag = tagOffset + index
             button.backgroundColor = UIColor(rgba: item)
-            button.addTarget(self, action: "buttonPressed:", forControlEvents: UIControlEvents.TouchDown)
+            button.addTarget(self, action: #selector(TLIMenuColorsView.buttonPressed(_:)), forControlEvents: UIControlEvents.TouchDown)
             buttonsContainer?.addSubview(button)
-            index++
+            index += 1
         }
         
         setSelectedIndex(0)
@@ -108,7 +108,7 @@ class TLIMenuColorsView: UIView {
             let button:UIButton = item as! UIButton
             button.frame = rect
             rect.origin.x += rect.size.width + 10.0
-            index++
+            index += 1
         }
     }
 }

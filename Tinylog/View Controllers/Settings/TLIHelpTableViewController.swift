@@ -68,7 +68,7 @@ class TLIHelpTableViewController: UITableViewController, UIGestureRecognizerDele
         self.navigationController?.interactivePopGestureRecognizer!.enabled = true
         self.navigationController?.interactivePopGestureRecognizer!.delegate = self
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFonts", name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIHelpTableViewController.updateFonts), name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
     }
     
     func updateFonts() {

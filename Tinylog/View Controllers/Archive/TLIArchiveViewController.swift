@@ -101,19 +101,19 @@ class TLIArchiveViewController: TLICoreDataTableViewController, UITextFieldDeleg
         
         self.view.addSubview(self.noListsLabel!)
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "close:")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TLIArchiveViewController.close(_:)))
         
         setEditing(false, animated: false)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidEndNotification:", name: IDMSyncActivityDidEndNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIArchiveViewController.syncActivityDidEndNotification(_:)), name: IDMSyncActivityDidEndNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidBeginNotification:", name: IDMSyncActivityDidBeginNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIArchiveViewController.syncActivityDidBeginNotification(_:)), name: IDMSyncActivityDidBeginNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFonts", name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIArchiveViewController.updateFonts), name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "appBecomeActive", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIArchiveViewController.appBecomeActive), name: UIApplicationDidBecomeActiveNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onChangeSize:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIArchiveViewController.onChangeSize(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
         
         definesPresentationContext = true
         

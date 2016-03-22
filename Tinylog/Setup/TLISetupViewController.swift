@@ -40,14 +40,14 @@ class TLISetupViewController: UIViewController {
         let notNowButton = TLIRoundedButton.newAutoLayoutView()
         notNowButton.setTitle("Later", forState: UIControlState.Normal)
         notNowButton.backgroundColor = UIColor.tinylogTextColor()
-        notNowButton.addTarget(self, action: "disableiCloudAndDismiss:", forControlEvents: UIControlEvents.TouchDown)
+        notNowButton.addTarget(self, action: #selector(TLISetupViewController.disableiCloudAndDismiss(_:)), forControlEvents: UIControlEvents.TouchDown)
         return notNowButton
     }()
     
     lazy var useiCloudButton:TLIRoundedButton = {
         let useiCloudButton = TLIRoundedButton.newAutoLayoutView()
         useiCloudButton.setTitle("Use iCloud", forState: UIControlState.Normal)
-        useiCloudButton.addTarget(self, action: "enableiCloudAndDismiss:", forControlEvents: UIControlEvents.TouchDown)
+        useiCloudButton.addTarget(self, action: #selector(TLISetupViewController.enableiCloudAndDismiss(_:)), forControlEvents: UIControlEvents.TouchDown)
         useiCloudButton.backgroundColor = UIColor.tinylogMainColor()
         return useiCloudButton
     }()

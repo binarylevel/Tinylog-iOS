@@ -105,7 +105,7 @@ class TLIAboutViewController: TLIGroupedTableViewController, UIGestureRecognizer
             label.textColor = UIColor.tinylogTextColor()
             label.text = "Logo created by John Anagnostou \n(behance.net/tzoAnagnostou)"
             label.userInteractionEnabled = true
-            let tap = UITapGestureRecognizer(target: self, action: "viewWebsite")
+            let tap = UITapGestureRecognizer(target: self, action: #selector(TLIAboutViewController.viewWebsite))
             label.addGestureRecognizer(tap)
             return view
         }

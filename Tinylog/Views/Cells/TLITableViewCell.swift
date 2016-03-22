@@ -73,7 +73,7 @@ class TLITableViewCell: UITableViewCell {
         editingLongPressGestureRecognizer?.delegate = self
         self.addGestureRecognizer(editingLongPressGestureRecognizer!)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFonts", name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLITableViewCell.updateFonts), name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
     }
     
     required init(coder aDecoder: NSCoder) {

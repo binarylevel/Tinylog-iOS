@@ -23,14 +23,14 @@ class TLIEditTaskViewController: UIViewController {
         self.title = "Edit Task"
         self.view.backgroundColor = UIColor.whiteColor()
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "close:")
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TLIEditTaskViewController.close(_:)))
         
         let reminderButton:UIButton = UIButton(frame: CGRectMake(0.0, 0.0, 22.0, 22.0))
         reminderButton.setBackgroundImage(UIImage(named: "728-clock-toolbar"), forState: UIControlState.Normal)
-        reminderButton.addTarget(self, action: "displayReminder:", forControlEvents: UIControlEvents.TouchUpInside)
+        reminderButton.addTarget(self, action: #selector(TLIEditTaskViewController.displayReminder(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         let reminderBarButtonItem:UIBarButtonItem = UIBarButtonItem(customView: reminderButton)
-        let saveBarButtonItem:UIBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: "save:")
+        let saveBarButtonItem:UIBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TLIEditTaskViewController.save(_:)))
         
         self.navigationItem.rightBarButtonItems = [saveBarButtonItem, reminderBarButtonItem]
         
@@ -47,8 +47,8 @@ class TLIEditTaskViewController: UIViewController {
         keyboardBar.keyInputView = textView
         textView?.inputAccessoryView = keyboardBar
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIEditTaskViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIEditTaskViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     func keyboardWillShow(notification:NSNotification) {

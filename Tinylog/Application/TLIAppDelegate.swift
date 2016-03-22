@@ -126,7 +126,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
         UITextField.appearance().tintColor = UIColor.tinylogMainColor()
         
         //Check for reachability
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityDidChange:", name: kReachabilityChangedNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIAppDelegate.reachabilityDidChange(_:)), name: kReachabilityChangedNotification, object: nil)
         
         let navigationBar:UINavigationBar = UINavigationBar.appearance()
         navigationBar.barTintColor = UIColor.tinylogNavigationBarDayColor()
@@ -174,9 +174,9 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
             TLIAnalyticsTracker.createAlias(Mixpanel.sharedInstance().distinctId)
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidEndNotification:", name: IDMSyncActivityDidEndNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidBeginNotification:", name: IDMSyncActivityDidBeginNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearPassedNotifications", name: "TLIClearPassedNotifications", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIAppDelegate.syncActivityDidEndNotification(_:)), name: IDMSyncActivityDidEndNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIAppDelegate.syncActivityDidBeginNotification(_:)), name: IDMSyncActivityDidBeginNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIAppDelegate.clearPassedNotifications), name: "TLIClearPassedNotifications", object: nil)
         
         return true
     }
@@ -190,7 +190,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
         do {
             let results:NSArray = try cdc.context!.executeFetchRequest(fetchRequest)
             
-            for var j:Int = 0; j < results.count; j++ {
+            for j:Int in 0 ..< results.count {
                 let notification:TLINotification = results.objectAtIndex(j) as! TLINotification
                 
                 if notification.fireDate!.timeIntervalSinceNow < 0.0 {
@@ -367,7 +367,7 @@ class TLIAppDelegate: UIResponder, UIApplicationDelegate {
         userInfo["displayText"] = displayText
         
         localNotification.userInfo = userInfo
-        localNotification.applicationIconBadgeNumber++;
+        localNotification.applicationIconBadgeNumber += 1;
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
         
         TLIAnalyticsTracker.trackMixpanelEvent("", properties: [

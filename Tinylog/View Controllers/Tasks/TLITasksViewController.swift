@@ -36,7 +36,7 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         addTransparentLayer.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleBottomMargin]
         addTransparentLayer.backgroundColor = UIColor(white: 1.0, alpha: 0.9)
         addTransparentLayer.alpha = 0.0
-        let tapGestureRecognizer:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "transparentLayerTapped:")
+        let tapGestureRecognizer:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TLITasksViewController.transparentLayerTapped(_:)))
         addTransparentLayer.addGestureRecognizer(tapGestureRecognizer)
         return addTransparentLayer
     }()
@@ -63,7 +63,7 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
 
     lazy var addTaskView:TLIAddTaskView? = {
         let header:TLIAddTaskView = TLIAddTaskView(frame: CGRectMake(0.0, 0.0, self.tableView!.bounds.size.width, TLIAddTaskView.height()))
-        header.closeButton?.addTarget(self, action: "transparentLayerTapped:", forControlEvents: UIControlEvents.TouchDown)
+        header.closeButton?.addTarget(self, action: #selector(TLITasksViewController.transparentLayerTapped(_:)), forControlEvents: UIControlEvents.TouchDown)
         header.delegate = self
         return header
     }()
@@ -154,8 +154,8 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         self.tableView?.estimatedRowHeight = TLITableViewCell.cellHeight()
         self.tableView?.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height - 50.0)
     
-        tasksFooterView?.exportTasksButton?.addTarget(self, action: "exportTasks:", forControlEvents: UIControlEvents.TouchDown)
-        tasksFooterView?.archiveButton?.addTarget(self, action: "displayArchive:", forControlEvents: UIControlEvents.TouchDown)
+        tasksFooterView?.exportTasksButton?.addTarget(self, action: #selector(TLITasksViewController.exportTasks(_:)), forControlEvents: UIControlEvents.TouchDown)
+        tasksFooterView?.archiveButton?.addTarget(self, action: #selector(TLITasksViewController.displayArchive(_:)), forControlEvents: UIControlEvents.TouchDown)
         
         let IS_IPAD = (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
         
@@ -169,11 +169,11 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         
         setEditing(false, animated: false)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onChangeSize:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidEndNotification:", name: IDMSyncActivityDidEndNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidBeginNotification:", name: IDMSyncActivityDidBeginNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "appBecomeActive", name: UIApplicationDidBecomeActiveNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFonts", name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLITasksViewController.onChangeSize(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLITasksViewController.syncActivityDidEndNotification(_:)), name: IDMSyncActivityDidEndNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLITasksViewController.syncActivityDidBeginNotification(_:)), name: IDMSyncActivityDidBeginNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLITasksViewController.appBecomeActive), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLITasksViewController.updateFonts), name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
     }
     
     func updateFonts() {
@@ -373,9 +373,9 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         if editing {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "toggleEditMode:")
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TLITasksViewController.toggleEditMode(_:)))
         } else {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: "toggleEditMode:")
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TLITasksViewController.toggleEditMode(_:)))
         }
     }
     
@@ -540,7 +540,7 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         if task.reminder != nil {
             let cell:TLIReminderTaskTableViewCell = tableView.dequeueReusableCellWithIdentifier(kReminderCellIdentifier) as! TLIReminderTaskTableViewCell!
             cell.selectionStyle = UITableViewCellSelectionStyle.None
-            cell.checkBoxButton.addTarget(self, action: "toggleComplete:", forControlEvents: UIControlEvents.TouchUpInside)
+            cell.checkBoxButton.addTarget(self, action: #selector(TLITasksViewController.toggleComplete(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             cell.taskLabel.delegate = self
             configureCell(cell, atIndexPath: indexPath)
             
@@ -554,7 +554,7 @@ class TLITasksViewController: TLICoreDataTableViewController, TLIAddTaskViewDele
         } else {
             let cell:TLITaskTableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as! TLITaskTableViewCell!
             cell.selectionStyle = UITableViewCellSelectionStyle.None
-            cell.checkBoxButton.addTarget(self, action: "toggleComplete:", forControlEvents: UIControlEvents.TouchUpInside)
+            cell.checkBoxButton.addTarget(self, action: #selector(TLITasksViewController.toggleComplete(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             cell.taskLabel.delegate = self
             configureCell(cell, atIndexPath: indexPath)
             

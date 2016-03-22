@@ -108,22 +108,22 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
         settingsButton.frame = CGRectMake(0, 0, 22, 22);
         settingsButton.setBackgroundImage(settingsImage, forState: UIControlState.Normal)
         settingsButton.setBackgroundImage(settingsImage, forState: UIControlState.Highlighted)
-        settingsButton.addTarget(self, action: "displaySettings:", forControlEvents: UIControlEvents.TouchDown)
+        settingsButton.addTarget(self, action: #selector(TLIListsViewController.displaySettings(_:)), forControlEvents: UIControlEvents.TouchDown)
         
         let settingsBarButtonItem:UIBarButtonItem = UIBarButtonItem(customView: settingsButton)
         self.navigationItem.hidesBackButton = true
         self.navigationItem.leftBarButtonItem = settingsBarButtonItem
         
-        listsFooterView?.addListButton?.addTarget(self, action: "addNewList:", forControlEvents: UIControlEvents.TouchDown)
-        listsFooterView?.archiveButton?.addTarget(self, action: "displayArchive:", forControlEvents: UIControlEvents.TouchDown)
+        listsFooterView?.addListButton?.addTarget(self, action: #selector(TLIListsViewController.addNewList(_:)), forControlEvents: UIControlEvents.TouchDown)
+        listsFooterView?.archiveButton?.addTarget(self, action: #selector(TLIListsViewController.displayArchive(_:)), forControlEvents: UIControlEvents.TouchDown)
         
         setEditing(false, animated: false)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidEndNotification:", name: IDMSyncActivityDidEndNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncActivityDidBeginNotification:", name: IDMSyncActivityDidBeginNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFonts", name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "appBecomeActive", name: UIApplicationDidBecomeActiveNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onChangeSize:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIListsViewController.syncActivityDidEndNotification(_:)), name: IDMSyncActivityDidEndNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIListsViewController.syncActivityDidBeginNotification(_:)), name: IDMSyncActivityDidBeginNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIListsViewController.updateFonts), name: TLINotifications.kTLIFontDidChangeNotification as String, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIListsViewController.appBecomeActive), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TLIListsViewController.onChangeSize(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
         
         definesPresentationContext = true
     }
@@ -397,9 +397,9 @@ class TLIListsViewController: TLICoreDataTableViewController, UITextFieldDelegat
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         if editing {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "toggleEditMode:")
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TLIListsViewController.toggleEditMode(_:)))
         } else {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: "toggleEditMode:")
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TLIListsViewController.toggleEditMode(_:)))
         }
     }
     

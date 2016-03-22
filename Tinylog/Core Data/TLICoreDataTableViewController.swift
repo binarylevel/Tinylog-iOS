@@ -63,7 +63,7 @@ class TLICoreDataTableViewController: UIViewController, UITableViewDataSource, U
     
     func performFetch() {
         if debug! {
-            print("Running \(NSStringFromClass(TLICoreDataTableViewController)) \(NSStringFromSelector(__FUNCTION__))")
+            print("Running \(NSStringFromClass(TLICoreDataTableViewController)) \(NSStringFromSelector(#function))")
         }
         
         if self.frc != nil {

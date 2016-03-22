@@ -57,7 +57,7 @@ class TLITagsView: UIView, UITextFieldDelegate {
         var xOffset:CGFloat = 0
         let xButtonBuffer:CGFloat = 5.0
         
-        for var i = 0; i < count; i++ {
+        for var i = 0; i < count; i += 1 {
             
             let font:UIFont = UIFont(name: "Avenir-Book", size: 16.0)!
             let text:NSString = tagsObject?.objectAtIndex(i) as! NSString
